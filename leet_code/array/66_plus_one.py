@@ -23,6 +23,21 @@ class Solution:
             digits.insert(0, carry)
         return digits
 
+    def plusOne_2(self, digits: List[int]) -> List[int]:
+        n = len(digits)
+        carry = (digits[n - 1] + 1) // 10
+        digits[n - 1] = (digits[n - 1] + 1) % 10
+        j = 2
+        while carry > 0 and j <= n:
+            new_value = (digits[n - j] + carry) % 10
+            carry = (digits[n - j] + carry) // 10
+            digits[n - j] = new_value
+            j += 1
+            print(digits)
+        if carry > 0:
+            return [carry] + digits
+        return digits
+
 
 class TestPlusOne(unittest.TestCase):
     def setUp(self):
