@@ -21,8 +21,7 @@ class Solution:
                     seen[complement],
                     i,
                 ]  # Return the indices if the complement is found
-            else:
-                seen[num] = i  # Store the current number and its index
+            seen[num] = i  # Store the current number and its index
 
         return None  # Added this for clarity. If no two numbers sum up to the target after check all numbers.
 
@@ -50,7 +49,7 @@ class TestTwoSum(unittest.TestCase):
         self.assertEqual(Solution().twoSum([3, 2, 3], 6), [0, 2])
 
     def test_negative_numbers(self):
-        self.assertEqual(Solution().twoSum([-1, -2, 7], 5), [2, 0])
+        self.assertEqual(Solution().twoSum([-1, -2, 7], 5), [1, 2])
 
     def test_zero_target(self):
         self.assertEqual(Solution().twoSum([0, 4, -4], 0), [1, 2])
