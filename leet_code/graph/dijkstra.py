@@ -21,8 +21,7 @@ class Graph:
         heapq.heappush(heap, (0,source))
 
         while heap:
-            top = heap[0]
-            heapq.heappop(heap)
+            top = heapq.heappop(heap)
 
             node = top[1]
             dis = top[0]
