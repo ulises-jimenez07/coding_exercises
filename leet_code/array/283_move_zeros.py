@@ -1,70 +1,77 @@
-def moveZeroes(nums):
-    """
-    Moves all zeros in a list to the end while maintaining the relative order of non-zero elements.
+"""
+Problem: Move all zeros to the end while maintaining relative order of non-zeros
 
-    :type nums: List[int]
-    :rtype: None Do not return anything, modify nums in-place instead.
-    """
-    j = 0  # Index for placing the next non-zero element
+Approach:
+- Use two-pass approach: first copy non-zeros to front, then fill rest with zeros
+- Maintains relative order of non-zero elements
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
 
-    # Iterate through the list
-    for num in nums:
-        # If the current element is non-zero
-        if num != 0:
-            # Place it at the current index j and increment j
-            nums[j] = num
-            j += 1
-
-    # Fill the remaining elements from index j to the end with zeros
-    for x in range(j, len(nums)):
-        nums[x] = 0
+import unittest
+from typing import List
 
 
-# Test cases
-def test_moveZeroes():
-    # Test case 1: Basic example
-    nums1 = [0, 1, 0, 3, 12]
-    expected1 = [1, 3, 12, 0, 0]
-    moveZeroes(nums1)
-    assert nums1 == expected1
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """Moves all zeros to the end while maintaining relative order of non-zero elements."""
+        j = 0
 
-    # Test case 2: All zeros
-    nums2 = [0, 0, 0, 0, 0]
-    expected2 = [0, 0, 0, 0, 0]
-    moveZeroes(nums2)
-    assert nums2 == expected2
+        for num in nums:
+            if num != 0:
+                nums[j] = num
+                j += 1
 
-    # Test case 3: No zeros
-    nums3 = [1, 2, 3, 4, 5]
-    expected3 = [1, 2, 3, 4, 5]
-    moveZeroes(nums3)
-    assert nums3 == expected3
-
-    # Test case 4: Single zero
-    nums4 = [0]
-    expected4 = [0]
-    moveZeroes(nums4)
-    assert nums4 == expected4
-
-    # Test case 5: Empty list
-    nums5 = []
-    expected5 = []
-    moveZeroes(nums5)
-    assert nums5 == expected5
-
-    # Test case 6: Zeros at the beginning
-    nums6 = [0, 0, 1]
-    expected6 = [1, 0, 0]
-    moveZeroes(nums6)
-    assert nums6 == expected6
-
-    # Test case 7: Zeros at the end
-    nums7 = [1, 2, 0, 0]
-    expected7 = [1, 2, 0, 0]
-    moveZeroes(nums7)
-    assert nums7 == expected7
-
-    print("All test cases passed!")
+        for x in range(j, len(nums)):
+            nums[x] = 0
 
 
-test_moveZeroes()
+class TestMoveZeroes(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
+    def test_basic_example(self):
+        """Basic example with zeros mixed in."""
+        nums = [0, 1, 0, 3, 12]
+        self.solution.moveZeroes(nums)
+        self.assertEqual(nums, [1, 3, 12, 0, 0])
+
+    def test_all_zeros(self):
+        """All zeros."""
+        nums = [0, 0, 0, 0, 0]
+        self.solution.moveZeroes(nums)
+        self.assertEqual(nums, [0, 0, 0, 0, 0])
+
+    def test_no_zeros(self):
+        """No zeros."""
+        nums = [1, 2, 3, 4, 5]
+        self.solution.moveZeroes(nums)
+        self.assertEqual(nums, [1, 2, 3, 4, 5])
+
+    def test_single_zero(self):
+        """Single zero."""
+        nums = [0]
+        self.solution.moveZeroes(nums)
+        self.assertEqual(nums, [0])
+
+    def test_empty_list(self):
+        """Empty list."""
+        nums = []
+        self.solution.moveZeroes(nums)
+        self.assertEqual(nums, [])
+
+    def test_zeros_at_beginning(self):
+        """Zeros at the beginning."""
+        nums = [0, 0, 1]
+        self.solution.moveZeroes(nums)
+        self.assertEqual(nums, [1, 0, 0])
+
+    def test_zeros_at_end(self):
+        """Zeros at the end."""
+        nums = [1, 2, 0, 0]
+        self.solution.moveZeroes(nums)
+        self.assertEqual(nums, [1, 2, 0, 0])
+
+
+if __name__ == "__main__":
+    unittest.main()

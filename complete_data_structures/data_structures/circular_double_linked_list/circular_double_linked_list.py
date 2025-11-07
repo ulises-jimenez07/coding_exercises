@@ -1,4 +1,9 @@
+"""This module implements a Circular Double Linked List."""
+
+
 class Node:
+    """Represents a node in a circular double linked list."""
+
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -9,6 +14,8 @@ class Node:
 
 
 class CircularDoubleLinkedList:
+    """Implements a circular double linked list."""
+
     def __init__(self):
         self.head = None
         self.tail = None
@@ -34,6 +41,7 @@ class CircularDoubleLinkedList:
     #     self.length = 1
 
     def append(self, value):
+        """Appends a new node with the given value to the end of the list."""
         new_node = Node(value)
         if self.length == 0:
             self.head = new_node
@@ -49,6 +57,7 @@ class CircularDoubleLinkedList:
         self.length += 1
 
     def prepend(self, value):
+        """Adds a new node with the given value to the beginning of the list."""
         new_node = Node(value)
         if self.length == 0:
             self.head = new_node
@@ -64,6 +73,7 @@ class CircularDoubleLinkedList:
         self.length += 1
 
     def traverse(self):
+        """Traverses the list from head to tail, printing each node's value."""
         current_node = self.head
         while current_node:
             print(current_node.value)
@@ -72,6 +82,7 @@ class CircularDoubleLinkedList:
                 break
 
     def reverse_traverse(self):
+        """Traverses the list from tail to head, printing each node's value."""
         current_node = self.tail
         while current_node:
             print(current_node.value)
@@ -80,6 +91,7 @@ class CircularDoubleLinkedList:
                 break
 
     def search(self, target):
+        """Searches for a target value in the list."""
         current_node = self.head
         while current_node:
             if current_node.value == target:
@@ -90,6 +102,7 @@ class CircularDoubleLinkedList:
         return False
 
     def get(self, index):
+        """Retrieves the node at the specified index."""
         if index < 0 or index >= self.length:
             return None
         current_node = None
@@ -104,6 +117,7 @@ class CircularDoubleLinkedList:
         return current_node
 
     def set_value(self, index, value):
+        """Sets the value of the node at the specified index."""
         target_node = self.get(index)
         if target_node:
             target_node.value = value
@@ -111,6 +125,7 @@ class CircularDoubleLinkedList:
         return False
 
     def insert(self, index, value):
+        """Inserts a new node with the given value at the specified index."""
         if index < 0 or index >= self.length:
             print("Error index out of bounds")
             return
@@ -129,6 +144,7 @@ class CircularDoubleLinkedList:
         self.length += 1
 
     def pop_first(self):
+        """Removes and returns the first node from the list."""
         if self.length == 0:
             return None
         popped_node = self.head
@@ -145,6 +161,7 @@ class CircularDoubleLinkedList:
         return popped_node
 
     def pop(self):
+        """Removes and returns the last node from the list."""
         if self.length == 0:
             return None
         popped_node = self.tail
@@ -161,6 +178,7 @@ class CircularDoubleLinkedList:
         return popped_node
 
     def remove(self, index):
+        """Removes and returns the node at the specified index."""
         if index < 0 or index >= self.length:
             return None
         if index == 0:
@@ -177,6 +195,7 @@ class CircularDoubleLinkedList:
 
 
 def delelete_all(self):
+    """Deletes all nodes from the list, making it empty."""
     self.head = None
     self.tail = None
     self.length = 0

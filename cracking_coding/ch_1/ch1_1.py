@@ -1,13 +1,14 @@
-#Check if a string only have unique elements
+# Check if a string only have unique elements
 def is_unique(str):
-    #create a set (similar to hash table)
-    characters=set()
+    # create a set (similar to hash table)
+    characters = set()
     for char in str:
-        #if the character has been seen before, then duplicate
+        # if the character has been seen before, then duplicate
         if char in characters:
             return False
         characters.add(char)
     return True
+
 
 test_cases = [
     ("abcd", True),

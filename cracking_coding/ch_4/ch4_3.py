@@ -1,14 +1,15 @@
 from coding_interview.CrackingCoding.ch_2.linked_list import LinkedList
-from collections import deque   
+
 
 class BinaryNode:
     def __init__(self, name, left=None, right=None):
         self.name = name
         self.left = left
         self.right = right
-    
+
     def __str__(self):
         return str(self.name)
+
 
 def create_node_list_by_depth(tree):
     if not tree:
@@ -30,7 +31,6 @@ def create_node_list_by_depth(tree):
     return result
 
 
-
 node_h = BinaryNode("H")
 node_g = BinaryNode("G")
 node_f = BinaryNode("F")
@@ -40,7 +40,7 @@ node_c = BinaryNode("C", None, node_f)
 node_b = BinaryNode("B", node_d, node_e)
 node_a = BinaryNode("A", node_b, node_c)
 
-levels=create_node_list_by_depth(node_a)
+levels = create_node_list_by_depth(node_a)
 print(levels[0])
 print(levels[1])
 

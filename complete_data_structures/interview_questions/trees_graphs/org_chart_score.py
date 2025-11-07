@@ -22,14 +22,12 @@ def calculate_score(org_chart, node):
         return 0
     score = len(org_chart[node])  # Direct reports
     for report in org_chart[node]:
-        score += calculate_score(
-            org_chart, report
-        )  # Recursive call for indirect reports
+        score += calculate_score(org_chart, report)  # Recursive call for indirect reports
 
     return score
 
 
-def calculate_score_optimized(org_chart, node, memo={}):
+def calculate_score_optimized(org_chart, node, memo=None):
     """
     Calculates the score of a node in an organizational chart using dynamic programming.
 
@@ -42,6 +40,8 @@ def calculate_score_optimized(org_chart, node, memo={}):
         The score of the node.
     """
 
+    if memo is None:
+        memo = {}
     if node in memo:
         return memo[node]
     if node not in org_chart:

@@ -1,6 +1,6 @@
 from multiprocessing import Queue
 
-custom_queue = Queue(maxsize=3)
+custom_queue: Queue = Queue(maxsize=3)  # type: ignore[type-arg]
 print(custom_queue.qsize())
 print(custom_queue.empty())
 custom_queue.put(1)

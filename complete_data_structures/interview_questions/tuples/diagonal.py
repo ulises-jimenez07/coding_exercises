@@ -1,4 +1,4 @@
-'''
+"""
 Diagonal
 Create a function that takes a tuple of tuples and returns a tuple containing the diagonal elements of the input.
 
@@ -11,12 +11,13 @@ input_tuple = (
 )
 output_tuple = get_diagonal(input_tuple)
 print(output_tuple)  # Expected output: (1, 5, 9)
-'''
+"""
+
 
 def get_diagonal(tup):
     # TODO
-    res=[]
+    res = []
     for i in range(len(tup)):
         res.append(tup[i][i])
-        
+
     return tuple(res)

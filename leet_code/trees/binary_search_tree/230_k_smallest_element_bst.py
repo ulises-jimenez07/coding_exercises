@@ -1,3 +1,14 @@
+"""
+Problem: Find the k-th smallest element in a Binary Search Tree
+
+Approach:
+- Use inorder traversal which visits BST nodes in sorted order
+- Stop traversal once k-th element is found for efficiency
+- Track count during traversal to identify k-th position
+- Time complexity: O(k) in best case, O(n) worst case
+- Space complexity: O(h) where h is height for recursion stack
+"""
+
 import unittest
 from typing import Optional
 

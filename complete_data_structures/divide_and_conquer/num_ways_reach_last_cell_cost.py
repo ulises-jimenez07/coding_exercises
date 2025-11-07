@@ -2,10 +2,7 @@ def number_of_paths(two_d_array, row, col, cost):
     if cost < 0:
         return 0
     if row == 0 and col == 0:
-        if two_d_array[0][0] - cost == 0:
-            return 1
-        else:
-            return 0
+        return 1 if two_d_array[0][0] - cost == 0 else 0
     if row == 0:
         return number_of_paths(two_d_array, row, col - 1, cost - two_d_array[row][col])
     if col == 0:

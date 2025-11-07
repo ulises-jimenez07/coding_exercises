@@ -14,11 +14,12 @@ def build_freq_tables(string):
             letter_count_map[letter] = 1
     return letter_count_map
 
+
 def print_perms_inner(letter_count_map, prefix, remaining, result):
     if remaining == 0:
         result.append(prefix)
         return
-    
+
     for character in letter_count_map:
         count = letter_count_map[character]
         if count > 0:

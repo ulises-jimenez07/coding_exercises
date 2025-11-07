@@ -4,20 +4,22 @@ class BinaryNode:
         self.left = None
         self.right = None
 
+
 def _find_height(root):
     if root is None:
         return 0
-    left_height =_find_height(root.left)
+    left_height = _find_height(root.left)
     if left_height == -1:
-        return -1 
-    right_height= _find_height(root.right)
-    if right_height==-1:
         return -1
-    
-    if abs(left_height-right_height)>1:
+    right_height = _find_height(root.right)
+    if right_height == -1:
         return -1
-    
-    return max(left_height,right_height)+1
+
+    if abs(left_height - right_height) > 1:
+        return -1
+
+    return max(left_height, right_height) + 1
+
 
 def is_balanced(root):
     return _find_height(root) > -1

@@ -1,9 +1,20 @@
+"""
+Problem: Count good nodes where node value >= all ancestors
+
+Approach:
+- Track maximum value seen on path from root
+- Node is good if its value >= current max
+- Recursively count good nodes in both subtrees
+- Time complexity: O(n) where n is number of nodes
+- Space complexity: O(h) where h is height for recursion stack
+"""
+
 import unittest
 
 
-# Definition for a binary tree node.
-# This class is provided as part of the problem setup.
 class TreeNode:
+    """Definition for a binary tree node."""
+
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -12,129 +23,58 @@ class TreeNode:
 
 class Solution:
     """
-    Solves the 'Good Nodes in Binary Tree' problem using a recursive approach.
-    A node is considered 'good' if the path from the root to the node
-    contains no node with a value greater than the current node's value.
+    Solves the 'Good Nodes in Binary Tree' problem recursively.
+    A node is 'good' if its value is the greatest on the path from the root.
     """
 
     def goodNodes(self, root: TreeNode) -> int:
-        """
-        Main method to initiate the search for good nodes.
-        It initializes a counter and calls the recursive helper function.
-        """
-        self.count = 0
-        # Start the traversal from the root with the initial max_till_parent as negative infinity.
-        self.count_nodes(root, float("-inf"))
-        return self.count
+        """Counts the number of good nodes in the binary tree."""
 
-    def count_nodes(self, node, max_till_parent):
-        """
-        A recursive helper function to traverse the tree and count good nodes.
+        def count_good_nodes(node, max_val):
+            if not node:
+                return 0
 
-        Args:
-            node: The current TreeNode being visited.
-            max_till_parent: The maximum value found in the path from the root
-                             to the current node's parent.
-        """
-        # Base case: If the current node is None, we've reached a leaf and stop the recursion.
-        if node:
-            # max_till_me will store the maximum value encountered so far on the path to this node.
-            # We initialize it with the current node's value.
-            max_till_me = node.val
+            # A node is good if its value is >= the max value on the path so far.
+            is_good = 1 if node.val >= max_val else 0
+            new_max = max(max_val, node.val)
 
-            # Check if the current node is a 'good' node.
-            # The first node (root) is always 'good', as there's no path above it.
-            if max_till_parent == float("-inf"):
-                self.count += 1
-            else:
-                # If the current node's value is greater than or equal to the maximum
-                # value in its path from the root, it's a good node.
-                if node.val >= max_till_parent:
-                    self.count += 1
-                # Update the maximum value for the path to be passed down to children.
-                # This is the greater of the current node's value and the parent's max.
-                max_till_me = max(max_till_me, max_till_parent)
+            # Recursively count good nodes in the left and right subtrees.
+            return is_good + count_good_nodes(node.left, new_max) + count_good_nodes(node.right, new_max)
 
-            # Recursively call the function for the left and right children,
-            # passing the updated maximum value for their respective paths.
-            self.count_nodes(node.left, max_till_me)
-            self.count_nodes(node.right, max_till_me)
+        return count_good_nodes(root, float("-inf"))
 
 
-# Unit test class to verify the solution
 class TestSolution(unittest.TestCase):
-    def test_good_nodes_simple_case(self):
-        """
-        Test case for a simple binary tree.
-        Tree:
-        """
-        #       3
-        #      / \
-        #     1   4
-        #    /   / \
-        #   3   1   5
-        # Good nodes are 3 (root), 4, 5, and 3 (leftmost leaf). Expected count is 4.
-        # Construct the binary tree
+    def setUp(self):
+        self.solution = Solution()
+
+    def test_simple_case(self):
+        """Tests a simple binary tree with a mix of good and bad nodes."""
         root = TreeNode(3)
         root.left = TreeNode(1, TreeNode(3))
         root.right = TreeNode(4, TreeNode(1), TreeNode(5))
+        self.assertEqual(self.solution.goodNodes(root), 4)
 
-        # Instantiate the solution and run the test
-        solution = Solution()
-        result = solution.goodNodes(root)
-
-        # Assert that the result matches the expected output
-        self.assertEqual(result, 4, "The number of good nodes should be 4")
-
-    def test_good_nodes_all_good(self):
-        """
-        Test case where all nodes are good.
-        Tree:
-              1
-             / \
-            2   3
-        Expected count is 3.
-        """
+    def test_all_good(self):
+        """Tests a tree where all nodes are good."""
         root = TreeNode(1, TreeNode(2), TreeNode(3))
-        solution = Solution()
-        result = solution.goodNodes(root)
-        self.assertEqual(result, 3, "All nodes should be good")
+        self.assertEqual(self.solution.goodNodes(root), 3)
 
-    def test_good_nodes_all_bad_except_root(self):
-        """
-        Test case where only the root is good.
-        Tree:
-              5
-             / \
-            2   4
-        Expected count is 1.
-        """
+    def test_all_bad_except_root(self):
+        """Tests a tree where only the root is a good node."""
         root = TreeNode(5, TreeNode(2), TreeNode(4))
-        solution = Solution()
-        result = solution.goodNodes(root)
-        self.assertEqual(result, 1, "Only the root should be good")
+        self.assertEqual(self.solution.goodNodes(root), 1)
 
-    def test_good_nodes_single_node(self):
-        """
-        Test case for a single-node tree.
-        Expected count is 1.
-        """
+    def test_single_node(self):
+        """Tests a tree with only a single node."""
         root = TreeNode(10)
-        solution = Solution()
-        result = solution.goodNodes(root)
-        self.assertEqual(result, 1, "A single node tree should have 1 good node")
+        self.assertEqual(self.solution.goodNodes(root), 1)
 
-    def test_good_nodes_empty_tree(self):
-        """
-        Test case for an empty tree.
-        Expected count is 0.
-        """
+    def test_empty_tree(self):
+        """Tests an empty tree."""
         root = None
-        solution = Solution()
-        result = solution.goodNodes(root)
-        self.assertEqual(result, 0, "An empty tree should have 0 good nodes")
+        self.assertEqual(self.solution.goodNodes(root), 0)
 
 
-# This block allows the script to be run directly to execute the tests.
 if __name__ == "__main__":
     unittest.main()

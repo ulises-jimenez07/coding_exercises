@@ -1,9 +1,10 @@
-#given a binary tree , print all possible arrays that could have led to the tree
+# given a binary tree , print all possible arrays that could have led to the tree
 
 from coding_interview.CrackingCoding.ch_4.binary_search_tree import BinarySearchTree
 
+
 def find_bst_sequences(bst):
-    #mask function to send the root
+    # mask function to send the root
     if not bst.root:
         return []
     return helper(bst.root)
@@ -12,13 +13,13 @@ def find_bst_sequences(bst):
 def helper(node):
     if not node:
         return [[]]
-    #recurse through subtress
+    # recurse through subtress
     right_sequences = helper(node.right)
     left_sequences = helper(node.left)
     sequences = []
     for right in right_sequences:
         for left in left_sequences:
-            #weave through sequences
+            # weave through sequences
             sequences = weave(left, right, [node.key], sequences)
     return sequences
 
@@ -32,12 +33,12 @@ def weave(first, second, prefix, results):
         results.append(result)
         return results
 
-    #recurse with the head for the first item
+    # recurse with the head for the first item
     head = first[0]
     prefix.append(head)
     results = weave(first[1:], second, prefix, results)
     prefix.pop()
-    #recurse with the head for the second item
+    # recurse with the head for the second item
     head = second[0]
     prefix.append(head)
     results = weave(first, second[1:], prefix, results)

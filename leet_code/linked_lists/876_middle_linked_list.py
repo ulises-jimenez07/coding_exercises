@@ -1,12 +1,26 @@
-from typing import Optional, List
+"""
+Problem: Find the middle node of a linked list
+
+Approach:
+- Use slow and fast pointer technique
+- Fast moves 2 steps, slow moves 1 step
+- When fast reaches end, slow is at middle
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import (
+    List,
+    Optional,
+)
 
 
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=0, next_node=None):
         self.val = val
-        self.next = next
+        self.next = next_node
 
 
 class Solution:
@@ -23,11 +37,11 @@ class Solution:
         the `slow` pointer will be at the middle node.
         """
         slow = fast = head
+        # Fast moves twice as fast as slow
         while fast and fast.next:
-            slow = slow.next  # Move slow pointer one step
-            fast = fast.next.next  # Move fast pointer two steps
+            slow = slow.next
+            fast = fast.next.next
 
-        # When the loop ends, slow pointer is at the middle node
         return slow
 
 

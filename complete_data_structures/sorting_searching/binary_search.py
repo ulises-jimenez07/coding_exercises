@@ -10,8 +10,7 @@ def binary_search(array, value):
         middle = (start + end) // 2
     if array[middle] == value:
         return middle
-    else:
-        return -1
+    return -1
 
 
 cust_array = [8, 9, 12, 15, 17, 19, 20, 21, 28]

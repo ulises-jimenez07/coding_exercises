@@ -1,95 +1,68 @@
-# The isBadVersion API is already defined for you.
-# def isBadVersion(version: int) -> bool:
+"""
+Problem: Find the first bad version in a sequence of versions
 
-# Mock isBadVersion function for local testing.  In a real LeetCode
-# environment, this function would be provided and you would not
-# need to implement it.  Adjust bad_version for different test scenarios.
-bad_version = 0  # Example: first bad version
+Approach:
+- Binary search to minimize API calls
+- Narrow search range based on isBadVersion result
+- Time complexity: O(log n)
+- Space complexity: O(1)
+"""
+
+import unittest
+
+# Mock isBadVersion for local testing
+_bad_version_global = 0
 
 
 def isBadVersion(version: int) -> bool:
-    return version >= bad_version
+    return version >= _bad_version_global
 
 
 class Solution:
     def firstBadVersion(self, n: int) -> int:
-        """
-        Finds the first bad version in a sequence of versions.
+        left = 1
+        right = n
 
-        Uses a binary search approach to efficiently find the first version that is considered "bad".
-        The isBadVersion API is used to check if a given version is bad.
+        while left < right:
+            mid = (right + left) // 2
 
-        Args:
-            n: The total number of versions.
+            if isBadVersion(mid):
+                right = mid
+            else:
+                left = mid + 1
 
-        Returns:
-            The index of the first bad version.
-        """
-        left = 1  # Initialize left pointer to the first version.
-        right = n  # Initialize right pointer to the last version.
-
-        while left < right:  # Continue searching while left < right
-            mid = (right + left) // 2  # Calculate midpoint using integer division
-
-            if isBadVersion(
-                mid
-            ):  # If the middle version is bad, the first bad version could be mid or before.
-                right = mid  # Narrow search to the left half, including mid.
-            else:  # If the middle version is good, the first bad version is after mid.
-                left = mid + 1  # Narrow search to the right half, excluding mid.
-
-        return left  # Return the left pointer, which represents the first bad version.
+        return left
 
 
-# Test cases (using the mock isBadVersion)
-solution = Solution()
+class TestFirstBadVersion(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
 
-# Test case 1: First version is bad
-bad_version = 1
-n1 = 5
-expected1 = 1
-result1 = solution.firstBadVersion(n1)
-assert (
-    result1 == expected1
-), f"Test case 1 failed. Expected: {expected1}, Got: {result1}"
+    def test_first_version_is_bad(self):
+        global _bad_version_global
+        _bad_version_global = 1
+        self.assertEqual(self.solution.firstBadVersion(5), 1)
 
+    def test_last_version_is_bad(self):
+        global _bad_version_global
+        _bad_version_global = 5
+        self.assertEqual(self.solution.firstBadVersion(5), 5)
 
-# Test case 2: Last version is bad
-bad_version = 5
-n2 = 5
-expected2 = 5
-result2 = solution.firstBadVersion(n2)
-assert (
-    result2 == expected2
-), f"Test case 2 failed. Expected: {expected2}, Got: {result2}"
+    def test_middle_version_is_bad(self):
+        global _bad_version_global
+        _bad_version_global = 3
+        self.assertEqual(self.solution.firstBadVersion(5), 3)
 
-# Test case 3: Middle version is bad
-bad_version = 3
-n3 = 5
-expected3 = 3
-result3 = solution.firstBadVersion(n3)
-assert (
-    result3 == expected3
-), f"Test case 3 failed. Expected: {expected3}, Got: {result3}"
+    def test_single_version_is_bad(self):
+        global _bad_version_global
+        _bad_version_global = 1
+        self.assertEqual(self.solution.firstBadVersion(1), 1)
 
-# Test case 4: No bad versions
-bad_version = 6  # Set a bad_version outside range 1-5
-n4 = 5
-expected4 = 5
-result4 = solution.firstBadVersion(n4)
-assert (
-    result4 == expected4
-), f"Test case 4 failed. Expected: {expected4}, Got: {result4}"
+    def test_no_bad_versions_in_range(self):
+        global _bad_version_global
+        _bad_version_global = 6  # Bad version is outside the tested range
+        self.assertEqual(self.solution.firstBadVersion(5), 5)  # Should return n if no bad version found up to n
 
 
-# Test case 5: Single version
-bad_version = 1
-n5 = 1
-expected5 = 1
-result5 = solution.firstBadVersion(n5)
-assert (
-    result5 == expected5
-), f"Test case 5 failed. Expected: {expected5}, Got: {result5}"
-
-
-print("All test cases passed!")
+if __name__ == "__main__":
+    unittest.main()

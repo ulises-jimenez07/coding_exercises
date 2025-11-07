@@ -58,39 +58,37 @@ def heapify_tree_extract(root_node, index, heap_type):
 
     if root_node.heap_size < left_index:
         return
-    elif root_node.heap_size == left_index:
+    if root_node.heap_size == left_index:
         if heap_type == "min":
             if root_node.custom_list[index] > root_node.custom_list[left_index]:
                 temp = root_node.custom_list[index]
                 root_node.custom_list[index] = root_node.custom_list[left_index]
                 root_node.custom_list[left_index] = temp
             return
-        else:
-            if root_node.custom_list[index] < root_node.custom_list[left_index]:
-                temp = root_node.custom_list[index]
-                root_node.custom_list[index] = root_node.custom_list[left_index]
-                root_node.custom_list[left_index] = temp
-            return
+        if root_node.custom_list[index] < root_node.custom_list[left_index]:
+            temp = root_node.custom_list[index]
+            root_node.custom_list[index] = root_node.custom_list[left_index]
+            root_node.custom_list[left_index] = temp
+        return
 
-    else:
-        if heap_type == "min":
-            if root_node.custom_list[left_index] < root_node.custom_list[right_index]:
-                swap_child = left_index
-            else:
-                swap_child = right_index
-            if root_node.custom_list[index] > root_node.custom_list[swap_child]:
-                temp = root_node.custom_list[index]
-                root_node.custom_list[index] = root_node.custom_list[swap_child]
-                root_node.custom_list[swap_child] = temp
+    if heap_type == "min":
+        if root_node.custom_list[left_index] < root_node.custom_list[right_index]:
+            swap_child = left_index
         else:
-            if root_node.custom_list[left_index] > root_node.custom_list[right_index]:
-                swap_child = left_index
-            else:
-                swap_child = right_index
-            if root_node.custom_list[index] < root_node.custom_list[swap_child]:
-                temp = root_node.custom_list[index]
-                root_node.custom_list[index] = root_node.custom_list[swap_child]
-                root_node.custom_list[swap_child] = temp
+            swap_child = right_index
+        if root_node.custom_list[index] > root_node.custom_list[swap_child]:
+            temp = root_node.custom_list[index]
+            root_node.custom_list[index] = root_node.custom_list[swap_child]
+            root_node.custom_list[swap_child] = temp
+    else:
+        if root_node.custom_list[left_index] > root_node.custom_list[right_index]:
+            swap_child = left_index
+        else:
+            swap_child = right_index
+        if root_node.custom_list[index] < root_node.custom_list[swap_child]:
+            temp = root_node.custom_list[index]
+            root_node.custom_list[index] = root_node.custom_list[swap_child]
+            root_node.custom_list[swap_child] = temp
     heapify_tree_extract(root_node, swap_child, heap_type)
 
 

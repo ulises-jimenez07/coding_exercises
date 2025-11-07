@@ -1,45 +1,48 @@
+"""
+Problem: Binary Tree Level Order Traversal - traverse tree level by level
+
+Approach:
+- Use BFS with a queue to process nodes level by level
+- Track level size to group nodes at each depth
+- Time complexity: O(n) where n is number of nodes
+- Space complexity: O(w) where w is max width of tree
+"""
+
+
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
 
-class Solution(object):
+class Solution:
     def levelOrder(self, root):
         """
         Performs a level-order traversal of a binary tree.
-
-        Args:
-            root: The root of the binary tree.
-
-        Returns:
-            A list of lists, where each inner list represents a level in the tree and contains the values of the nodes at that level.
-            Returns an empty list if the tree is empty.
+        Returns a list of lists, where each inner list represents a level.
         """
         if not root:
             return []
 
-        queue = [root]  # Initialize the queue with the root node
-        ans = []  # Initialize the result list
+        queue = [root]
+        ans = []
 
         while queue:
-            level_size = len(queue)  # Get the number of nodes in the current level
-            level = []  # Initialize a list to store the values of the current level
+            level_size = len(queue)
+            level = []
 
-            # Iterate through all nodes in the current level
             for _ in range(level_size):
-                node = queue.pop(0)  # Dequeue a node from the front
-                level.append(node.val)  # Add the node's value to the current level list
+                node = queue.pop(0)
+                level.append(node.val)
 
-                # Enqueue the node's children (if any) for the next level
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
 
-            ans.append(level)  # Add the current level's list to the result list
+            ans.append(level)
 
         return ans
 
@@ -48,36 +51,41 @@ import unittest
 
 
 class TestLevelOrder(unittest.TestCase):
-    def test_level_order(self):
-        solution = Solution()
+    def setUp(self):
+        self.solution = Solution()
 
-        # Test case 1: Empty tree
-        self.assertEqual(solution.levelOrder(None), [])
+    def test_empty_tree(self):
+        """Test with an empty tree."""
+        self.assertEqual(self.solution.levelOrder(None), [])
 
-        # Test case 2: Single node tree
-        root2 = TreeNode(1)
-        self.assertEqual(solution.levelOrder(root2), [[1]])
+    def test_single_node_tree(self):
+        """Test with a single node tree."""
+        root = TreeNode(1)
+        self.assertEqual(self.solution.levelOrder(root), [[1]])
 
-        # Test case 3: Complete binary tree
-        root3 = TreeNode(3)
-        root3.left = TreeNode(9)
-        root3.right = TreeNode(20)
-        root3.right.left = TreeNode(15)
-        root3.right.right = TreeNode(7)
-        self.assertEqual(solution.levelOrder(root3), [[3], [9, 20], [15, 7]])
+    def test_complete_binary_tree(self):
+        """Test with a complete binary tree."""
+        root = TreeNode(3)
+        root.left = TreeNode(9)
+        root.right = TreeNode(20)
+        root.right.left = TreeNode(15)
+        root.right.right = TreeNode(7)
+        self.assertEqual(self.solution.levelOrder(root), [[3], [9, 20], [15, 7]])
 
-        # Test case 4: Incomplete binary tree
-        root4 = TreeNode(1)
-        root4.left = TreeNode(2)
-        root4.right = TreeNode(3)
-        root4.left.left = TreeNode(4)
-        self.assertEqual(solution.levelOrder(root4), [[1], [2, 3], [4]])
+    def test_incomplete_binary_tree(self):
+        """Test with an incomplete binary tree."""
+        root = TreeNode(1)
+        root.left = TreeNode(2)
+        root.right = TreeNode(3)
+        root.left.left = TreeNode(4)
+        self.assertEqual(self.solution.levelOrder(root), [[1], [2, 3], [4]])
 
-        # Test case 5: Skewed tree
-        root5 = TreeNode(1)
-        root5.right = TreeNode(2)
-        root5.right.right = TreeNode(3)
-        self.assertEqual(solution.levelOrder(root5), [[1], [2], [3]])
+    def test_skewed_tree(self):
+        """Test with a skewed tree."""
+        root = TreeNode(1)
+        root.right = TreeNode(2)
+        root.right.right = TreeNode(3)
+        self.assertEqual(self.solution.levelOrder(root), [[1], [2], [3]])
 
 
 if __name__ == "__main__":

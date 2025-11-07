@@ -1,84 +1,67 @@
+"""
+Problem: Format license key by grouping characters into segments of length k
+
+Approach:
+- Process from right to left to handle variable first group size
+- Build groups of k characters, converting to uppercase
+- Time complexity: O(n)
+- Space complexity: O(n)
+"""
+
 import unittest
 
 
 class Solution:
     def licenseKeyFormatting(self, s: str, k: int) -> str:
-        """
-        Formats a license key string by grouping characters into segments of length k.
+        """Formats license key by grouping characters into segments of length k."""
+        res = []
+        i = 0
 
-        The characters in the license key string are alphanumeric, and the key contains hyphens '-'.
-        The function removes all hyphens, converts characters to uppercase, and groups the characters into segments of length k.
-        The segments are separated by hyphens. The first segment may have fewer than k characters.
-
-        Args:
-            s: The license key string.
-            k: The length of each segment.
-
-        Returns:
-            The formatted license key string.
-        """
-
-        res = []  # Initialize a list to store the formatted characters
-        i = 0  # Counter for characters within a segment
-        # Iterate through the input string in reverse order
         for c in reversed(s):
-            if c != "-":  # Ignore hyphens
-                res.append(c.upper())  # Add the uppercase character to the result
-                i += 1  # Increment the character counter
-                if i == k:  # If a segment is complete
-                    i = 0  # Reset the character counter
-                    res.append("-")  # Add a hyphen separator
+            if c != "-":
+                res.append(c.upper())
+                i += 1
+                if i == k:
+                    i = 0
+                    res.append("-")
 
-        # Remove the trailing hyphen if present
         if len(res) > 0 and res[-1] == "-":
             res = res[:-1]
 
-        res = res[::-1]  # reverse string
-        return "".join(res)  # Return the formatted string
+        return "".join(reversed(res))
 
 
 class TestLicenseKeyFormatting(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
     def test_example_1(self):
-        s = "5F3Z-2e-9-w"
-        k = 4
-        expected = "5F3Z-2E9W"
-        self.assertEqual(Solution().licenseKeyFormatting(s, k), expected)
+        """Basic example."""
+        self.assertEqual(self.solution.licenseKeyFormatting("5F3Z-2e-9-w", 4), "5F3Z-2E9W")
 
     def test_example_2(self):
-        s = "2-5g-3-J"
-        k = 2
-        expected = "2-5G-3J"
-        self.assertEqual(Solution().licenseKeyFormatting(s, k), expected)
+        """Another basic example."""
+        self.assertEqual(self.solution.licenseKeyFormatting("2-5g-3-J", 2), "2-5G-3J")
 
     def test_empty_string(self):
-        s = ""
-        k = 2
-        expected = ""
-        self.assertEqual(Solution().licenseKeyFormatting(s, k), expected)
+        """Empty string."""
+        self.assertEqual(self.solution.licenseKeyFormatting("", 2), "")
 
     def test_all_hyphens(self):
-        s = "----"
-        k = 2
-        expected = ""
-        self.assertEqual(Solution().licenseKeyFormatting(s, k), expected)
+        """All hyphens."""
+        self.assertEqual(self.solution.licenseKeyFormatting("----", 2), "")
 
     def test_single_character(self):
-        s = "a"
-        k = 1
-        expected = "A"
-        self.assertEqual(Solution().licenseKeyFormatting(s, k), expected)
+        """Single character."""
+        self.assertEqual(self.solution.licenseKeyFormatting("a", 1), "A")
 
     def test_no_hyphens(self):
-        s = "abcdef"
-        k = 2
-        expected = "AB-CD-EF"
-        self.assertEqual(Solution().licenseKeyFormatting(s, k), expected)
+        """No hyphens."""
+        self.assertEqual(self.solution.licenseKeyFormatting("abcdef", 2), "AB-CD-EF")
 
     def test_leading_hyphens(self):
-        s = "--a-b-c"
-        k = 2
-        expected = "A-BC"
-        self.assertEqual(Solution().licenseKeyFormatting(s, k), expected)
+        """Leading hyphens."""
+        self.assertEqual(self.solution.licenseKeyFormatting("--a-b-c", 2), "A-BC")
 
 
 if __name__ == "__main__":

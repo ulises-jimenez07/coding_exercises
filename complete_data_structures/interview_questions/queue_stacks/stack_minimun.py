@@ -1,7 +1,7 @@
 class Node:
-    def __init__(self, value=None, next=None):
+    def __init__(self, value=None, next_node=None):
         self.value = value
-        self.next = next
+        self.next = next_node
 
     def __str__(self):
         string = str(self.value)
@@ -22,10 +22,10 @@ class Stack:
 
     def push(self, item):
         if self.min_node and (self.min_node.value < item):
-            self.min_node = Node(value=self.min_node.value, next=self.min_node)
+            self.min_node = Node(value=self.min_node.value, next_node=self.min_node)
         else:
-            self.min_node = Node(value=item, next=self.min_node)
-        self.top = Node(value=item, next=self.top)
+            self.min_node = Node(value=item, next_node=self.min_node)
+        self.top = Node(value=item, next_node=self.top)
 
     def pop(self):
         if not self.top:

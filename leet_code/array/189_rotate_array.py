@@ -1,40 +1,32 @@
-from typing import List
+"""
+Problem: Rotate an array to the right by k steps in-place
+
+Approach:
+- Reverse entire array, then reverse first k elements, then reverse remaining
+- Uses three reversals to achieve rotation without extra space
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import List
 
 
 class Solution:
     def rotate(self, nums: List[int], k: int) -> None:
-        """
-        Rotates an array to the right by k steps in-place.
-
-        Args:
-            nums: The list of integers to rotate.
-            k: The number of steps to rotate the array to the right.
-
-        Do not return anything, modify nums in-place instead.
-        """
-
         def reverse(nums, start, end):
-            """
-            Reverses a portion of the list nums in-place.
-
-            Args:
-                nums: The list of integers.
-                start: The starting index of the portion to reverse.
-                end: The ending index of the portion to reverse.
-            """
             i = start
             j = end
             while i < j:
-                nums[i], nums[j] = nums[j], nums[i]  # Swap elements
+                nums[i], nums[j] = nums[j], nums[i]
                 i += 1
                 j -= 1
 
         n = len(nums)
-        k = k % n  # Handle cases where k is larger than the array length
-        reverse(nums, 0, n - 1)  # Reverse the entire array
-        reverse(nums, 0, k - 1)  # Reverse the first k elements
-        reverse(nums, k, n - 1)  # Reverse the remaining n-k elements
+        k = k % n
+        reverse(nums, 0, n - 1)
+        reverse(nums, 0, k - 1)
+        reverse(nums, k, n - 1)
 
 
 class TestRotate(unittest.TestCase):

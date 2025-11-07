@@ -1,18 +1,19 @@
+"""
+Problem: Convert an integer to a Roman numeral string
+
+Approach:
+- Use greedy approach with value-symbol pairs from largest to smallest
+- Apply each symbol as many times as possible before moving to next
+- Time complexity: O(1) - fixed number of symbols
+- Space complexity: O(1)
+"""
+
 import unittest
 
 
 class Solution:
     def intToRoman(self, num: int) -> str:
-        """
-        Converts an integer to a Roman numeral string.
-
-        Args:
-            num: The integer to convert (1 <= num <= 3999).
-
-        Returns:
-            The Roman numeral representation of the integer.
-        """
-        # Define the mapping of integer values to Roman numeral symbols.
+        """Converts an integer to a Roman numeral string."""
         digits = [
             (1000, "M"),
             (900, "CM"),
@@ -29,17 +30,14 @@ class Solution:
             (1, "I"),
         ]
 
-        roman_digits = []  # Initialize an empty list to store Roman numeral characters.
+        roman_digits = []
 
-        # Iterate through the digits mapping.
         for value, symbol in digits:
             if num == 0:
-                break  # If the number is reduced to 0, we're done.
-            # Calculate how many times the current value fits into the remaining number.
+                break
             count, num = divmod(num, value)
-            # Append the corresponding Roman numeral symbol repeated 'count' times.
             roman_digits.append(symbol * count)
-        return "".join(roman_digits)  # Concatenate the Roman numeral characters.
+        return "".join(roman_digits)
 
 
 class TestIntToRoman(unittest.TestCase):

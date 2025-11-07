@@ -1,37 +1,37 @@
+"""
+Problem: Count unique paths from top-left to bottom-right in grid.
+
+Approach:
+- Use dynamic programming with 2D array
+- dp[i][j] = number of ways to reach cell (i,j)
+- Initialize first row and column to 1 (only one way each)
+- Each cell = sum of paths from top and left
+- Time complexity: O(m * n) fill entire grid
+- Space complexity: O(m * n) for dp array
+
+Example: 3x7 grid -> 28 unique paths
+"""
+
 import unittest
 
 
-class Solution(object):
-    def uniquePaths(self, m, n):
-        """
-        A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
-
-        The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
-
-        How many possible unique paths are there?
-
-        :type m: int
-        :type n: int
-        :rtype: int
-        """
-        # Create a 2D array to store the number of ways to reach each cell
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
         ways = [[0] * n for _ in range(m)]
 
-        # Initialize the first column to 1, as there's only 1 way to reach any cell in the first column
+        # Initialize first column: only one way down
         for i in range(m):
             ways[i][0] = 1
 
-        # Initialize the first row to 1, as there's only 1 way to reach any cell in the first row
+        # Initialize first row: only one way right
         for j in range(n):
             ways[0][j] = 1
 
-        # Iterate through the remaining cells, calculating the number of ways to reach each cell
-        # by summing the ways to reach the cell above and the cell to the left
+        # Fill dp table: paths = paths from above + paths from left
         for i in range(1, m):
             for j in range(1, n):
                 ways[i][j] = ways[i - 1][j] + ways[i][j - 1]
 
-        # Return the number of ways to reach the bottom-right cell
         return ways[m - 1][n - 1]
 
 
@@ -40,21 +40,27 @@ class TestUniquePaths(unittest.TestCase):
         self.solution = Solution()
 
     def test_example_1(self):
+        """Test case for a 3x7 grid."""
         self.assertEqual(self.solution.uniquePaths(3, 7), 28)
 
     def test_example_2(self):
+        """Test case for a 3x2 grid."""
         self.assertEqual(self.solution.uniquePaths(3, 2), 3)
 
     def test_square_grid(self):
+        """Test case for a square grid (3x3)."""
         self.assertEqual(self.solution.uniquePaths(3, 3), 6)
 
-    def test_single_row(self):
+    def test_single_row_grid(self):
+        """Test case for a grid with a single row."""
         self.assertEqual(self.solution.uniquePaths(1, 5), 1)
 
-    def test_single_column(self):
+    def test_single_column_grid(self):
+        """Test case for a grid with a single column."""
         self.assertEqual(self.solution.uniquePaths(5, 1), 1)
 
     def test_large_grid(self):
+        """Test case for a larger grid (10x10)."""
         self.assertEqual(self.solution.uniquePaths(10, 10), 48620)
 
 

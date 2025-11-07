@@ -1,4 +1,5 @@
 def find_min_opearation(s1, s2, index1, index2):
+    """Calculates the minimum operations (insert, delete, replace) to convert s1 to s2."""
     # need to delete
     if index1 == len(s1):
         return len(s2) - index2
@@ -18,6 +19,7 @@ print(find_min_opearation("table", "tbrltt", 0, 0))
 
 
 def findMinOperationBU(s1, s2, tempDict):
+    """Calculates the minimum operations (bottom-up DP) to convert s1 to s2."""
     for i1 in range(len(s1) + 1):
         dictKey = str(i1) + "0"
         tempDict[dictKey] = i1
@@ -37,9 +39,7 @@ def findMinOperationBU(s1, s2, tempDict):
                 dictKeyD = str(i1 - 1) + str(i2)
                 dictKeyI = str(i1) + str(i2 - 1)
                 dictKeyR = str(i1 - 1) + str(i2 - 1)
-                tempDict[dictKey] = 1 + min(
-                    tempDict[dictKeyD], min(tempDict[dictKeyI], tempDict[dictKeyR])
-                )
+                tempDict[dictKey] = 1 + min(tempDict[dictKeyD], tempDict[dictKeyI], tempDict[dictKeyR])
     dictKey = str(len(s1)) + str(len(s2))
     return tempDict[dictKey]
 

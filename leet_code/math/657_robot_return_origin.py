@@ -1,20 +1,22 @@
+"""
+Problem: Determine if a robot returns to the origin after executing a sequence of moves
+
+Approach:
+- Track x and y coordinates starting from (0, 0)
+- Process each move (U/D/L/R) and update coordinates
+- Time complexity: O(n) where n is number of moves
+- Space complexity: O(1)
+"""
+
+import unittest
+
+
 class Solution:
     def judgeCircle(self, moves: str) -> bool:
-        """
-        Determines if a robot returns to the origin after a sequence of moves.
+        x = 0
+        y = 0
 
-        The robot moves on a plane starting from the origin (0, 0). "U" moves the robot up one unit, "D" moves it down one unit, "L" moves it left one unit, and "R" moves it right one unit. The function checks if the robot returns to the origin after it finishes all of its moves.
-
-        Args:
-            moves: A string consisting of 'U', 'D', 'L', and 'R' characters representing the robot's moves.
-
-        Returns:
-            True if the robot returns to the origin, False otherwise.
-        """
-        x = 0  # Represents the horizontal position (positive right, negative left)
-        y = 0  # Represents the vertical position (positive up, negative down)
-
-        for move in moves:  # Iterate through each move
+        for move in moves:
             if move == "U":
                 y += 1
             elif move == "D":
@@ -24,46 +26,43 @@ class Solution:
             elif move == "R":
                 x += 1
 
-        return x == 0 and y == 0  # Return True if both x and y are 0 (back at origin)
+        return x == 0 and y == 0  # Check if back at origin
 
 
-# Test cases
-solution = Solution()
+class TestSolution(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
 
-# Test case 1: Returns to origin
-moves1 = "UD"
-expected1 = True
-assert (
-    solution.judgeCircle(moves1) == expected1
-), f"Test case 1 failed. Expected {expected1}, got {solution.judgeCircle(moves1)}"
+    def test_returns_to_origin_ud(self):
+        """Test with moves 'UD' which should return to origin."""
+        moves = "UD"
+        expected = True
+        self.assertEqual(self.solution.judgeCircle(moves), expected)
 
-# Test case 2: Returns to origin (longer sequence)
-moves2 = "LDRRLRUULR"
-expected2 = False
-assert (
-    solution.judgeCircle(moves2) == expected2
-), f"Test case 2 failed. Expected {expected2}, got {solution.judgeCircle(moves2)}"
+    def test_does_not_return_to_origin_ldrrlr_uulr(self):
+        """Test with moves 'LDRRLRUULR' which should not return to origin."""
+        moves = "LDRRLRUULR"
+        expected = False
+        self.assertEqual(self.solution.judgeCircle(moves), expected)
 
-# Test case 3: Does not return to origin
-moves3 = "LL"
-expected3 = False
-assert (
-    solution.judgeCircle(moves3) == expected3
-), f"Test case 3 failed. Expected {expected3}, got {solution.judgeCircle(moves3)}"
+    def test_does_not_return_to_origin_ll(self):
+        """Test with moves 'LL' which should not return to origin."""
+        moves = "LL"
+        expected = False
+        self.assertEqual(self.solution.judgeCircle(moves), expected)
+
+    def test_empty_moves(self):
+        """Test with empty moves, should return to origin."""
+        moves = ""
+        expected = True
+        self.assertEqual(self.solution.judgeCircle(moves), expected)
+
+    def test_circular_movement(self):
+        """Test with circular movement 'ULDR' which should return to origin."""
+        moves = "ULDR"
+        expected = True
+        self.assertEqual(self.solution.judgeCircle(moves), expected)
 
 
-# Test case 4: Empty moves
-moves4 = ""
-expected4 = True
-assert (
-    solution.judgeCircle(moves4) == expected4
-), f"Test case 4 failed. Expected {expected4}, got {solution.judgeCircle(moves4)}"
-
-# Test case 5: Circular movement
-moves5 = "ULDR"
-expected5 = True
-assert (
-    solution.judgeCircle(moves5) == expected5
-), f"Test case 5 failed. Expected {expected5}, got {solution.judgeCircle(moves5)}"
-
-print("All test cases passed!")
+if __name__ == "__main__":
+    unittest.main()

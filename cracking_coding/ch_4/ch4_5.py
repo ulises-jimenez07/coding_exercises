@@ -1,18 +1,19 @@
-#VAlidate if a tree is a bainary search tree
+# VAlidate if a tree is a bainary search tree
 from coding_interview.CrackingCoding.ch_4.binary_search_tree import BinarySearchTree
 from coding_interview.CrackingCoding.ch_4.binary_tree import BinaryTree
+
 
 def is_binary_search_tree(tree):
     return _is_bst(tree.root)
 
+
 def _is_bst(node, min_val=None, max_val=None):
     if not node:
         return True
-    #condition to confirm if left <= current < right
+    # condition to confirm if left <= current < right
     if (min_val and node.key < min_val) or (max_val and node.key >= max_val):
         return False
-    return _is_bst(node.left, min_val, node.key) and _is_bst(node.right, node.key,max_val)
-
+    return _is_bst(node.left, min_val, node.key) and _is_bst(node.right, node.key, max_val)
 
 
 bst = BinarySearchTree()

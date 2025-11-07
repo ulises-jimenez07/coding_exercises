@@ -93,11 +93,11 @@ def delete_node(root_node, node_value):
     elif node_value > root_node.data:
         root_node.right_child = delete_node(root_node.right_child, node_value)
     else:
-        if root_node.left_child == None:
+        if root_node.left_child is None:
             temp = root_node.right_child
             root_node = None
             return temp
-        if root_node.right_child == None:
+        if root_node.right_child is None:
             temp = root_node.left_child
             root_node = None
             return temp

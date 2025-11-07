@@ -1,18 +1,26 @@
-# Definition for singly-linked list.
-from typing import Optional
+"""
+Problem: Merge two sorted linked lists
+
+Approach:
+- Use dummy node to simplify edge cases
+- Compare values and link smaller node
+- Attach remaining nodes at end
+- Time complexity: O(n + m)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import Optional
 
 
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=0, next_node=None):
         self.val = val
-        self.next = next
+        self.next = next_node
 
 
 class Solution:
-    def mergeTwoLists(
-        self, list1: Optional[ListNode], list2: Optional[ListNode]
-    ) -> Optional[ListNode]:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         """
         Merges two sorted linked lists into a new sorted linked list.
 
@@ -24,32 +32,30 @@ class Solution:
             A new sorted linked list containing all elements from list1 and list2,
             or None if both input lists are None.
         """
-        # Create a dummy node to simplify the merging process.
-        dummy = ListNode(0)  # Use a more descriptive name
-        # Store the head of the merged list.  Using a separate variable is slightly clearer
+        dummy = ListNode(0)
         tail = dummy
 
-        # Iterate while both lists have elements.
+        # Merge while both lists have nodes
         while list1 and list2:
-            # Compare the current elements and add the smaller one to the merged list.
-            if list1.val <= list2.val:  # Use <= to maintain stability
+            if list1.val <= list2.val:
                 tail.next = list1
                 list1 = list1.next
             else:
                 tail.next = list2
                 list2 = list2.next
-            # Move to the next node in the merged list.
             tail = tail.next
 
-        # Add the remaining elements from list1 or list2 (only one will be non-empty at this point)
-        tail.next = list1 or list2  # More concisely handles remaining elements.
+        # Attach remaining nodes
+        tail.next = list1 or list2
 
-        # Return the head of the merged list (excluding the dummy node).
         return dummy.next
 
 
 # Test cases using unittest
 class TestMergeTwoLists(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
     def create_linked_list(self, values):
         """Helper function to create a linked list from a list of values."""
         head = None
@@ -75,25 +81,25 @@ class TestMergeTwoLists(unittest.TestCase):
     def test_both_lists_non_empty(self):
         list1 = self.create_linked_list([1, 2, 4])
         list2 = self.create_linked_list([1, 3, 4])
-        merged_list = Solution().mergeTwoLists(list1, list2)
+        merged_list = self.solution.mergeTwoLists(list1, list2)
         self.assertEqual(self.linked_list_to_list(merged_list), [1, 1, 2, 3, 4, 4])
 
     def test_one_list_empty(self):
         list1 = self.create_linked_list([1, 2, 4])
         list2 = None
-        merged_list = Solution().mergeTwoLists(list1, list2)
+        merged_list = self.solution.mergeTwoLists(list1, list2)
         self.assertEqual(self.linked_list_to_list(merged_list), [1, 2, 4])
 
     def test_both_lists_empty(self):
         list1 = None
         list2 = None
-        merged_list = Solution().mergeTwoLists(list1, list2)
+        merged_list = self.solution.mergeTwoLists(list1, list2)
         self.assertEqual(self.linked_list_to_list(merged_list), [])
 
     def test_one_list_longer(self):
         list1 = self.create_linked_list([1, 2])
         list2 = self.create_linked_list([1, 3, 4, 5])
-        merged_list = Solution().mergeTwoLists(list1, list2)
+        merged_list = self.solution.mergeTwoLists(list1, list2)
         self.assertEqual(self.linked_list_to_list(merged_list), [1, 1, 2, 3, 4, 5])
 
 

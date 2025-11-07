@@ -9,7 +9,7 @@ def rob_house(houses, current_house, memo):
     return memo[current_house]
 
 
-def robber_bu(houses, current_index):
+def robber_bu(houses, _current_index):
     temp_arr = [0] * (len(houses) + 2)
     for i in range(len(houses) - 1, -1, -1):
         temp_arr[i] = max(houses[i] + temp_arr[i + 2], temp_arr[i + 1])
@@ -34,6 +34,6 @@ def robber_bu_2(houses):
 
 
 houses = [6, 7, 1, 30, 8, 2, 4]
-my_dic = {}
+my_dic: dict[int, int] = {}
 print(rob_house(houses, 0, my_dic))
 print(robber_bu(houses, 0))

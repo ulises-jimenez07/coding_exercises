@@ -1,10 +1,16 @@
+"""This module implements Single Source Shortest Path (SSSP) using BFS."""
+
+
 class Graph:
+    """Represents a graph for Single Source Shortest Path (SSSP) problems."""
+
     def __init__(self, gdict=None):
         if gdict is None:
             gdict = {}
         self.gdict = gdict
 
     def bfs(self, start, end):
+        """Performs a Breadth-First Search (BFS) to find the shortest path between two nodes."""
         queue = []
         queue.append([start])
         while queue:
@@ -16,6 +22,7 @@ class Graph:
                 new_path = list(path)
                 new_path.append(adjacent)
                 queue.append(new_path)
+        return None
 
 
 custom_dict = {

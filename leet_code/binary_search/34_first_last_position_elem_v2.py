@@ -1,8 +1,14 @@
-#   Created by Elshad Karimov
-#   Copyright © AppMillers. All rights reserved.
+"""
+Problem: Find frequency of a number in a sorted array
 
-# Divide and Conquer - sortedFrequency
-import math
+Approach:
+- Find leftmost and rightmost positions using binary search
+- Calculate frequency as (right - left + 1)
+- Time complexity: O(log n)
+- Space complexity: O(1)
+"""
+
+import unittest
 
 
 def sortedFrequency(arr, num):
@@ -14,6 +20,7 @@ def sortedFrequency(arr, num):
 
 
 def search_left(arr, num):
+    # Find leftmost occurrence
     left = 0
     right = len(arr) - 1
     result = -1
@@ -31,6 +38,7 @@ def search_left(arr, num):
 
 
 def search_right(arr, num):
+    # Find rightmost occurrence
     left = 0
     right = len(arr) - 1
     result = -1
@@ -45,3 +53,19 @@ def search_right(arr, num):
         else:
             left = mid + 1
     return result
+
+
+class TestSortedFrequency(unittest.TestCase):
+
+    def test_sorted_frequency(self):
+        self.assertEqual(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 2), 4)
+        self.assertEqual(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 3), 1)
+        self.assertEqual(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 1), 2)
+        self.assertEqual(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 4), -1)
+        self.assertEqual(sortedFrequency([], 1), -1)
+        self.assertEqual(sortedFrequency([1, 2, 3, 4, 5], 3), 1)
+        self.assertEqual(sortedFrequency([5, 5, 5, 5, 5], 5), 5)
+
+
+if __name__ == "__main__":
+    unittest.main()

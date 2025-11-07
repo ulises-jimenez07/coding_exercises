@@ -1,54 +1,62 @@
+"""
+Problem: Find the maximum profit from buying and selling a stock once.
+
+Approach:
+- Track the minimum buy price seen so far
+- For each price, calculate profit if selling today
+- Keep track of maximum profit found
+- Time complexity: O(n) single pass through prices
+- Space complexity: O(1) only storing two variables
+
+Example: [7,1,5,3,6,4] -> buy at 1, sell at 6 for profit of 5
+"""
+
 import unittest
+from typing import List
 
 
-class Solution(object):
-    def maxProfit(self, prices):
-        """
-        You are given an array prices where prices[i] is the price of a given stock on the ith day.
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        buy_price = 10**9
+        profit = 0
 
-        You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
-
-        Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
-
-        :type prices: List[int]
-        :rtype: int
-        """
-        buy_price = float("inf")  # Initialize buy price to infinity
-        profit = 0  # Initialize profit to 0
-
-        for price in prices:  # Iterate through the prices
-            if (
-                price < buy_price
-            ):  # If current price is lower than buy price, update buy price
+        for price in prices:
+            # Update minimum buy price
+            if price < buy_price:
                 buy_price = price
-            else:  # If current price is higher than buy price, calculate potential profit
-                profit = max(
-                    profit, price - buy_price
-                )  # Update profit if potential profit is higher
+            else:
+                # Calculate profit if selling today
+                profit = max(profit, price - buy_price)
 
-        return profit  # Return the maximum profit
+        return profit
 
 
-class TestMaxProfit(unittest.TestCase):  # Test cases using unittest
+class TestMaxProfit(unittest.TestCase):
     def setUp(self):
         self.solution = Solution()
 
-    def test_empty_prices(self):  # Test with empty prices array
+    def test_empty_prices(self):
+        """Tests with an empty prices array."""
         self.assertEqual(self.solution.maxProfit([]), 0)
 
-    def test_single_price(self):  # Test with single price
+    def test_single_price(self):
+        """Tests with a single price."""
         self.assertEqual(self.solution.maxProfit([5]), 0)
 
-    def test_decreasing_prices(self):  # Test with decreasing prices
+    def test_decreasing_prices(self):
+        """Tests with decreasing prices."""
         self.assertEqual(self.solution.maxProfit([5, 4, 3, 2, 1]), 0)
 
-    def test_increasing_prices(self):  # Test with increasing prices
+    def test_increasing_prices(self):
+        """Tests with increasing prices."""
         self.assertEqual(self.solution.maxProfit([1, 2, 3, 4, 5]), 4)
 
-    def test_mixed_prices(self):  # Test with mixed prices
+    def test_mixed_prices(self):
+        """Tests with mixed prices."""
         self.assertEqual(self.solution.maxProfit([7, 1, 5, 3, 6, 4]), 5)
 
-    def test_example_1(self):  # Example 1 from LeetCode
+    def test_no_profit(self):
+        """Tests a case where no profit can be made."""
         self.assertEqual(self.solution.maxProfit([7, 6, 4, 3, 1]), 0)
 
 

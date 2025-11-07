@@ -1,12 +1,22 @@
-from typing import Optional
+"""
+Problem: Reverse a singly linked list
+
+Approach:
+- Use three pointers: prev, current, and next
+- Iterate through list, reversing links one by one
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import Optional
 
 
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=0, next_node=None):
         self.val = val
-        self.next = next
+        self.next = next_node
 
 
 class Solution:
@@ -22,15 +32,20 @@ class Solution:
         """
         prev = None
         while head:
-            next_node = head.next  # Store the next node
-            head.next = prev  # Reverse the pointer
+            next_node = head.next
+            # Reverse the link
+            head.next = prev
 
-            prev = head  # Move prev forward
-            head = next_node  # Move head forward
+            # Move pointers forward
+            prev = head
+            head = next_node
         return prev
 
 
 class TestReverseList(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
     def create_linked_list(self, values):
         """Helper function to create a linked list from a list of values."""
         head = None
@@ -55,17 +70,17 @@ class TestReverseList(unittest.TestCase):
 
     def test_empty_list(self):
         head = self.create_linked_list([])
-        reversed_head = Solution().reverseList(head)
+        reversed_head = self.solution.reverseList(head)
         self.assertIsNone(reversed_head)
 
     def test_single_element_list(self):
         head = self.create_linked_list([5])
-        reversed_head = Solution().reverseList(head)
+        reversed_head = self.solution.reverseList(head)
         self.assertEqual(self.linked_list_to_list(reversed_head), [5])
 
     def test_multiple_elements_list(self):
         head = self.create_linked_list([1, 2, 3, 4, 5])
-        reversed_head = Solution().reverseList(head)
+        reversed_head = self.solution.reverseList(head)
         self.assertEqual(self.linked_list_to_list(reversed_head), [5, 4, 3, 2, 1])
 
 

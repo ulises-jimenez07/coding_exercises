@@ -20,6 +20,6 @@ def number_factor_tab(n):
     return tb[n]
 
 
-my_dic = {}
+my_dic: dict[int, int] = {}
 print(number_factor_memo(5, my_dic))
 print(number_factor_tab(5))

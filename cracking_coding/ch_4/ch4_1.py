@@ -1,41 +1,44 @@
-#Given to nodes check if there exists a route between them
+# Given to nodes check if there exists a route between them
 from collections import deque
 
-#depth approch with recuresion
+
+# depth approch with recuresion
 def is_route(graph, start, end, visited=None):
     # create a set of visisted nodes in case is the first iteration
     if visited is None:
-        visited=set()
+        visited = set()
     # for each child in the node
     for node in graph[start]:
         if node not in visited:
             visited.add(node)
-            #recurse to go to the next child
-            if node == end or is_route(graph,node, end, visited):
+            # recurse to go to the next child
+            if node == end or is_route(graph, node, end, visited):
                 return True
     return False
 
-#breadht approch iteration
-def is_route_bdf(graph,start, end ):
-    #if root is start and end
-    if start==end:
+
+# breadht approch iteration
+def is_route_bdf(graph, start, end):
+    # if root is start and end
+    if start == end:
         return True
-    visited =set()
-    #using queue for breadth-first
+    visited = set()
+    # using queue for breadth-first
     queue = deque()
     queue.append(start)
     while queue:
-        node= queue.popleft()
-        #for each adjacen node child
+        node = queue.popleft()
+        # for each adjacen node child
         for adjacent in graph[node]:
             if adjacent not in visited:
                 visited.add(adjacent)
                 if adjacent == end:
                     return True
                 else:
-                    #add childs to the queue
+                    # add childs to the queue
                     queue.append(adjacent)
     return False
+
 
 def is_route_bidirectional(graph, start, end):
     to_visit = deque()
@@ -60,7 +63,8 @@ def is_route_bidirectional(graph, start, end):
                 to_visit.append(y)
     return False
 
-#graph is created with dictionaries, pointing to the child nodes.
+
+# graph is created with dictionaries, pointing to the child nodes.
 graph = {
     "A": ["B", "C"],
     "B": ["D"],
@@ -77,10 +81,10 @@ graph = {
     "L": ["J"],
     "P": ["Q", "R"],
     "Q": ["P", "R"],
-    "R": ["P", "Q"]
+    "R": ["P", "Q"],
 }
 
-#test different routes between nodes
+# test different routes between nodes
 tests = [
     ("A", "L", True),
     ("A", "B", True),

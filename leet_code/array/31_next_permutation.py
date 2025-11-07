@@ -1,20 +1,22 @@
-from typing import List
+"""
+Problem: Find the next lexicographically greater permutation in-place
+
+Approach:
+- Find first decreasing element from right, swap with next larger element
+- Reverse suffix to get smallest arrangement
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import List
 
 
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
-        """
-        Finds the next lexicographically greater permutation of a list of integers in-place.
-
-        Args:
-            nums: A list of integers.
-
-        Do not return anything, modify nums in-place instead.
-        """
+        """Finds the next lexicographically greater permutation in-place."""
 
         def _reverse(nums, start):
-            """Reverses a portion of the list nums in-place."""
             i, j = start, len(nums) - 1
             while i < j:
                 nums[i], nums[j] = nums[j], nums[i]
@@ -23,57 +25,59 @@ class Solution:
 
         n = len(nums)
         i = n - 2
-        # Find the first decreasing element from right to left.
+        # Find first decreasing element from right
         while i >= 0 and nums[i + 1] <= nums[i]:
             i -= 1
 
         if i >= 0:
-            # Find the smallest element to the right of nums[i] that is greater than nums[i].
+            # Find smallest element greater than nums[i]
             j = n - 1
             while nums[j] <= nums[i]:
                 j -= 1
-            # Swap nums[i] and nums[j].
             nums[i], nums[j] = nums[j], nums[i]
-        # Reverse the portion of the list to the right of i.
+
         _reverse(nums, i + 1)
 
 
 class TestNextPermutation(unittest.TestCase):
-    def test_next_permutation_1(self):
+    def setUp(self):
+        self.solution = Solution()
+
+    def test_basic(self):
+        """Basic permutation."""
         nums = [1, 2, 3]
-        expected = [1, 3, 2]
-        Solution().nextPermutation(nums)
-        self.assertEqual(nums, expected)
+        self.solution.nextPermutation(nums)
+        self.assertEqual(nums, [1, 3, 2])
 
-    def test_next_permutation_2(self):
+    def test_reversed_order(self):
+        """Largest permutation wraps to smallest."""
         nums = [3, 2, 1]
-        expected = [1, 2, 3]
-        Solution().nextPermutation(nums)
-        self.assertEqual(nums, expected)
+        self.solution.nextPermutation(nums)
+        self.assertEqual(nums, [1, 2, 3])
 
-    def test_next_permutation_3(self):
+    def test_with_duplicates(self):
+        """Permutation with duplicate values."""
         nums = [1, 1, 5]
-        expected = [1, 5, 1]
-        Solution().nextPermutation(nums)
-        self.assertEqual(nums, expected)
+        self.solution.nextPermutation(nums)
+        self.assertEqual(nums, [1, 5, 1])
 
-    def test_next_permutation_4(self):
+    def test_single_element(self):
+        """Single element list."""
         nums = [1]
-        expected = [1]
-        Solution().nextPermutation(nums)
-        self.assertEqual(nums, expected)
+        self.solution.nextPermutation(nums)
+        self.assertEqual(nums, [1])
 
-    def test_next_permutation_5(self):
+    def test_two_elements(self):
+        """Two elements."""
         nums = [1, 2]
-        expected = [2, 1]
-        Solution().nextPermutation(nums)
-        self.assertEqual(nums, expected)
+        self.solution.nextPermutation(nums)
+        self.assertEqual(nums, [2, 1])
 
-    def test_next_permutation_6(self):
+    def test_complex(self):
+        """Complex permutation."""
         nums = [2, 3, 1]
-        expected = [3, 1, 2]
-        Solution().nextPermutation(nums)
-        self.assertEqual(nums, expected)
+        self.solution.nextPermutation(nums)
+        self.assertEqual(nums, [3, 1, 2])
 
 
 if __name__ == "__main__":

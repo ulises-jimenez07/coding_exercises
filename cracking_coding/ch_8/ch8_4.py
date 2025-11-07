@@ -1,13 +1,14 @@
 import copy
 
+
 def get_subsets(setz, index=None):
-    if index == None:
-        index= len(setz)-1
+    if index is None:
+        index = len(setz) - 1
     if index == -1:
         return [[]]
-    
-    old_subs = get_subsets(setz, index-1)
-    new_subs =[]
+
+    old_subs = get_subsets(setz, index - 1)
+    new_subs = []
     item = setz[index]
 
     for val in old_subs:
@@ -18,4 +19,4 @@ def get_subsets(setz, index=None):
     return new_subs
 
 
-print(get_subsets([1,2,3]))
+print(get_subsets([1, 2, 3]))

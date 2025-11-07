@@ -1,33 +1,26 @@
+"""
+Problem: Convert a string to a 32-bit signed integer (atoi)
+
+Approach:
+- Skip whitespace, handle sign, parse digits with overflow checking
+- Stop at first non-digit character
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
 
 
 class Solution:
     def myAtoi(self, s: str) -> int:
-        """
-        Converts a string to a 32-bit integer.
+        """Converts a string to a 32-bit integer."""
+        sign = 1
+        result = 0
+        index = 0
+        n = len(s)
 
-        The function follows these rules:
-
-        1. Read in and ignore any leading whitespace.
-        2. Check if the next character (if not already at the end of the string) is '-' or '+'. Read this character in if it is either. This determines the sign of the final result.
-        3. Read in next the characters until the next non-digit character or the end of the input is reached. The rest of the string is ignored.
-        4. Convert these digits into an integer (i.e. "123" -> 123, "0032" -> 32). If no digits were read, then the integer is 0. Change the sign as necessary.
-        5. If the integer is out of the 32-bit signed integer range [-2^31, 2^31 - 1], then clamp the integer so that it remains in the range. Specifically, integers less than -2^31 should be clamped to -2^31, and integers greater than 2^31 - 1 should be clamped to 2^31 - 1.
-        6. Return the integer as the final result.
-
-        Args:
-            s: The input string.
-
-        Returns:
-            The converted 32-bit integer.
-        """
-        sign = 1  # Initialize sign as positive
-        result = 0  # Initialize result
-        index = 0  # Initialize index
-        n = len(s)  # Get the length of the string
-
-        INT_MAX = pow(2, 31) - 1  # Maximum 32-bit integer
-        INT_MIN = -pow(2, 31)  # Minimum 32-bit integer
+        INT_MAX = pow(2, 31) - 1
+        INT_MIN = -pow(2, 31)
 
         # Skip leading whitespace
         while index < n and s[index] == " ":
@@ -46,61 +39,58 @@ class Solution:
             digit = int(s[index])
 
             # Check for overflow
-            if (result > INT_MAX // 10) or (
-                result == INT_MAX // 10 and digit > INT_MAX % 10
-            ):
+            if (result > INT_MAX // 10) or (result == INT_MAX // 10 and digit > INT_MAX % 10):
                 return INT_MAX if sign == 1 else INT_MIN
 
             result = 10 * result + digit
             index += 1
 
-        return sign * result  # Return the result with the correct sign
+        return sign * result
 
 
 class TestMyAtoi(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
     def test_positive_numbers(self):
-        solution = Solution()
-        self.assertEqual(solution.myAtoi("42"), 42)
-        self.assertEqual(solution.myAtoi("   42"), 42)
-        self.assertEqual(solution.myAtoi("0042"), 42)
+        """Positive numbers."""
+        self.assertEqual(self.solution.myAtoi("42"), 42)
+        self.assertEqual(self.solution.myAtoi("   42"), 42)
+        self.assertEqual(self.solution.myAtoi("0042"), 42)
 
     def test_negative_numbers(self):
-        solution = Solution()
-        self.assertEqual(solution.myAtoi("-42"), -42)
-        self.assertEqual(solution.myAtoi("  -42  "), -42)
+        """Negative numbers."""
+        self.assertEqual(self.solution.myAtoi("-42"), -42)
+        self.assertEqual(self.solution.myAtoi("  -42  "), -42)
 
     def test_leading_zeros(self):
-        solution = Solution()
-        self.assertEqual(solution.myAtoi("0000042"), 42)
+        """Leading zeros."""
+        self.assertEqual(self.solution.myAtoi("0000042"), 42)
 
     def test_trailing_non_digits(self):
-        solution = Solution()
-        self.assertEqual(solution.myAtoi("4193 with words"), 4193)
+        """Trailing non-digits."""
+        self.assertEqual(self.solution.myAtoi("4193 with words"), 4193)
 
     def test_leading_non_digits(self):
-        solution = Solution()
-        self.assertEqual(solution.myAtoi("words and 987"), 0)
+        """Leading non-digits."""
+        self.assertEqual(self.solution.myAtoi("words and 987"), 0)
 
     def test_empty_string(self):
-        solution = Solution()
-        self.assertEqual(solution.myAtoi(""), 0)
+        """Empty string."""
+        self.assertEqual(self.solution.myAtoi(""), 0)
 
     def test_whitespace_string(self):
-        solution = Solution()
-        self.assertEqual(solution.myAtoi("   "), 0)
+        """Whitespace string."""
+        self.assertEqual(self.solution.myAtoi("   "), 0)
 
     def test_overflow(self):
-        solution = Solution()
-        self.assertEqual(
-            solution.myAtoi("2147483648"), 2147483647
-        )  # Clamped to INT_MAX
-        self.assertEqual(
-            solution.myAtoi("-2147483649"), -2147483648
-        )  # Clamped to INT_MIN
+        """Overflow."""
+        self.assertEqual(self.solution.myAtoi("2147483648"), 2147483647)
+        self.assertEqual(self.solution.myAtoi("-2147483649"), -2147483648)
 
     def test_plus_sign(self):
-        solution = Solution()
-        self.assertEqual(solution.myAtoi("+42"), 42)
+        """Plus sign."""
+        self.assertEqual(self.solution.myAtoi("+42"), 42)
 
 
 if __name__ == "__main__":

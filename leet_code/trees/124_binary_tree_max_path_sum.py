@@ -1,8 +1,21 @@
+"""
+Problem: Find the maximum path sum in a binary tree
+
+Approach:
+- Path can start and end at any nodes
+- Use post-order DFS, tracking max gain from each subtree
+- At each node, update global max with path through current node
+- Time complexity: O(n) where n is number of nodes
+- Space complexity: O(h) where h is height for recursion stack
+"""
+
+import unittest
 from typing import Optional
 
 
-# Definition for a binary tree node.
 class TreeNode:
+    """Definition for a binary tree node."""
+
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -11,95 +24,71 @@ class TreeNode:
 
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        """
-        Finds the maximum path sum in a binary tree.
+        """Calculates the maximum path sum in a binary tree."""
+        # Initialize with a very small number to handle negative node values.
+        self.max_sum = -float("inf")
 
-        A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.
+        def find_max_gain(node):
+            """Recursively finds the maximum gain from a node downward."""
+            if not node:
+                return 0
 
-        The path sum of a path is the sum of the node's values in the path.
+            # Max gain from left and right, ignore paths with negative sums.
+            left_gain = max(find_max_gain(node.left), 0)
+            right_gain = max(find_max_gain(node.right), 0)
 
-        Args:
-            root: The root of the binary tree.
+            # Check if the path through the current node is the new maximum.
+            current_path_sum = node.val + left_gain + right_gain
+            self.max_sum = max(self.max_sum, current_path_sum)
 
-        Returns:
-            The maximum path sum.
-        """
-        self.ans = -float("inf")  # Initialize the maximum path sum to negative infinity
+            # Return the max gain for a path starting at the current node.
+            return node.val + max(left_gain, right_gain)
 
-        def solution(node):
-            """
-            Recursive helper function to calculate the maximum path sum starting from a given node.
-
-            Args:
-                node: The current node being considered.
-
-            Returns:
-                The maximum path sum starting from the given node.
-            """
-            if node is None:
-                return 0  # Base case: empty subtree
-
-            left = solution(
-                node.left
-            )  # Recursively calculate max path sum from left subtree
-            right = solution(
-                node.right
-            )  # Recursively calculate max path sum from right subtree
-
-            # Calculate the maximum path sum that includes the current node
-            mx_side = max(
-                node.val, node.val + max(left, right)
-            )  # Max path ending at current node
-            mx_current = max(
-                mx_side, node.val + left + right
-            )  # Max path including current node
-
-            self.ans = max(self.ans, mx_current)  # Update the overall maximum path sum
-
-            return mx_side  # Return the maximum path sum ending at the current node
-
-        solution(root)  # Call the recursive helper function starting from the root
-        return self.ans
-
-
-import unittest
+        find_max_gain(root)
+        return int(self.max_sum) if root else 0
 
 
 class TestMaxPathSum(unittest.TestCase):
-    def test_max_path_sum(self):
-        solution = Solution()
+    def setUp(self):
+        self.solution = Solution()
 
-        # Test case 1: Example 1
-        root1 = TreeNode(-10)
-        root1.left = TreeNode(9)
-        root1.right = TreeNode(20)
-        root1.right.left = TreeNode(15)
-        root1.right.right = TreeNode(7)
-        self.assertEqual(solution.maxPathSum(root1), 42)
+    def test_complex_tree(self):
+        """Tests a tree with a mix of positive and negative values."""
+        root = TreeNode(-10)
+        root.left = TreeNode(9)
+        root.right = TreeNode(20)
+        root.right.left = TreeNode(15)
+        root.right.right = TreeNode(7)
+        self.assertEqual(self.solution.maxPathSum(root), 42)
 
-        # Test case 2: Example 2
-        root2 = TreeNode(1)
-        root2.left = TreeNode(2)
-        root2.right = TreeNode(3)
-        self.assertEqual(solution.maxPathSum(root2), 6)
+    def test_simple_positive_tree(self):
+        """Tests a simple tree with only positive values."""
+        root = TreeNode(1)
+        root.left = TreeNode(2)
+        root.right = TreeNode(3)
+        self.assertEqual(self.solution.maxPathSum(root), 6)
 
-        # Test case 3: Negative values
-        root3 = TreeNode(-3)
-        self.assertEqual(solution.maxPathSum(root3), -3)
+    def test_single_negative_node(self):
+        """Tests a tree with a single negative node."""
+        root = TreeNode(-3)
+        self.assertEqual(self.solution.maxPathSum(root), -3)
 
-        # Test case 4: Single node
-        root4 = TreeNode(5)
-        self.assertEqual(solution.maxPathSum(root4), 5)
+    def test_single_node(self):
+        """Tests a tree with a single node."""
+        root = TreeNode(5)
+        self.assertEqual(self.solution.maxPathSum(root), 5)
 
-        # Test case 5: Skewed tree
-        root5 = TreeNode(1)
-        root5.left = TreeNode(2)
-        root5.left.left = TreeNode(3)
-        root5.left.left.left = TreeNode(4)
-        self.assertEqual(solution.maxPathSum(root5), 10)
+    def test_left_skewed_tree(self):
+        """Tests a tree that is skewed to the left."""
+        root = TreeNode(1)
+        root.left = TreeNode(2)
+        root.left.left = TreeNode(3)
+        root.left.left.left = TreeNode(4)
+        self.assertEqual(self.solution.maxPathSum(root), 10)
 
-        # Test case 6: Empty tree
-        self.assertEqual(solution.maxPathSum(None), -float("inf"))
+    def test_empty_tree(self):
+        """Tests an empty tree."""
+        self.assertEqual(self.solution.maxPathSum(None), 0)
 
 
 if __name__ == "__main__":

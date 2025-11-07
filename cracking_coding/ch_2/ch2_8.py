@@ -2,20 +2,20 @@ from coding_interview.CrackingCoding.ch_2.linked_list import LinkedList
 
 
 def loop_detection(ll):
-    fast=ll.head
-    slow=ll.head
+    fast = ll.head
+    slow = ll.head
     while fast and fast.next:
-        slow=slow.next
-        fast=fast.next.next
+        slow = slow.next
+        fast = fast.next.next
         if slow is fast:
             break
     if fast is None or fast.next is None:
         return None
-    slow=ll.head
+    slow = ll.head
 
     while fast is not slow:
-        slow=slow.next
-        fast=fast.next
+        slow = slow.next
+        fast = fast.next
     return fast
 
 

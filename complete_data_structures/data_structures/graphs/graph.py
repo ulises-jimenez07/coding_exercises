@@ -1,29 +1,37 @@
+"""This module implements a Graph data structure using an adjacency list."""
+
 from collections import deque
 
 
 class Graph:
+    """Represents an undirected graph using an adjacency list."""
+
     def __init__(self):
         self.adjacency_list = {}
 
     def add_vertex(self, vertex):
-        if vertex not in self.adjacency_list.keys():
+        """Adds a new vertex to the graph."""
+        if vertex not in self.adjacency_list:
             self.adjacency_list[vertex] = []
             return True
         return False
 
     def print_graph(self):
-        for vertex in self.adjacency_list:
-            print(vertex, ":", self.adjacency_list[vertex])
+        """Prints the adjacency list representation of the graph."""
+        for vertex, neighbors in self.adjacency_list.items():
+            print(vertex, ":", neighbors)
 
     def add_edge(self, vertex1, vertex2):
-        if vertex1 in self.adjacency_list.keys() and vertex2 in self.adjacency_list.keys():
+        """Adds an undirected edge between two vertices."""
+        if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
             self.adjacency_list[vertex1].append(vertex2)
             self.adjacency_list[vertex2].append(vertex1)
             return True
         return False
 
     def remove_edge(self, vertex1, vertex2):
-        if vertex1 in self.adjacency_list.keys() and vertex2 in self.adjacency_list.keys():
+        """Removes an edge between two vertices."""
+        if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
             try:
                 self.adjacency_list[vertex1].remove(vertex2)
                 self.adjacency_list[vertex2].remove(vertex1)
@@ -33,7 +41,8 @@ class Graph:
         return False
 
     def remove_vertex(self, vertex):
-        if vertex in self.adjacency_list.keys():
+        """Removes a vertex and all its incident edges from the graph."""
+        if vertex in self.adjacency_list:
             for other_vertex in self.adjacency_list[vertex]:
                 self.adjacency_list[other_vertex].remove(vertex)
             del self.adjacency_list[vertex]
@@ -43,6 +52,7 @@ class Graph:
     # time complexity O(V+E)
     # Space complexity O(v)
     def bfs(self, vertex):
+        """Performs a Breadth-First Search (BFS) starting from a given vertex."""
         visited = set()
         visited.add(vertex)
         queue = deque([vertex])
@@ -57,6 +67,7 @@ class Graph:
     # time complexity O(V+E)
     # Space complexity O(v)
     def dfs(self, vertex):
+        """Performs a Depth-First Search (DFS) starting from a given vertex (iterative)."""
         visited = set()
         stack = [vertex]
         while stack:
@@ -69,6 +80,7 @@ class Graph:
                     stack.append(adjacent_vertex)
 
     def dfs_recursive(self, vertex, visited):
+        """Performs a Depth-First Search (DFS) starting from a given vertex (recursive)."""
         visited.add(vertex)
         print(vertex, end=" ")
 

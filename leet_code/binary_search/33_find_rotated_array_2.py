@@ -1,26 +1,19 @@
-from typing import List
+"""
+Problem: Search for a target value in a rotated sorted array (cleaner approach)
+
+Approach:
+- Single pass binary search identifying which half is sorted
+- Compare target with sorted half boundaries to decide which side to search
+- Time complexity: O(log n)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import List
+
 
 class Solution:
-    """
-    This class implements a search algorithm to find a target value in a rotated sorted array.
-    """
     def search(self, nums: List[int], target: int) -> int:
-        """
-        Searches for a target value in a rotated sorted array.
-
-        This algorithm uses a modified binary search approach to handle the rotation.
-        It divides the array into two parts: a left sorted part and a right sorted part.
-        By comparing the middle element with the first element of the array, it determines
-        which part is sorted and narrows down the search space accordingly.
-
-        Args:
-            nums: A list of integers representing the rotated sorted array.
-            target: The integer value to search for.
-
-        Returns:
-            The index of the target value if found, otherwise -1.
-        """
         start = 0
         end = len(nums) - 1
         ans = -1
@@ -31,22 +24,21 @@ class Solution:
             if nums[mid] == target:
                 return mid
 
-            # Determine which half of the array the mid element belongs to.
-            # If nums[mid] is in the left sorted part and target is in the right unsorted part.
+            # Determine which half to search based on pivot
             if nums[mid] >= nums[0] and target < nums[0]:
                 start = mid + 1
-            # If nums[mid] is in the right sorted part and target is in the left unsorted part.
             elif nums[mid] < nums[0] and target >= nums[0]:
                 end = mid - 1
-            # Regular binary search on the determined part of the array.
             else:
                 if nums[mid] < target:
                     start = mid + 1
-                else:  # nums[mid] > target
+                else:
                     end = mid - 1
         return ans
 
+
 # --- Unit Tests ---
+
 
 class TestSolution(unittest.TestCase):
     """
@@ -123,8 +115,9 @@ class TestSolution(unittest.TestCase):
         target = 0
         self.assertEqual(self.solution.search(nums, target), -1)
 
+
 # To run the tests, you can use:
 # unittest.main()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

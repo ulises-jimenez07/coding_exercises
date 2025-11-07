@@ -1,54 +1,35 @@
+"""
+Problem: Find length of longest consecutive sequence in unsorted array
+
+Approach:
+- Convert array to set for O(1) lookups
+- For each number, check if it's a sequence start (num-1 not in set)
+- Count consecutive numbers from each sequence start
+- Time complexity: O(n)
+- Space complexity: O(n)
+"""
+
 import unittest
 from typing import List
 
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        """
-        Finds the length of the longest consecutive elements sequence in an unsorted list of integers.
-
-        The algorithm works by first converting the input list into a set for O(1) average time complexity
-        for checking the existence of an element. Then, it iterates through each number in the set.
-        If a number `num` is the start of a sequence (i.e., `num - 1` is not in the set),
-        it then counts the length of the consecutive sequence starting from `num`.
-        The maximum length found is updated and returned.
-
-        Args:
-            nums: A list of integers.
-
-        Returns:
-            The length of the longest consecutive elements sequence.
-        """
-        # Convert the list of numbers into a set to allow for O(1) average time complexity
-        # for checking the existence of elements. This also handles duplicate numbers automatically.
         n_set = set(nums)
-
-        # Initialize the variable to store the length of the longest consecutive sequence found so far.
         ans = 0
 
-        # Iterate through each unique number in the input list.
         for num in n_set:
-            # Check if the current number is the start of a new consecutive sequence.
-            # A number is the start of a sequence if its predecessor (num - 1) is not present in the set.
-            # This check is crucial for optimizing the algorithm to avoid redundant counting.
-            # If we only start counting from the beginning of a sequence, each number will be part of
-            # the "while" loop's check at most once.
+            # Only process if sequence start
             if (num - 1) not in n_set:
-                # Initialize the current number being checked in the potential sequence.
                 current = num
-                # Initialize the length of the current consecutive sequence.
                 current_streak = 1
 
-                # While the next consecutive number (current + 1) is present in the set,
-                # extend the current streak.
+                # Count consecutive numbers
                 while current + 1 in n_set:
                     current_streak += 1
                     current += 1
 
-                # Update the longest consecutive sequence found so far if the current streak is longer.
                 ans = max(current_streak, ans)
-
-        # Return the length of the longest consecutive sequence found.
         return ans
 
 

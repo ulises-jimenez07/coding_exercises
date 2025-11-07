@@ -1,9 +1,9 @@
 def collectStrings(obj):
     res = []
     for key in obj:
-        if type(obj[key]) is dict:
+        if isinstance(obj[key], dict):
             res += collectStrings(obj[key])
-        elif type(obj[key]) is str:
+        elif isinstance(obj[key], str):
             res.append(obj[key])
     return res
 
@@ -11,8 +11,8 @@ def collectStrings(obj):
 def stringifyNumbers(obj):
     new_obj = obj
     for key in obj:
-        if type(obj[key]) is dict:
+        if isinstance(obj[key], dict):
             new_obj[key] = stringifyNumbers(obj[key])
-        elif type(obj[key]) is int:
+        elif isinstance(obj[key], int):
             new_obj[key] = str(obj[key])
     return new_obj

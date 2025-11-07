@@ -1,40 +1,36 @@
+"""
+Problem: Find the minimum number of coins needed to make a target amount.
+
+Approach:
+- Use bottom-up dynamic programming
+- dp[i] = minimum coins needed to make amount i
+- For each amount, try all coins and take minimum
+- Build up from 0 to target amount
+- Time complexity: O(amount * coins) nested loops
+- Space complexity: O(amount) for dp array
+
+Example: coins=[1,2,5], amount=11 -> use 5+5+1 for 3 coins
+"""
+
 import unittest
+from typing import List
 
 
-class Solution(object):
-    def coinChange(self, coins, amount):
-        """
-        You are given an integer array coins representing a list of coin denominations and an integer amount representing a total amount of money.
-
-        Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
-
-        You may assume that you have an infinite number of each kind of coin.
-
-        :type coins: List[int]
-        :type amount: int
-        :rtype: int
-        """
-        # If amount is less than or equal to 0, return 0
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
         if amount <= 0:
             return 0
 
-        # Initialize dp table with infinity for all amounts from 1 to amount
         dp = [float("inf")] * (amount + 1)
-        # Base case: 0 coins needed to make amount 0
         dp[0] = 0
 
-        # Iterate through amounts from 1 to amount
         for i in range(1, amount + 1):
-            # Iterate through each coin denomination
             for coin in coins:
-                # If current coin is less than or equal to current amount
-                # and the number of coins needed to make up (amount - coin) is not infinity
+                # Try using this coin if it fits
                 if coin <= i and dp[i - coin] != float("inf"):
-                    # Update dp[i] with the minimum of current value and (number of coins to make (i-coin) + 1)
                     dp[i] = min(dp[i], dp[i - coin] + 1)
 
-        # Return dp[amount] if it's not infinity, otherwise return -1
-        return dp[amount] if dp[amount] != float("inf") else -1
+        return int(dp[amount]) if dp[amount] != float("inf") else -1
 
 
 class TestCoinChange(unittest.TestCase):
@@ -42,37 +38,47 @@ class TestCoinChange(unittest.TestCase):
         self.solution = Solution()
 
     def test_amount_zero(self):
+        """Test with amount zero."""
         self.assertEqual(self.solution.coinChange([1, 2, 5], 0), 0)
 
     def test_amount_less_than_zero(self):
+        """Test with amount less than zero."""
         self.assertEqual(self.solution.coinChange([1, 2, 5], -5), 0)
 
     def test_cannot_make_amount(self):
+        """Test case where the amount cannot be made."""
         self.assertEqual(self.solution.coinChange([2], 3), -1)
 
     def test_single_coin(self):
+        """Test with a single coin denomination."""
         self.assertEqual(self.solution.coinChange([1], 5), 5)
 
     def test_multiple_coins(self):
+        """Test with multiple coin denominations."""
         self.assertEqual(self.solution.coinChange([1, 2, 5], 11), 3)
 
     def test_large_amount(self):
+        """Test with a large amount."""
         self.assertEqual(self.solution.coinChange([1, 2, 5], 100), 20)
 
     def test_duplicate_coins(self):
+        """Test with duplicate coin denominations."""
         self.assertEqual(self.solution.coinChange([1, 2, 2, 5], 11), 3)
 
-    # Additional test cases
     def test_empty_coins(self):
+        """Test with an empty list of coins."""
         self.assertEqual(self.solution.coinChange([], 5), -1)
 
-    def test_example_leetcode_1(self):
+    def test_leetcode_example_1(self):
+        """Test case from LeetCode example 1."""
         self.assertEqual(self.solution.coinChange([1, 2, 5], 11), 3)
 
-    def test_example_leetcode_2(self):
+    def test_leetcode_example_2(self):
+        """Test case from LeetCode example 2."""
         self.assertEqual(self.solution.coinChange([2], 3), -1)
 
-    def test_example_leetcode_3(self):
+    def test_leetcode_example_3(self):
+        """Test case from LeetCode example 3."""
         self.assertEqual(self.solution.coinChange([1], 0), 0)
 
 

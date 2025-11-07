@@ -1,3 +1,15 @@
+"""
+Problem: Find lowest common ancestor of two nodes in a BST
+
+Approach:
+- Use BST property: all left descendants < node < right descendants
+- If both nodes < current, LCA is in left subtree
+- If both nodes > current, LCA is in right subtree
+- Otherwise, current node is the LCA (split point)
+- Time complexity: O(h) where h is height of tree
+- Space complexity: O(h) for recursion stack
+"""
+
 import unittest
 
 

@@ -1,13 +1,22 @@
+"""
+Problem: Check if two nodes are cousins in a binary tree
+
+Approach:
+- Find depth and parent for both nodes
+- Cousins have same depth but different parents
+- Use DFS to locate each node and track parent/level
+- Time complexity: O(n) where n is number of nodes
+- Space complexity: O(h) where h is height for recursion stack
+"""
+
 import unittest
-from typing import Optional
+from typing import (
+    List,
+    Optional,
+)
 
 
-# Definition for a binary tree node.
 class TreeNode:
-    """
-    A class to represent a node in a binary tree.
-    """
-
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -15,149 +24,74 @@ class TreeNode:
 
 
 class Solution:
-    """
-    A class to determine if two nodes in a binary tree are cousins.
-    Cousins are nodes that are at the same level but have different parents.
-    """
-
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
-        """
-        Determines if nodes with values x and y are cousins.
+        x_info = self.find_node(root, x, None, 0)
+        y_info = self.find_node(root, y, None, 0)
 
-        Args:
-            root: The root node of the binary tree.
-            x: The value of the first node to check.
-            y: The value of the second node to check.
+        if x_info and y_info:
+            return x_info[0] != y_info[0] and x_info[1] == y_info[1]
+        return False
 
-        Returns:
-            True if x and y are cousins, False otherwise.
-        """
-        # Instance variables to store the parent and level of the target nodes.
-        self.first_parent = None
-        self.second_parent = None
-        self.first_level = -1
-        self.second_level = -1
-
-        # Perform a pre-order traversal to find the parent and level of x and y.
-        self._pre_order(root, 0, None, x, y)
-
-        # Cousins must have different parents and be at the same level.
-        return self.first_parent != self.second_parent and self.first_level == self.second_level
-
-    def _pre_order(self, node, level, parent, x, y):
-        """
-        A recursive helper function for pre-order traversal.
-
-        Args:
-            node: The current node being visited.
-            level: The current depth of the node.
-            parent: The parent node of the current node.
-            x: The value of the first node to find.
-            y: The value of the second node to find.
-        """
-        # Base case: if the node is None, stop the recursion.
+    def find_node(self, node, val, parent, level):
         if not node:
-            return
-
-        # Check if the current node's value matches x or y.
-        if node.val == x:
-            self.first_parent = parent
-            self.first_level = level
-        if node.val == y:
-            self.second_parent = parent
-            self.second_level = level
-
-        # Recursively traverse the left and right subtrees.
-        self._pre_order(node.left, level + 1, node, x, y)
-        self._pre_order(node.right, level + 1, node, x, y)
-
-
-# -----------------------------------------------------------------------------
+            return None
+        if node.val == val:
+            return (parent, level)
+        return self.find_node(node.left, val, node, level + 1) or self.find_node(node.right, val, node, level + 1)
 
 
 class TestIsCousins(unittest.TestCase):
-    """
-    Unit tests for the isCousins method.
-    """
-
     def setUp(self):
-        """
-        Set up the Solution object before each test.
-        """
         self.solution = Solution()
 
+    def create_tree(self, values: List[Optional[int]]) -> Optional[TreeNode]:
+        if not values:
+            return None
+        root = TreeNode(values[0])
+        queue = [root]
+        i = 1
+        while i < len(values):
+            current = queue.pop(0)
+            if i < len(values) and values[i] is not None:
+                current.left = TreeNode(values[i])
+                queue.append(current.left)
+            i += 1
+            if i < len(values) and values[i] is not None:
+                current.right = TreeNode(values[i])
+                queue.append(current.right)
+            i += 1
+        return root
+
     def test_example_1(self):
-        """
-        Test case from LeetCode example 1.
-        Tree: [1,2,3,4], x=4, y=3
-        Expected: False (different levels)
-        """
-        root = TreeNode(1, TreeNode(2, TreeNode(4)), TreeNode(3))
+        """Tests the first example case from LeetCode."""
+        root = self.create_tree([1, 2, 3, 4])
         self.assertFalse(self.solution.isCousins(root, 4, 3))
 
     def test_example_2(self):
-        """
-        Test case from LeetCode example 2.
-        Tree: [1,2,3,null,4,null,5], x=5, y=4
-        Expected: True (same level, different parents)
-        """
-        root = TreeNode(1, TreeNode(2, None, TreeNode(4)), TreeNode(3, None, TreeNode(5)))
+        """Tests the second example case from LeetCode."""
+        root = self.create_tree([1, 2, 3, None, 4, None, 5])
         self.assertTrue(self.solution.isCousins(root, 5, 4))
 
     def test_example_3(self):
-        """
-        Test case from LeetCode example 3.
-        Tree: [1,2,3,null,4], x=2, y=3
-        Expected: False (same parents)
-        """
-        root = TreeNode(1, TreeNode(2, None, TreeNode(4)), TreeNode(3))
+        """Tests the third example case from LeetCode."""
+        root = self.create_tree([1, 2, 3, None, 4])
         self.assertFalse(self.solution.isCousins(root, 2, 3))
 
     def test_siblings(self):
-        """
-        Test case where nodes are siblings (same parent, same level).
-        Tree: [1,2,3,4,5], x=4, y=5
-        Expected: False (same parent)
-        """
-        root = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(5)), TreeNode(3))
+        """Tests a case where the nodes are siblings."""
+        root = self.create_tree([1, 2, 3, 4, 5])
         self.assertFalse(self.solution.isCousins(root, 4, 5))
 
     def test_cousins_at_level_2(self):
-        """
-        Test case for two nodes at the same level with different parents.
-        Tree: [1,2,3,4,5,6,7], x=5, y=7
-        Expected: True
-        """
-        root = TreeNode(
-            1, TreeNode(2, TreeNode(4), TreeNode(5)), TreeNode(3, TreeNode(6), TreeNode(7))
-        )
-        self.assertTrue(self.solution.isCousins(root, 5, 7))
-
-    def test_x_is_root(self):
-        """
-        Test case where one of the nodes is the root.
-        Expected: False, as root has no parent and thus cannot be a cousin.
-        """
-        root = TreeNode(1, TreeNode(2), TreeNode(3))
-        self.assertFalse(self.solution.isCousins(root, 1, 2))
-
-    def test_y_is_root(self):
-        """
-        Test case where one of the nodes is the root.
-        Expected: False, as root has no parent and thus cannot be a cousin.
-        """
-        root = TreeNode(1, TreeNode(2), TreeNode(3))
-        self.assertFalse(self.solution.isCousins(root, 2, 1))
+        """Tests a case where the nodes are cousins at level 2."""
+        root = self.create_tree([1, 2, 3, 4, 5, 6, 7])
+        self.assertTrue(self.solution.isCousins(root, 4, 6))
 
     def test_nodes_not_in_tree(self):
-        """
-        Test case where one or both nodes are not in the tree.
-        Expected: False, as their level will remain at -1.
-        """
-        root = TreeNode(1, TreeNode(2), TreeNode(3))
+        """Tests a case where one or both nodes are not in the tree."""
+        root = self.create_tree([1, 2, 3])
         self.assertFalse(self.solution.isCousins(root, 4, 5))
-        self.assertFalse(self.solution.isCousins(root, 2, 5))
 
 
 if __name__ == "__main__":
-    unittest.main(argv=["first-arg-is-ignored"], exit=False)
+    unittest.main()

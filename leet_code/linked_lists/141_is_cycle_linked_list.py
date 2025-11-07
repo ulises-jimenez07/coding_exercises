@@ -1,5 +1,16 @@
-from typing import Optional
+"""
+Problem: Detect if a linked list has a cycle
+
+Approach:
+- Use Floyd's cycle detection (two pointers: fast and slow)
+- Fast pointer moves 2 steps, slow moves 1 step
+- If they meet, there's a cycle
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import Optional
 
 
 # Definition for singly-linked list.
@@ -20,19 +31,24 @@ class Solution:
         Returns:
             True if the linked list has a cycle, False otherwise.
         """
-        fast = head  # Fast pointer moves two steps at a time
-        slow = head  # Slow pointer moves one step at a time
+        fast = head
+        slow = head
 
-        while fast and fast.next:  # Check if fast pointer and its next node exist
-            fast = fast.next.next  # Move fast pointer two steps
-            slow = slow.next  # Move slow pointer one step
-            if slow == fast:  # Cycle detected if slow and fast pointers meet
+        # Fast moves 2 steps, slow moves 1
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            # If pointers meet, cycle exists
+            if slow == fast:
                 return True
 
-        return False  # No cycle found
+        return False
 
 
 class TestHasCycle(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
     def create_linked_list(self, values, pos):
         """
         Creates a linked list with an optional cycle.
@@ -55,27 +71,27 @@ class TestHasCycle(unittest.TestCase):
 
     def test_has_cycle(self):
         head = self.create_linked_list([3, 2, 0, -4], 1)
-        self.assertTrue(Solution().hasCycle(head))
+        self.assertTrue(self.solution.hasCycle(head))
 
     def test_no_cycle(self):
         head = self.create_linked_list([1, 2], -1)
-        self.assertFalse(Solution().hasCycle(head))
+        self.assertFalse(self.solution.hasCycle(head))
 
     def test_single_node_no_cycle(self):
         head = self.create_linked_list([1], -1)
-        self.assertFalse(Solution().hasCycle(head))
+        self.assertFalse(self.solution.hasCycle(head))
 
     def test_empty_list(self):
         head = self.create_linked_list([], -1)
-        self.assertFalse(Solution().hasCycle(head))
+        self.assertFalse(self.solution.hasCycle(head))
 
     def test_cycle_at_end(self):  # New test case: Cycle at the end
-        head = self.create_linked_list([1, 2, 3, 4], 3)  # Cycle back to last node
-        self.assertTrue(Solution().hasCycle(head))
+        head = self.create_linked_list([1, 2, 3, 4], 3)
+        self.assertTrue(self.solution.hasCycle(head))
 
     def test_cycle_at_beginning(self):
-        head = self.create_linked_list([1, 2, 3], 0)  # Cycle back to the first node
-        self.assertTrue(Solution().hasCycle(head))
+        head = self.create_linked_list([1, 2, 3], 0)
+        self.assertTrue(self.solution.hasCycle(head))
 
 
 if __name__ == "__main__":

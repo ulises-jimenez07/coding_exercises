@@ -1,9 +1,19 @@
-# Definition for a binary tree node.
-class TreeNode:
-    """
-    A class to represent a node in a binary tree.
-    """
+"""
+Problem: Find the diameter (longest path) between any two nodes
 
+Approach:
+- Diameter may not pass through root
+- Track max path length globally while computing heights
+- At each node, diameter = left_height + right_height
+- Time complexity: O(n) where n is number of nodes
+- Space complexity: O(h) where h is height for recursion stack
+"""
+
+import unittest
+from typing import Optional
+
+
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -11,131 +21,72 @@ class TreeNode:
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode) -> int:
-        """
-        Calculates the diameter of a binary tree. The diameter is the length
-        of the longest path between any two nodes in a tree. This path may or may not
-        pass through the root.
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        self.diameter = 0
+        self.longest_path(root)
+        return self.diameter
 
-        Args:
-            root: The root node of the binary tree.
+    def longest_path(self, node: Optional[TreeNode]) -> int:
+        if not node:
+            return 0
 
-        Returns:
-            The diameter of the binary tree.
-        """
-        # A nonlocal variable to store the maximum diameter found so far.
-        diameter = 0
+        # Recursively find the longest path in each subtree.
+        left_path = self.longest_path(node.left)
+        right_path = self.longest_path(node.right)
 
-        def longest_path(node):
-            """
-            A helper function to recursively find the longest path (height) from a given node
-            to its furthest leaf. It also updates the global diameter.
+        # Update the diameter with the path through the current node.
+        self.diameter = max(self.diameter, left_path + right_path)
 
-            Args:
-                node: The current node in the traversal.
-
-            Returns:
-                The height of the subtree rooted at the current node.
-            """
-            # Base case: if the node is None, it means we've gone past a leaf,
-            # so we return -1 to represent a path of length 0 from a leaf.
-            if not node:
-                return -1
-
-            # Use nonlocal to modify the 'diameter' variable defined in the outer scope.
-            nonlocal diameter
-
-            # Recursively find the height of the left and right subtrees.
-            left_path = longest_path(node.left)
-            right_path = longest_path(node.right)
-
-            # The diameter through the current node is the sum of the heights of its
-            # left and right subtrees plus 2 (for the two edges connecting the node).
-            # We update the global diameter with the maximum value found.
-            diameter = max(diameter, left_path + right_path + 2)
-
-            # The height of the current subtree is 1 (for the edge to the node's parent)
-            # plus the maximum of the heights of its left and right subtrees.
-            return max(left_path, right_path) + 1
-
-        # Start the recursive traversal from the root.
-        longest_path(root)
-
-        # Return the maximum diameter found during the traversal.
-        return diameter
-
-
-# Unit tests
-import unittest
+        # Return the depth of the current node.
+        return max(left_path, right_path) + 1
 
 
 class TestSolution(unittest.TestCase):
-    """
-    Unit tests for the diameterOfBinaryTree method.
-    """
+    def setUp(self):
+        self.solution = Solution()
+
+    def create_tree(self, values: list) -> Optional[TreeNode]:
+        if not values:
+            return None
+        root = TreeNode(values[0])
+        queue = [root]
+        i = 1
+        while i < len(values):
+            current = queue.pop(0)
+            if i < len(values) and values[i] is not None:
+                current.left = TreeNode(values[i])
+                queue.append(current.left)
+            i += 1
+            if i < len(values) and values[i] is not None:
+                current.right = TreeNode(values[i])
+                queue.append(current.right)
+            i += 1
+        return root
 
     def test_simple_tree(self):
-        """
-        Test a simple binary tree.
-
-        """
-        # Create a simple tree:
-        #      1
-        #     / \
-        #    2   3
-        root = TreeNode(1)
-        root.left = TreeNode(2)
-        root.right = TreeNode(3)
-        self.assertEqual(Solution().diameterOfBinaryTree(root), 2)
+        """Tests a simple binary tree."""
+        root = self.create_tree([1, 2, 3])
+        self.assertEqual(self.solution.diameterOfBinaryTree(root), 2)
 
     def test_long_tree(self):
-        """
-        Test a tree with a long path.
-
-        """
-        # Create a tree with a long path on the left side:
-        #        1
-        #       / \
-        #      2   3
-        #     / \
-        #    4   5
-        #   / \
-        #  6   7
-        root = TreeNode(
-            1, TreeNode(2, TreeNode(4, TreeNode(6), TreeNode(7)), TreeNode(5)), TreeNode(3)
-        )
-        self.assertEqual(Solution().diameterOfBinaryTree(root), 4)
+        """Tests a tree with a long path."""
+        root = self.create_tree([1, 2, 3, 4, 5, None, None, 6, 7])
+        self.assertEqual(self.solution.diameterOfBinaryTree(root), 4)
 
     def test_skewed_tree(self):
-        """
-        Test a skewed tree.
-
-        """
-        # Create a skewed tree (all nodes on one side):
-        # 1
-        #  \
-        #   2
-        #    \
-        #     3
-        #      \
-        #       4
-        root = TreeNode(1, None, TreeNode(2, None, TreeNode(3, None, TreeNode(4))))
-        self.assertEqual(Solution().diameterOfBinaryTree(root), 3)
+        """Tests a skewed tree."""
+        root = self.create_tree([1, None, 2, None, 3, None, 4])
+        self.assertEqual(self.solution.diameterOfBinaryTree(root), 3)
 
     def test_single_node_tree(self):
-        """
-        Test a tree with only one node.
-        """
-        root = TreeNode(1)
-        self.assertEqual(Solution().diameterOfBinaryTree(root), 0)
+        """Tests a tree with only one node."""
+        root = self.create_tree([1])
+        self.assertEqual(self.solution.diameterOfBinaryTree(root), 0)
 
     def test_empty_tree(self):
-        """
-        Test an empty tree.
-        """
-        root = None
-        self.assertEqual(Solution().diameterOfBinaryTree(root), 0)
+        """Tests an empty tree."""
+        self.assertEqual(self.solution.diameterOfBinaryTree(None), 0)
 
 
 if __name__ == "__main__":
-    unittest.main(argv=["first-arg-is-ignored"], exit=False)
+    unittest.main()

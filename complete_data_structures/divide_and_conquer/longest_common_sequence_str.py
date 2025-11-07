@@ -20,11 +20,10 @@ def LCS(X, Y, m, n, T):
 
     if T[m - 1][n] > T[m][n - 1]:
         return LCS(X, Y, m - 1, n, T)
-    else:
-        # if left cell of current cell has more value than the top
-        # cell, then drop current character of Y and find LCS
-        # of substring X[0..m-1], Y[0..n-2]
-        return LCS(X, Y, m, n - 1, T)
+    # if left cell of current cell has more value than the top
+    # cell, then drop current character of Y and find LCS
+    # of substring X[0..m-1], Y[0..n-2]
+    return LCS(X, Y, m, n - 1, T)
 
 
 # Function to fill lookup table by finding the length of LCS

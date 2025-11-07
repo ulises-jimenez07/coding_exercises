@@ -1,46 +1,49 @@
-class Solution:
-    def hammingWeight(self, n: int) -> int:
-        """
-        Calculates the number of set bits (1s) in the binary representation of an integer.
-        
-        This is also known as the Hamming weight or population count.
-        
-        Args:
-            n: A non-negative integer.
-            
-        Returns:
-            The number of set bits in the integer's binary representation.
-        """
-        count = 0
-        # Iterate through each of the 32 bits of the integer.
-        for i in range(0, 32):
-            # Check if the i-th bit is set (1) using a bitwise AND operation.
-            # (1 << i) creates a bitmask with a single 1 at the i-th position.
-            if n & (1 << i) != 0:
-                # If the bit is set, increment the count.
-                count += 1
+"""
+Problem: Count the number of 1 bits in binary representation (Hamming Weight)
 
-        return count
+Approach:
+- Check each of 32 bits using bit shifting and AND operation
+- Count set bits where (n & (1 << i)) is non-zero
+- Time complexity: O(1) - always check 32 bits
+- Space complexity: O(1)
+"""
 
 import unittest
 
+
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        count = 0
+        for i in range(32):
+            if n & (1 << i):  # Check if bit i is set
+                count += 1
+        return count
+
+
 class TestSolution(unittest.TestCase):
-    def test_hammingWeight(self):
-        # Test case 1: A positive integer with a known number of set bits.
-        self.assertEqual(Solution().hammingWeight(11), 3)  # Binary of 11 is 1011
+    def setUp(self):
+        self.solution = Solution()
 
-        # Test case 2: A power of two (should have only one set bit).
-        self.assertEqual(Solution().hammingWeight(8), 1)   # Binary of 8 is 1000
+    def test_positive_integer_with_multiple_set_bits(self):
+        """Test with 11 (binary 1011), which has 3 set bits."""
+        self.assertEqual(self.solution.hammingWeight(11), 3)
 
-        # Test case 3: Zero (should have zero set bits).
-        self.assertEqual(Solution().hammingWeight(0), 0)
+    def test_power_of_two(self):
+        """Test with 8 (binary 1000), which has 1 set bit."""
+        self.assertEqual(self.solution.hammingWeight(8), 1)
 
-        # Test case 4: A large number with multiple set bits.
-        self.assertEqual(Solution().hammingWeight(128), 1) # Binary of 128 is 10000000
+    def test_zero(self):
+        """Test with 0, which has 0 set bits."""
+        self.assertEqual(self.solution.hammingWeight(0), 0)
 
-        # Test case 5: A number with all bits set (for a 32-bit integer, this would be -1).
-        # We'll use a positive number to stay within the non-negative assumption.
-        self.assertEqual(Solution().hammingWeight(4294967295), 32) # Binary of 4294967295 is all 1s (2^32 - 1)
+    def test_large_number_with_single_set_bit(self):
+        """Test with 128 (binary 10000000), which has 1 set bit."""
+        self.assertEqual(self.solution.hammingWeight(128), 1)
 
-if __name__ == '__main__':
+    def test_all_bits_set(self):
+        """Test with 4294967295 (all 32 bits set), which has 32 set bits."""
+        self.assertEqual(self.solution.hammingWeight(4294967295), 32)
+
+
+if __name__ == "__main__":
     unittest.main()

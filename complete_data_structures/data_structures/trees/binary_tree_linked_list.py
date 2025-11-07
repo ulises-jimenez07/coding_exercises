@@ -8,17 +8,12 @@ class TreeNode:
         self.right_child = None
 
 
-"""
-time complexity
-recursiveley O(n/2)
-recursiveley O(n/2)
-
-functions this O(n)
-stack memory for each node o(n)
-"""
-
-
 def pre_order_traversal(root_node):
+    """
+    Pre-order traversal of binary tree.
+    Time complexity: O(n)
+    Space complexity: O(n) for recursion stack
+    """
     if not root_node:
         return
     print(root_node.data)
@@ -47,7 +42,7 @@ def level_order_traversal(root_node):
         return
     custom_queue = Queue()
     custom_queue.enqueue(root_node)
-    while not (custom_queue.is_empty()):
+    while not custom_queue.is_empty():
         root = custom_queue.dequeue()
         print(root.value.data)
         if root.value.left_child is not None:
@@ -97,18 +92,17 @@ def insert_node_bt(root_node, new_node):
 def get_deepest_node(root_node):
     if not root_node:
         return None
-    else:
-        custom_queue = Queue()
-        custom_queue.enqueue(root_node)
-        while not custom_queue.is_empty():
-            root = custom_queue.dequeue()
-            if root.value.left_child is not None:
-                custom_queue.enqueue(root.value.left_child)
+    custom_queue = Queue()
+    custom_queue.enqueue(root_node)
+    while not custom_queue.is_empty():
+        root = custom_queue.dequeue()
+        if root.value.left_child is not None:
+            custom_queue.enqueue(root.value.left_child)
 
-            if root.value.right_child is not None:
-                custom_queue.enqueue(root.value.right_child)
-        deepest_node = root.value
-        return deepest_node
+        if root.value.right_child is not None:
+            custom_queue.enqueue(root.value.right_child)
+    deepest_node = root.value
+    return deepest_node
 
 
 def delete_deepest_node(root_node, deepest_node):
@@ -125,34 +119,31 @@ def delete_deepest_node(root_node, deepest_node):
             if root.value.left_child is deepest_node:
                 root.value.left_child = None
                 return
-            else:
-                custom_queue.enqueue(root.value.left_child)
+            custom_queue.enqueue(root.value.left_child)
         if root.value.right_child:
             if root.value.right_child is deepest_node:
                 root.value.right_child = None
                 return
-            else:
-                custom_queue.enqueue(root.value.right_child)
+            custom_queue.enqueue(root.value.right_child)
 
 
 def delete_node_bt(root_node, node):
     if not root_node:
         return "The BT does not exist"
-    else:
-        custom_queue = Queue()
-        custom_queue.enqueue(root_node)
-        while not custom_queue.is_empty():
-            root = custom_queue.dequeue()
-            if root.value.data == node:
-                deep_node = get_deepest_node(root_node)
-                root.value.data = deep_node.data
-                delete_deepest_node(root_node, deep_node)
-                return "The node has been deleted"
-            if root.value.left_child is not None:
-                custom_queue.enqueue(root.value.left_child)
-            if root.value.right_child is not None:
-                custom_queue.enqueue(root.value.right_child)
-        return "Failed to delete"
+    custom_queue = Queue()
+    custom_queue.enqueue(root_node)
+    while not custom_queue.is_empty():
+        root = custom_queue.dequeue()
+        if root.value.data == node:
+            deep_node = get_deepest_node(root_node)
+            root.value.data = deep_node.data
+            delete_deepest_node(root_node, deep_node)
+            return "The node has been deleted"
+        if root.value.left_child is not None:
+            custom_queue.enqueue(root.value.left_child)
+        if root.value.right_child is not None:
+            custom_queue.enqueue(root.value.right_child)
+    return "Failed to delete"
 
 
 def delete_bt(root_node):

@@ -1,9 +1,15 @@
+"""This module solves the N-Queens problem."""
+
+
 class NQueens:
+    """Solves the N-Queens problem using backtracking."""
+
     def __init__(self, n):
         self.n = n
         self.chess_table = [[0 for _ in range(n)] for _ in range(n)]
 
     def print_queens(self):
+        """Prints the chessboard with queens placed."""
         for i in range(self.n):
             for j in range(self.n):
                 if self.chess_table[i][j] == 1:
@@ -13,6 +19,7 @@ class NQueens:
             print("\n")
 
     def is_place_valid(self, row_index, col_index):
+        """Checks if a queen can be placed at a given position."""
         # check rows (whether given queens can attack each other horizontally)
         # there is already at least one queen in that row
         for i in range(self.n):
@@ -41,6 +48,7 @@ class NQueens:
         return True
 
     def solve(self, col_index):
+        """Recursively attempts to place queens column by column."""
         # if we have 4 queens so indecies will be 0,1,2,3 , so when we reach 4 it means we have already placed all queens
         if col_index == self.n:
             return True
@@ -57,7 +65,8 @@ class NQueens:
         # when we consideren all rows in a given column without findind valid cell for the queen
         return False
 
-    def solve_NQueens(self):
+    def solve_n_queens(self):
+        """Initiates the N-Queens problem solving process and prints the solution."""
         if self.solve(0):
             self.print_queens()
         else:

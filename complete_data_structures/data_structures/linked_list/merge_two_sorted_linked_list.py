@@ -1,11 +1,11 @@
 # Definition for singly-linked list.
-class ListNode(object):
-    def __init__(self, val=0, next=None):
+class ListNode:
+    def __init__(self, val=0, next_node=None):
         self.val = val
-        self.next = next
+        self.next = next_node
 
 
-class Solution(object):
+class Solution:
     def mergeTwoLists(self, l1, l2):
         """
         :type list1: Optional[ListNode]

@@ -1,8 +1,5 @@
 def isOdd(num):
-    if num % 2 == 0:
-        return False
-    else:
-        return True
+    return num % 2 != 0
 
 
 def someRecursive(arr, cb):

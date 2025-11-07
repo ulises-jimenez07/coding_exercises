@@ -1,6 +1,6 @@
 from collections import deque
 
-custom_queue = deque(maxlen=3)
+custom_queue: deque[int] = deque(maxlen=3)
 print(custom_queue)
 custom_queue.append(1)
 custom_queue.append(2)
@@ -11,4 +11,5 @@ print(custom_queue)
 
 print(custom_queue.popleft())
 print(custom_queue)
-print(custom_queue.clear())
+custom_queue.clear()
+print("Queue cleared")

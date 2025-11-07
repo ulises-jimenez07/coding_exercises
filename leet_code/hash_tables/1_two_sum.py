@@ -1,36 +1,32 @@
+"""
+Problem: Find two numbers in array that sum to target value
+
+Approach:
+- Use hash table to store seen numbers and indices
+- For each number, check if complement exists in hash table
+- Time complexity: O(n)
+- Space complexity: O(n)
+"""
+
+
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
-        """
-        Finds two indices in a list of integers such that the values at those indices sum up to the target value.
-
-        Args:
-            nums: A list of integers.
-            target: The target sum.
-
-        Returns:
-            A list containing the indices of the two numbers that add up to the target, or None if no such pair exists.
-        """
-        seen = {}  # Hash map to store numbers encountered so far and their indices
+        seen: dict[int, int] = {}
 
         for i, num in enumerate(nums):
-            complement = (
-                target - num
-            )  # Calculate the complement needed to reach the target
+            complement = target - num
             if complement in seen:
-                return [
-                    seen[complement],
-                    i,
-                ]  # Return the indices if the complement is found
-            seen[num] = i  # Store the current number and its index
-
-        return None  # Added this for clarity. If no two numbers sum up to the target after check all numbers.
+                return [seen[complement], i]
+            seen[num] = i
+        return []
 
 
-# Test cases
 import unittest
 
 
 class TestTwoSum(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
 
     def test_empty_list(self):
         self.assertEqual(Solution().twoSum([], 0), None)
@@ -62,4 +58,4 @@ class TestTwoSum(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(argv=["first-arg-is-ignored"], exit=False)

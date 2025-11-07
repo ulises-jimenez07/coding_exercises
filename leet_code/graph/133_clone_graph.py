@@ -1,3 +1,14 @@
+"""
+Problem: Clone an undirected graph where each node contains a value and a list of neighbors.
+
+Approach:
+- Use BFS with a hash map to track original-to-clone node mappings
+- Create clone nodes and connect neighbors during traversal
+- Time complexity: O(N + E) where N is nodes and E is edges
+- Space complexity: O(N) for the hash map and queue
+"""
+
+
 # Definition for a Node.
 class Node:
     def __init__(self, val=0, neighbors=None):
@@ -5,12 +16,16 @@ class Node:
         self.neighbors = neighbors if neighbors is not None else []
 
 
-from typing import Optional
-from collections import deque
 import unittest  # Import unittest for testing
+from collections import deque
+from typing import Optional
 
 
 class Solution:
+    """
+    A class to clone an undirected graph.
+    """
+
     def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
         """
         Clones a given undirected graph using Breadth-First Search (BFS).
@@ -55,6 +70,10 @@ class Solution:
 
 
 class TestCloneGraph(unittest.TestCase):
+    """
+    Unit tests for the Solution.cloneGraph method.
+    """
+
     def setUp(self):
         self.sol = Solution()
 

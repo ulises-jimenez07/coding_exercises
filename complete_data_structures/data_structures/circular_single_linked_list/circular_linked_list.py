@@ -1,4 +1,9 @@
+"""This module implements a Circular Singly Linked List."""
+
+
 class Node:
+    """Represents a node in a circular singly linked list."""
+
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -8,12 +13,8 @@ class Node:
 
 
 class CSLinkedList:
-    # def __init__(self, value):
-    #     new_node = Node(value)
-    #     new_node.next = new_node
-    #     self.head = new_node
-    #     self.tail = new_node
-    #     self.length = 1
+    """Implements a circular singly linked list."""
+
     def __init__(self):
         self.head = None
         self.tail = None
@@ -31,6 +32,7 @@ class CSLinkedList:
         return result
 
     def append(self, value):
+        """Appends a new node with the given value to the end of the list."""
         new_node = Node(value)
         if self.length == 0:
             self.head = new_node
@@ -43,6 +45,7 @@ class CSLinkedList:
         self.length += 1
 
     def prepend(self, value):
+        """Adds a new node with the given value to the beginning of the list."""
         new_node = Node(value)
         if self.length == 0:
             self.head = new_node
@@ -55,9 +58,10 @@ class CSLinkedList:
         self.length += 1
 
     def insert(self, index, value):
+        """Inserts a new node with the given value at the specified index."""
         new_node = Node(value)
-        if index < 0 or index >= self.length:
-            raise Exception("Index out of range")
+        if index < 0 or index > self.length:
+            raise IndexError("Index out of range")
         if index == 0:
             if self.length == 0:
                 self.head = new_node
@@ -80,6 +84,7 @@ class CSLinkedList:
         self.length += 1
 
     def traverse(self):
+        """Traverses the list from head to tail, printing each node's value."""
         current = self.head
         while current:
             print(current.value)
@@ -88,6 +93,7 @@ class CSLinkedList:
                 break
 
     def search(self, target):
+        """Searches for a target value in the list."""
         current = self.head
         while current:
             if current.value == target:
@@ -98,16 +104,18 @@ class CSLinkedList:
         return False
 
     def get(self, index):
+        """Retrieves the node at the specified index."""
         if index == -1:
             return self.tail
-        elif index < -1 or index >= self.length:
-            raise None
+        if index < -1 or index >= self.length:
+            raise IndexError("Index out of range")
         current = self.head
         for _ in range(index):
             current = current.next
         return current
 
     def set_value(self, index, value):
+        """Sets the value of the node at the specified index."""
         temp_node = self.get(index)
         if temp_node:
             temp_node.value = value
@@ -115,6 +123,7 @@ class CSLinkedList:
         return False
 
     def pop_first(self):
+        """Removes and returns the first node from the list."""
         popped_node = self.head
         if self.length == 0:
             return None
@@ -129,6 +138,7 @@ class CSLinkedList:
         return popped_node
 
     def pop(self):
+        """Removes and returns the last node from the list."""
         if self.length == 0:
             return None
         popped_node = self.tail
@@ -146,6 +156,7 @@ class CSLinkedList:
         return popped_node
 
     def remove(self, index):
+        """Removes and returns the node at the specified index."""
         if index < 0 or index >= self.length:
             return None
         if index == 0:
@@ -160,6 +171,7 @@ class CSLinkedList:
         return popped_node
 
     def delete_all(self):
+        """Deletes all nodes from the list, making it empty."""
         if self.length == 0:
             return
         self.tail.next = None
@@ -168,6 +180,7 @@ class CSLinkedList:
         self.length = 0
 
     def delete_by_value(self, value):
+        """Deletes the first occurrence of a node with the given value."""
         if self.length == 0:
             return False
 
@@ -201,6 +214,7 @@ class CSLinkedList:
         return False
 
     def split_list(self):
+        """Splits the circular linked list into two new circular linked lists."""
         if self.length == 0:
             return None, None
         first_list = CSLinkedList()
@@ -221,23 +235,25 @@ class CSLinkedList:
         return first_list, second_list
 
     def is_sorted(self):
+        """Checks if the list is sorted in ascending order."""
         if self.head is None:
             return True
         curr = self.head
         while curr.next != self.head:
-            if curr.data > curr.next.data:
+            if curr.value > curr.next.value:
                 return False
             curr = curr.next
         return True
 
     def insert_into_sorted(self, data):
-        if self.head == None:
+        """Inserts data into a sorted circular linked list while maintaining sort order."""
+        if self.head is None:
             self.append(data)
-        elif data <= self.head.data:
+        elif data <= self.head.value:
             self.prepend(data)
         else:
             curr = self.head
-            while curr.next != self.head and curr.next.data < data:
+            while curr.next != self.head and curr.next.value < data:
                 curr = curr.next
 
             new_node = Node(data)

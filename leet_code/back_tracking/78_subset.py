@@ -1,60 +1,67 @@
+"""
+Problem: Generate all possible subsets (power set) of an array
+
+Approach:
+- Use backtracking to build subsets incrementally
+- Add current subset at each recursion level
+- For each element, choose to include or exclude it
+- Time complexity: O(2^n) as there are 2^n subsets
+- Space complexity: O(n) for recursion stack
+"""
+
+
 def subsets(nums):
-    """
-    Generates all possible subsets (power set) of a given list of numbers.
-
-    Args:
-        nums: A list of integers.
-
-    Returns:
-        A list of lists, where each inner list represents a subset of nums.
-    """
-
     def _subsets(nums, ans, curr, index):
-        """
-        Recursive helper function to generate subsets.
-
-        Args:
-            nums: The input list of numbers.
-            ans: The list to store the generated subsets.
-            curr: The current subset being built.
-            index: The index of the next element to consider.
-        """
-
-        # Base case: If the index is beyond the bounds of nums, add the current subset
-        # to the answer list.  We use a copy (curr[:]) to avoid modifications affecting
-        # already added subsets.
         if index > len(nums):
             return
 
-        # Add the current subset to the answer.
+        # Add current subset
         ans.append(curr[:])
 
-        # Iterate through the remaining elements from the current index.
+        # Try adding each remaining element
         for i in range(index, len(nums)):
-            # Include the current element in the subset.
             curr.append(nums[i])
-
-            # Recursively call _subsets to generate subsets including the current element.
-            _subsets(nums, ans, curr, i + 1)  # Increment index to avoid duplicates
-
-            # Backtrack: Remove the current element to explore subsets without it. This is crucial
-            # for generating all possible combinations.
-            curr.pop()
+            _subsets(nums, ans, curr, i + 1)
+            curr.pop()  # Backtrack
         return
 
-    # Initialize the answer list and the current subset.
     ans = []
     curr = []
-
-    # Call the recursive helper function starting from index 0.
     _subsets(nums, ans, curr, 0)
     return ans
 
 
-# Test cases
-print(
-    subsets([1, 2, 3])
-)  # Output: [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
-print(subsets([]))  # Output: [[]]
-print(subsets([1]))  # Output: [[], [1]]
-print(subsets([1, 2]))  # Output: [[], [1], [1, 2], [2]]
+import unittest
+
+
+class TestSubsets(unittest.TestCase):
+    def setUp(self):
+        self.maxDiff = None
+
+    def test_example_one(self):
+        nums = [1, 2, 3]
+        expected = [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
+        actual = subsets(nums)
+        self.assertCountEqual(actual, expected)
+
+    def test_empty_list(self):
+        nums = []
+        expected = [[]]
+        actual = subsets(nums)
+        self.assertCountEqual(actual, expected)
+
+    def test_single_element(self):
+        nums = [1]
+        expected = [[], [1]]
+        actual = subsets(nums)
+        self.assertCountEqual(actual, expected)
+
+    def test_two_elements(self):
+        nums = [1, 2]
+        expected = [[], [1], [1, 2], [2]]
+        actual = subsets(nums)
+        self.assertCountEqual(actual, expected)
+
+
+if __name__ == "__main__":
+    unittest.main()

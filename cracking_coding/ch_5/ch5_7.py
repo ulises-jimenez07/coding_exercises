@@ -6,7 +6,8 @@ def pairwise_swap(number):
     swp_num = (num_evn >> 1) | (num_odd << 1)
     return swp_num
 
-for number in  [123, 781, 278]:
+
+for number in [123, 781, 278]:
     swap_num = pairwise_swap(number)
     print(f"Number:  {bin(number)}")
     print(f"Swapped: {bin(swap_num)}")

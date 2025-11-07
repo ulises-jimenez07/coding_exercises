@@ -1,12 +1,22 @@
-# Definition for singly-linked list.
-from typing import Optional
+"""
+Problem: Check if a linked list is a palindrome
+
+Approach:
+- Find middle using fast/slow pointers
+- Reverse second half of list
+- Compare first and second halves
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import Optional
 
 
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=0, next_node=None):
         self.val = val
-        self.next = next
+        self.next = next_node
 
 
 class Solution:
@@ -22,16 +32,6 @@ class Solution:
         """
 
         def find_middle(head: Optional[ListNode]) -> Optional[ListNode]:
-            """
-            Finds the middle node of a singly linked list using the two-pointer (slow and fast) approach.
-            If the list has an even number of nodes, it returns the second middle node.
-
-            Args:
-                head (Optional[ListNode]): The head of the singly linked list.
-
-            Returns:
-                Optional[ListNode]: The middle node of the linked list.
-            """
             slow = head
             fast = head
             while fast and fast.next:
@@ -40,15 +40,6 @@ class Solution:
             return slow
 
         def reverse(head: Optional[ListNode]) -> Optional[ListNode]:
-            """
-            Reverses a singly linked list iteratively.
-
-            Args:
-                head (Optional[ListNode]): The head of the singly linked list to be reversed.
-
-            Returns:
-                Optional[ListNode]: The head of the reversed linked list.
-            """
             prev = None
             curr = head
             while curr:
@@ -58,26 +49,27 @@ class Solution:
                 curr = next_node
             return prev
 
-        # Find the middle of the linked list
+        # Find middle and reverse second half
         middle = find_middle(head)
-
-        # Reverse the second half of the linked list
         second_half_reversed = reverse(middle)
 
-        # Compare the first half and the reversed second half
         first_half = head
         second_half = second_half_reversed
 
+        # Compare both halves
         while second_half:
             if first_half.val != second_half.val:
-                return False  # Values don't match, not a palindrome
+                return False
             first_half = first_half.next
             second_half = second_half.next
 
-        return True  # All values matched, it's a palindrome
+        return True
 
 
 class TestIsPalindrome(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
     def create_linked_list(self, values: list[int]) -> Optional[ListNode]:
         """Helper function to create a linked list from a list of values."""
         if not values:
@@ -90,33 +82,27 @@ class TestIsPalindrome(unittest.TestCase):
         return head
 
     def test_empty_list(self):
-        solution = Solution()
-        self.assertTrue(solution.isPalindrome(None))
+        self.assertTrue(self.solution.isPalindrome(None))
 
     def test_single_node_list(self):
-        solution = Solution()
         head = self.create_linked_list([1])
-        self.assertTrue(solution.isPalindrome(head))
+        self.assertTrue(self.solution.isPalindrome(head))
 
     def test_palindrome_odd_length(self):
-        solution = Solution()
         head = self.create_linked_list([1, 2, 3, 2, 1])
-        self.assertTrue(solution.isPalindrome(head))
+        self.assertTrue(self.solution.isPalindrome(head))
 
     def test_palindrome_even_length(self):
-        solution = Solution()
         head = self.create_linked_list([1, 2, 2, 1])
-        self.assertTrue(solution.isPalindrome(head))
+        self.assertTrue(self.solution.isPalindrome(head))
 
     def test_not_palindrome_odd_length(self):
-        solution = Solution()
         head = self.create_linked_list([1, 2, 3, 4, 5])
-        self.assertFalse(solution.isPalindrome(head))
+        self.assertFalse(self.solution.isPalindrome(head))
 
     def test_not_palindrome_even_length(self):
-        solution = Solution()
         head = self.create_linked_list([1, 2, 3, 1])
-        self.assertFalse(solution.isPalindrome(head))
+        self.assertFalse(self.solution.isPalindrome(head))
 
 
 if __name__ == "__main__":

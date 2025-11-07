@@ -1,4 +1,6 @@
 class Queue:
+    """Implements a circular queue using a list."""
+
     def __init__(self, max_size):
         self.items = max_size * [None]
         self.max_size = max_size
@@ -10,19 +12,19 @@ class Queue:
         return " ".join(values)
 
     def is_full(self):
+        """Checks if the queue is full."""
         if self.top + 1 == self.start:
             return True
-        elif self.start == 0 and self.top + 1 == self.max_size:
-            return True
-        else:
-            return False
-
-    def is_empty(self):
-        if self.top == -1:
+        if self.start == 0 and self.top + 1 == self.max_size:
             return True
         return False
 
+    def is_empty(self):
+        """Checks if the queue is empty."""
+        return self.top == -1
+
     def enqueue(self, value):
+        """Adds an element to the rear of the queue."""
         if self.is_full():
             return "The Queue is full"
 
@@ -36,6 +38,7 @@ class Queue:
         return "The element is inserted at the end of the Queue"
 
     def dequeue(self):
+        """Removes and returns the element from the front of the queue."""
         if self.is_empty():
             return "There is not any element in the Queue"
         first_element = self.items[self.start]
@@ -51,11 +54,13 @@ class Queue:
         return first_element
 
     def peek(self):
+        """Returns the element at the front of the queue without removing it."""
         if self.is_empty():
             return "There is not any element in the Queue"
         return self.items[self.start]
 
     def delete(self):
+        """Deletes the entire queue."""
         self.items = self.max_size * [None]
         self.top = -1
         self.start = -1

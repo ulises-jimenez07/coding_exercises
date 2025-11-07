@@ -1,6 +1,23 @@
-# Definition for a binary tree node.
-from collections import defaultdict, deque
-from typing import List, Optional
+"""
+Problem: Return vertical order traversal of a binary tree
+
+Approach:
+- Use BFS with column indices (left=-1, right=+1)
+- Store nodes in hash map by column index
+- Sort columns and return values in order
+- Time complexity: O(n log k) where k is number of columns
+- Space complexity: O(n) for queue and hash map
+"""
+
+import unittest
+from collections import (
+    defaultdict,
+    deque,
+)
+from typing import (
+    List,
+    Optional,
+)
 
 
 class TreeNode:
@@ -12,77 +29,72 @@ class TreeNode:
 
 class Solution:
     def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        """
-        Performs a vertical traversal of a binary tree.
-
-        Args:
-            root: The root of the binary tree.
-
-        Returns:
-            A list of lists, where each inner list contains the node values at a specific vertical column,
-            ordered from leftmost column to rightmost column.  Nodes within the same column are ordered from top to bottom.
-        """
         if not root:
-            return []  # Empty tree, return empty list
+            return []
 
-        queue = deque([(root, 0)])  # Initialize queue with root and its column (0)
-        column_hash = defaultdict(list)  # Store nodes by column
+        # A hash map stores nodes by column index.
+        column_hash = defaultdict(list)
+        # The queue stores tuples of (node, column) for BFS.
+        queue = deque([(root, 0)])
 
         while queue:
-            curr, column = queue.popleft()  # Process node and its column
-            column_hash[column].append(curr.val)  # Add node value to its column's list
+            curr, column = queue.popleft()
+            column_hash[column].append(curr.val)
+
             if curr.left:
-                queue.append(
-                    (curr.left, column - 1)
-                )  # Add left child to queue, decrement column
+                queue.append((curr.left, column - 1))
             if curr.right:
-                queue.append(
-                    (curr.right, column + 1)
-                )  # Add right child to queue, increment column
+                queue.append((curr.right, column + 1))
 
-        return [
-            column_hash[x] for x in sorted(column_hash.keys())
-        ]  # Return lists of node values, sorted by column
-
-
-import unittest
+        # Sort the columns and return the values.
+        return [column_hash[x] for x in sorted(column_hash.keys())]
 
 
 class TestVerticalOrder(unittest.TestCase):
-    def test_vertical_order(self):
-        solution = Solution()
+    def setUp(self):
+        self.solution = Solution()
 
-        # Test case 1: Example 1
-        root1 = TreeNode(3)
-        root1.left = TreeNode(9)
-        root1.right = TreeNode(20)
-        root1.right.left = TreeNode(15)
-        root1.right.right = TreeNode(7)
-        self.assertEqual(solution.verticalOrder(root1), [[9], [3, 15], [20], [7]])
+    def create_tree(self, values: List[Optional[int]]) -> Optional[TreeNode]:
+        if not values:
+            return None
+        root = TreeNode(values[0])
+        queue = [root]
+        i = 1
+        while i < len(values):
+            current = queue.pop(0)
+            if i < len(values) and values[i] is not None:
+                current.left = TreeNode(values[i])
+                queue.append(current.left)
+            i += 1
+            if i < len(values) and values[i] is not None:
+                current.right = TreeNode(values[i])
+                queue.append(current.right)
+            i += 1
+        return root
 
-        # Test case 2: Example 2
-        root2 = TreeNode(1)
-        root2.left = TreeNode(2)
-        root2.left.left = TreeNode(4)
-        root2.left.right = TreeNode(5)
-        root2.right = TreeNode(3)
-        root2.right.left = TreeNode(6)
-        root2.right.right = TreeNode(7)
+    def test_standard_traversal(self):
+        """Tests a standard vertical traversal."""
+        root = self.create_tree([3, 9, 20, None, None, 15, 7])
+        self.assertEqual(self.solution.verticalOrder(root), [[9], [3, 15], [20], [7]])
 
-        self.assertEqual(solution.verticalOrder(root2), [[4], [2], [1, 5, 6], [3], [7]])
+    def test_full_binary_tree(self):
+        """Tests a full binary tree."""
+        root = self.create_tree([1, 2, 3, 4, 5, 6, 7])
+        self.assertEqual(self.solution.verticalOrder(root), [[4], [2], [1, 5, 6], [3], [7]])
 
-        # Test case 3: Empty tree
-        self.assertEqual(solution.verticalOrder(None), [])
+    def test_empty_tree(self):
+        """Tests an empty tree."""
+        self.assertEqual(self.solution.verticalOrder(None), [])
 
-        # Test case 4: Single node tree
-        root4 = TreeNode(1)
-        self.assertEqual(solution.verticalOrder(root4), [[1]])
+    def test_single_node(self):
+        """Tests a tree with a single node."""
+        root = self.create_tree([1])
+        self.assertEqual(self.solution.verticalOrder(root), [[1]])
 
-        # Test case 5: Skewed left tree
-        root5 = TreeNode(1)
-        root5.left = TreeNode(2)
-        root5.left.left = TreeNode(3)
-        self.assertEqual(solution.verticalOrder(root5), [[3], [2], [1]])
+    def test_left_skewed_tree(self):
+        """Tests a left-skewed tree."""
+        root = self.create_tree([1, 2, None, 3])
+        self.assertEqual(self.solution.verticalOrder(root), [[3], [2], [1]])
 
 
 if __name__ == "__main__":

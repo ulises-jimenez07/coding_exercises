@@ -1,52 +1,82 @@
-class Solution(object):
+"""
+Problem: Valid Parentheses - check if string has properly matched brackets
+
+Approach:
+- Use a stack to track opening brackets
+- Match closing brackets with stack top
+- Time complexity: O(n) where n is string length
+- Space complexity: O(n) for the stack
+"""
+
+import unittest
+
+
+class Solution:
     def isValid(self, s):
         """
         Determines if a string containing parentheses is valid.
-
         A valid string has properly nested and matching parentheses.
-
-        Args:
-            s: The string containing parentheses.
-
-        Returns:
-            True if the string is valid, False otherwise.
         """
-        brackets = {"(": ")", "[": "]", "{": "}"}  # Define matching bracket pairs
-        stack = []  # Use a stack to track opening brackets
+        brackets = {"(": ")", "[": "]", "{": "}"}
+        stack = []
 
-        for char in s:  # Iterate through each character in the string
-            if char in brackets:  # If it's an opening bracket
-                stack.append(char)  # Push it onto the stack
-            elif len(stack) == 0:  # If it's a closing bracket but the stack is empty
-                return False  # It's unmatched, so the string is invalid
-            else:  # If it's a closing bracket and the stack isn't empty
-                top = stack.pop()  # Pop the last opening bracket from the stack
-                if (
-                    brackets[top] != char
-                ):  # If it doesn't match the current closing bracket
-                    return False  # The string is invalid
+        for char in s:
+            if char in brackets:
+                stack.append(char)
+            elif not stack:
+                return False
+            else:
+                top = stack.pop()
+                if brackets[top] != char:
+                    return False
 
-        return len(stack) == 0  # If the stack is empty at the end, the string is valid
+        return not stack
 
 
-# Test cases
-test_cases = [
-    ("()", True),  # Simple valid case
-    ("()[]{}", True),  # Multiple valid bracket types
-    ("(]", False),  # Mismatched brackets
-    ("([)]", False),  # Incorrect nesting
-    ("{[]}", True),  # Correct nesting
-    ("", True),  # Empty string is valid
-    ("(", False),  # Unclosed opening bracket
-    ("}", False),  # Unmatched closing bracket
-    ("{{{{", False),  # Multiple unclosed opening brackets
-    ("}}", False),  # Multiple unmatched closing brackets
-]
+class TestIsValid(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
 
-# Run the test cases
-for input_string, expected_result in test_cases:
-    result = Solution().isValid(input_string)
-    print(f"Input: {input_string}, Expected: {expected_result}, Result: {result}")
-    assert result == expected_result, f"Test failed for input: {input_string}"
+    def test_simple_valid_case(self):
+        """Test with a simple valid string '()'."""
+        self.assertTrue(self.solution.isValid("()"))
 
-print("All test cases passed!")
+    def test_multiple_valid_bracket_types(self):
+        """Test with multiple valid bracket types '()[]{}'."""
+        self.assertTrue(self.solution.isValid("()[]{}"))
+
+    def test_mismatched_brackets(self):
+        """Test with mismatched brackets '(]'."""
+        self.assertFalse(self.solution.isValid("(]"))
+
+    def test_incorrect_nesting(self):
+        """Test with incorrect nesting '([)]'."""
+        self.assertFalse(self.solution.isValid("([)]"))
+
+    def test_correct_nesting(self):
+        """Test with correct nesting '{[]}'."""
+        self.assertTrue(self.solution.isValid("{[]}"))
+
+    def test_empty_string(self):
+        """Test with an empty string."""
+        self.assertTrue(self.solution.isValid(""))
+
+    def test_unclosed_opening_bracket(self):
+        """Test with an unclosed opening bracket '('."""
+        self.assertFalse(self.solution.isValid("("))
+
+    def test_unmatched_closing_bracket(self):
+        """Test with an unmatched closing bracket '}'."""
+        self.assertFalse(self.solution.isValid("}"))
+
+    def test_multiple_unclosed_opening_brackets(self):
+        """Test with multiple unclosed opening brackets '{{{{'."""
+        self.assertFalse(self.solution.isValid("{{{{"))
+
+    def test_multiple_unmatched_closing_brackets(self):
+        """Test with multiple unmatched closing brackets '}}'."""
+        self.assertFalse(self.solution.isValid("}}"))
+
+
+if __name__ == "__main__":
+    unittest.main()

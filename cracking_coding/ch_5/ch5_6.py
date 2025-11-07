@@ -1,9 +1,9 @@
 def bit_swap_required(a: int, b: int) -> int:
-    count=0
-    c= a^b
+    count = 0
+    c = a ^ b
     while c:
-        count+=1
-        c=c &(c-1)
+        count += 1
+        c = c & (c - 1)
     return count
 
 

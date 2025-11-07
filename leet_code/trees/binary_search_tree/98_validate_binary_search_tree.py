@@ -1,3 +1,15 @@
+"""
+Problem: Validate if a binary tree is a valid Binary Search Tree
+
+Approach:
+- Track valid range (low, high) for each node's value
+- All nodes in left subtree must be < current node
+- All nodes in right subtree must be > current node
+- Recursively validate with updated bounds
+- Time complexity: O(n) where n is number of nodes
+- Space complexity: O(h) where h is height for recursion stack
+"""
+
 import math
 import unittest
 from typing import Optional
@@ -79,7 +91,7 @@ class TestIsValidBST(unittest.TestCase):
     def test_valid_bst(self):
         """
         Test case for a valid BST.
-        
+
         Tree structure:
              2
             / \
@@ -93,7 +105,7 @@ class TestIsValidBST(unittest.TestCase):
     def test_invalid_bst(self):
         """
         Test case for an invalid BST where a left child is greater than the parent.
-        
+
         Tree structure:
              5
             / \
@@ -124,7 +136,7 @@ class TestIsValidBST(unittest.TestCase):
     def test_duplicates(self):
         """
         Test case with duplicate values, which makes the BST invalid.
-        
+
         Tree structure:
              2
             / \
@@ -138,7 +150,7 @@ class TestIsValidBST(unittest.TestCase):
     def test_left_subtree_invalid(self):
         """
         Test case where a node in the left subtree is out of its valid range.
-        
+
         Tree structure:
              5
             / \

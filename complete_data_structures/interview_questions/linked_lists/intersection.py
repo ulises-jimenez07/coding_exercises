@@ -1,10 +1,12 @@
 """
-Given two singly linked lists, determine if the two lists intersect. 
-Retrun the intersectiong node. 
+Given two singly linked lists, determine if the two lists intersect.
+Retrun the intersectiong node.
 """
 
-from linkedlist import LinkedList
-from linkedlist import Node
+from linkedlist import (
+    LinkedList,
+    Node,
+)
 
 
 def intersection(llA, llB):

@@ -1,9 +1,23 @@
+"""
+Problem: Find minimum time for signal to reach all nodes in a network (shortest path).
+
+Approach:
+- Use Dijkstra's algorithm with min-heap for shortest paths
+- Track visited nodes and return max distance when all reachable
+- Time complexity: O((V + E) log V)
+- Space complexity: O(V + E) for graph and heap
+"""
+
 import collections
 import heapq
 import unittest
 
 
 class Solution:
+    """
+    Solves the Network Delay Time problem using Dijkstra's algorithm.
+    """
+
     # Dijkstra's algorithm to find the shortest path from a source node to all other nodes in a weighted graph.
     def networkDelayTime(self, times: list[list[int]], n: int, k: int) -> int:
         # Build the graph as an adjacency list: {u: [(cost, v), ...]}
@@ -52,6 +66,10 @@ class Solution:
 
 
 class TestNetworkDelayTime(unittest.TestCase):
+    """
+    Unit tests for the Solution.networkDelayTime method.
+    """
+
     def setUp(self):
         self.sol = Solution()
 

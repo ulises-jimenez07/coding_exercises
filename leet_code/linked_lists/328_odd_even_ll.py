@@ -1,11 +1,23 @@
+"""
+Problem: Group odd and even nodes together in linked list
+
+Approach:
+- Maintain two pointers for odd and even nodes
+- Link odd nodes together, even nodes together
+- Attach even list to end of odd list
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
+
 # Definition for singly-linked list.
-class ListNode(object):
-    def __init__(self, val=0, next=None):
+class ListNode:
+    def __init__(self, val=0, next_node=None):
         self.val = val
-        self.next = next
+        self.next = next_node
 
 
-class Solution(object):
+class Solution:
     def oddEvenList(self, head):
         """
         Groups all odd nodes together followed by the even nodes in a linked list.
@@ -23,15 +35,17 @@ class Solution(object):
 
         odd = head
         even = head.next
-        even_head = even  # Store the head of the even list
+        even_head = even
 
+        # Group odd and even nodes
         while even and even.next:
-            odd.next = even.next  # Connect odd node to the next odd node
+            odd.next = even.next
             odd = odd.next
-            even.next = odd.next  # Connect even node to the next even node
+            even.next = odd.next
             even = even.next
 
-        odd.next = even_head  # Connect the end of the odd list to the beginning of the even list
+        # Connect odd list to even list
+        odd.next = even_head
         return head
 
 
@@ -39,6 +53,9 @@ import unittest
 
 
 class TestOddEvenList(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
     def create_linked_list(self, values):
         """Helper function to create a linked list from a list of values."""
         head = None
@@ -63,27 +80,27 @@ class TestOddEvenList(unittest.TestCase):
 
     def test_empty_list(self):
         head = self.create_linked_list([])
-        reordered_head = Solution().oddEvenList(head)
+        reordered_head = self.solution.oddEvenList(head)
         self.assertIsNone(reordered_head)
 
     def test_single_node(self):
         head = self.create_linked_list([1])
-        reordered_head = Solution().oddEvenList(head)
+        reordered_head = self.solution.oddEvenList(head)
         self.assertEqual(self.linked_list_to_list(reordered_head), [1])
 
     def test_two_nodes(self):
         head = self.create_linked_list([1, 2])
-        reordered_head = Solution().oddEvenList(head)
+        reordered_head = self.solution.oddEvenList(head)
         self.assertEqual(self.linked_list_to_list(reordered_head), [1, 2])
 
     def test_multiple_nodes(self):
         head = self.create_linked_list([1, 2, 3, 4, 5])
-        reordered_head = Solution().oddEvenList(head)
+        reordered_head = self.solution.oddEvenList(head)
         self.assertEqual(self.linked_list_to_list(reordered_head), [1, 3, 5, 2, 4])
 
     def test_even_number_of_nodes(self):
         head = self.create_linked_list([1, 2, 3, 4, 5, 6])
-        reordered_head = Solution().oddEvenList(head)
+        reordered_head = self.solution.oddEvenList(head)
         self.assertEqual(self.linked_list_to_list(reordered_head), [1, 3, 5, 2, 4, 6])
 
 

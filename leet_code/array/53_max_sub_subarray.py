@@ -1,28 +1,28 @@
-from typing import List
+"""
+Problem: Find the contiguous subarray with the largest sum (Kadane's algorithm)
+
+Approach:
+- Track current sum, reset to 0 if negative, update max at each step
+- Single pass through array keeping running sum
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
+from typing import List
 
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        """
-        Finds the contiguous subarray within a given array (containing at least one number) which has the largest sum.
+        """Finds the contiguous subarray with the largest sum."""
+        max_sum = nums[0]
+        curr_sum = 0
 
-        Args:
-            nums: A list of integers.
+        for num in nums:
+            curr_sum = max(0, curr_sum) + num
+            max_sum = max(max_sum, curr_sum)
 
-        Returns:
-            The maximum sum of a contiguous subarray.
-        """
-        max_sum = nums[0]  # Initialize max_sum with the first element
-        curr_sum = 0  # Initialize current sum to 0
-
-        for num in nums:  # Iterate through the numbers in the array
-            curr_sum = (
-                max(0, curr_sum) + num
-            )  # If curr_sum is negative, reset it to 0, otherwise add the current number
-            max_sum = max(max_sum, curr_sum)  # Update max_sum if curr_sum is greater
-
-        return max_sum  # Return the maximum sum found
+        return max_sum
 
 
 class TestMaxSubArray(unittest.TestCase):

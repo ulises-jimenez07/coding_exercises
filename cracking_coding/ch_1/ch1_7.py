@@ -1,24 +1,22 @@
 def roteate_matrix(matrix):
-    n=len(matrix)
-    for layer in range(n//2):
-        first=layer
-        last= n-1-layer
+    n = len(matrix)
+    for layer in range(n // 2):
+        first = layer
+        last = n - 1 - layer
         for i in range(first, last):
-            offset=i-first
-            top=matrix[first][i]
+            offset = i - first
+            top = matrix[first][i]
 
-            #rotate matrix
-            matrix[first][i]=matrix[last-offset][first]
-            matrix[last-offset][first]=matrix[last][last-offset]
-            matrix[last][last-offset]=matrix[i][last]
-            matrix[i][last]=top
+            # rotate matrix
+            matrix[first][i] = matrix[last - offset][first]
+            matrix[last - offset][first] = matrix[last][last - offset]
+            matrix[last][last - offset] = matrix[i][last]
+            matrix[i][last] = top
     return matrix
 
 
 test_cases = [
-    ([[1, 2, 3], 
-      [4, 5, 6],
-        [7, 8, 9]], [[7, 4, 1], [8, 5, 2], [9, 6, 3]]),
+    ([[1, 2, 3], [4, 5, 6], [7, 8, 9]], [[7, 4, 1], [8, 5, 2], [9, 6, 3]]),
     (
         [
             [1, 2, 3, 4, 5],
@@ -38,11 +36,13 @@ test_cases = [
 ]
 
 
-#for test in test_cases:
+# for test in test_cases:
 #    print(roteate_matrix(test))
 
-print(roteate_matrix([[1, 2, 3], 
-      [4, 5, 6],
-        [7, 8, 9]],))
+print(
+    roteate_matrix(
+        [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+    )
+)
 
 [[7, 4, 1], [8, 5, 2], [9, 6, 3]]

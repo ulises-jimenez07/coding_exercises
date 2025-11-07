@@ -13,7 +13,7 @@ class Trie:
         for i in word:
             ch = i
             node = current.children.get(ch)
-            if node == None:
+            if node is None:
                 node = TrieNode()
                 current.children.update({ch: node})
             current = node
@@ -24,7 +24,7 @@ class Trie:
         current_node = self.root
         for i in word:
             node = current_node.children.get(i)
-            if node == None:
+            if node is None:
                 return False
             current_node = node
 
@@ -44,20 +44,17 @@ def delete_string(root, word, index):
         if len(current_node.children) >= 1:
             current_node.end_of_string = False
             return False
-        else:
-            root.children.pop(ch)
-            return True
+        root.children.pop(ch)
+        return True
 
-    if current_node.end_of_string == True:
+    if current_node.end_of_string:
         delete_string(current_node, word, index + 1)
         return False
 
     can_this_node_be_deleted = delete_string(current_node, word, index + 1)
-    if can_this_node_be_deleted == True:
+    if can_this_node_be_deleted:
         root.children.pop(ch)
-        return True
-    else:
-        return False
+    return can_this_node_be_deleted
 
 
 new_trie = Trie()

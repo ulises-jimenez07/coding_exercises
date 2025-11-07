@@ -1,3 +1,14 @@
+"""
+Problem: Find the node where two linked lists intersect
+
+Approach:
+- Calculate lengths of both lists
+- Align the starting points by advancing the longer list
+- Move both pointers until they meet at intersection
+- Time complexity: O(n + m)
+- Space complexity: O(1)
+"""
+
 import unittest
 from typing import Optional
 
@@ -15,9 +26,7 @@ class Solution:
     Contains the solution for finding the intersection node of two linked lists.
     """
 
-    def getIntersectionNode(
-        self, headA: ListNode, headB: ListNode
-    ) -> Optional[ListNode]:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
         """
         Finds the node at which the intersection of two singly linked lists begins.
 
@@ -29,7 +38,6 @@ class Solution:
             The intersecting node if one exists, otherwise None.
         """
 
-        # Helper function to calculate the length of a linked list.
         def find_length(head):
             length = 0
             curr = head
@@ -38,45 +46,38 @@ class Solution:
                 curr = curr.next
             return length
 
-        # Calculate the lengths of both lists.
         n = find_length(headA)
         m = find_length(headB)
 
-        # Initialize pointers to the heads of the lists.
         currA = headA
         currB = headB
 
-        # Align the starting points of the pointers.
-        # Move the pointer of the longer list forward by the difference in lengths.
-        # This ensures both pointers are equidistant from the potential intersection point.
+        # Align starting points by advancing longer list
         if n <= m:
             for _ in range(m - n):
-                # Check if currB becomes None during alignment (can happen if lengths are miscalculated or lists are strange)
                 if currB is None:
-                    return None  # Should not happen with valid inputs if lengths are correct
+                    return None
                 currB = currB.next
-        else:  # n > m
+        else:
             for _ in range(n - m):
-                # Check if currA becomes None during alignment
                 if currA is None:
-                    return None  # Should not happen with valid inputs if lengths are correct
+                    return None
                 currA = currA.next
 
-        # Traverse both lists simultaneously.
-        while currA and currB:  # Iterate as long as both pointers are valid
-            # If the pointers point to the same node object, we've found the intersection.
+        # Move both until intersection found
+        while currA and currB:
             if currA == currB:
                 return currA
-            # Move both pointers one step forward.
             currA = currA.next
             currB = currB.next
 
-        # If the loop finishes without finding an intersection, return None.
         return None
 
 
 # --- Unit Tests ---
 class TestGetIntersectionNode(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
 
     def create_linked_list(self, values):
         """Helper function to create a linked list from a list of values."""
@@ -123,11 +124,8 @@ class TestGetIntersectionNode(unittest.TestCase):
         # List A: 4 -> 1 -> 8 -> 4 -> 5
         # List B: 5 -> 6 -> 1 -> 8 -> 4 -> 5
         # Intersection: 8 -> 4 -> 5
-        headA, headB, intersection_node = self.create_intersecting_lists(
-            [4, 1], [5, 6, 1], [8, 4, 5]
-        )
-        sol = Solution()
-        result = sol.getIntersectionNode(headA, headB)
+        headA, headB, intersection_node = self.create_intersecting_lists([4, 1], [5, 6, 1], [8, 4, 5])
+        result = self.solution.getIntersectionNode(headA, headB)
         self.assertEqual(result, intersection_node)
         self.assertEqual(result.val, 8)
 
@@ -136,34 +134,28 @@ class TestGetIntersectionNode(unittest.TestCase):
         # List B: 1 -> 5
         headA = self.create_linked_list([2, 6, 4])
         headB = self.create_linked_list([1, 5])
-        sol = Solution()
-        result = sol.getIntersectionNode(headA, headB)
+        result = self.solution.getIntersectionNode(headA, headB)
         self.assertIsNone(result)
 
     def test_one_list_empty(self):
         headA = self.create_linked_list([1, 2, 3])
         headB = None
-        sol = Solution()
-        result = sol.getIntersectionNode(headA, headB)
+        result = self.solution.getIntersectionNode(headA, headB)
         self.assertIsNone(result)
-        result = sol.getIntersectionNode(headB, headA)
+        result = self.solution.getIntersectionNode(headB, headA)
         self.assertIsNone(result)
 
     def test_both_lists_empty(self):
         headA = None
         headB = None
-        sol = Solution()
-        result = sol.getIntersectionNode(headA, headB)
+        result = self.solution.getIntersectionNode(headA, headB)
         self.assertIsNone(result)
 
     def test_intersection_at_head(self):
         # List A: 1 -> 2 -> 3
         # List B: 1 -> 2 -> 3 (same list)
-        headA, headB, intersection_node = self.create_intersecting_lists(
-            [], [], [1, 2, 3]
-        )
-        sol = Solution()
-        result = sol.getIntersectionNode(headA, headB)
+        headA, headB, intersection_node = self.create_intersecting_lists([], [], [1, 2, 3])
+        result = self.solution.getIntersectionNode(headA, headB)
         self.assertEqual(result, intersection_node)
         self.assertEqual(result.val, 1)
 
@@ -171,30 +163,23 @@ class TestGetIntersectionNode(unittest.TestCase):
         # List A: 3 -> 7 -> 8 -> 10
         # List B: 99 -> 1 -> 8 -> 10
         # Intersection: 8 -> 10
-        headA, headB, intersection_node = self.create_intersecting_lists(
-            [3, 7], [99, 1], [8, 10]
-        )
-        sol = Solution()
-        result = sol.getIntersectionNode(headA, headB)
+        headA, headB, intersection_node = self.create_intersecting_lists([3, 7], [99, 1], [8, 10])
+        result = self.solution.getIntersectionNode(headA, headB)
         self.assertEqual(result, intersection_node)
         self.assertEqual(result.val, 8)
 
     def test_different_lengths_no_intersection(self):
         headA = self.create_linked_list([1, 2, 3, 4])
         headB = self.create_linked_list([5, 6])
-        sol = Solution()
-        result = sol.getIntersectionNode(headA, headB)
+        result = self.solution.getIntersectionNode(headA, headB)
         self.assertIsNone(result)
 
     def test_intersection_is_single_node(self):
         # List A: 1 -> 9 -> 1 -> 2 -> 4
         # List B: 3 -> 2 -> 4
         # Intersection: 2 -> 4
-        headA, headB, intersection_node = self.create_intersecting_lists(
-            [1, 9, 1], [3], [2, 4]
-        )
-        sol = Solution()
-        result = sol.getIntersectionNode(headA, headB)
+        headA, headB, intersection_node = self.create_intersecting_lists([1, 9, 1], [3], [2, 4])
+        result = self.solution.getIntersectionNode(headA, headB)
         self.assertEqual(result, intersection_node)
         self.assertEqual(result.val, 2)
 

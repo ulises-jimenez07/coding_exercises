@@ -9,7 +9,7 @@ class StackTooBigError(Exception):
 class Stack:
     def __init__(self, stack_size) -> None:
         self.stack_size = stack_size
-        self._stack = deque()
+        self._stack: deque[int] = deque()
 
     def __str__(self):
         return " ".join(reversed([str(val) for val in self._stack]))
@@ -53,9 +53,7 @@ class MultiStack:
         return self.get_stack(stack_num).pop()
 
     def __str__(self):
-        str_result = [
-            f"Stack {idx}\n{stack}" for idx, stack in enumerate(self.multistack)
-        ]
+        str_result = [f"Stack {idx}\n{stack}" for idx, stack in enumerate(self.multistack)]
         return "\n".join(str_result)
 
     def __repr__(self):
@@ -92,7 +90,7 @@ class TowersOfHanoi:
     def get_stack(self, stack_num):
         return self._stacks.get_stack(stack_num)._stack
 
-    
+
 if __name__ == "__main__":
     toh = TowersOfHanoi(3, debug=True)
     print(toh.solve())

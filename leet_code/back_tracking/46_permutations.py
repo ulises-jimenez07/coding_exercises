@@ -1,51 +1,52 @@
-from typing import List
+"""
+Problem: Generate all permutations of distinct integers
+
+Approach:
+- Use backtracking to build permutations
+- Track used elements to avoid duplicates in current permutation
+- Explore all possibilities by trying each unused number at each position
+- Time complexity: O(n!)
+- Space complexity: O(n) for recursion stack
+"""
+
 import unittest
+from typing import List
 
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        """
-        Generates all possible permutations of a list of distinct numbers.
-
-        Args:
-            nums: A list of distinct integers.
-
-        Returns:
-            A list of lists, where each inner list represents a permutation of nums.
-        """
-
         def _permute(curr):
-            """
-            Recursive helper function to generate permutations.
-
-            Args:
-                curr: The current permutation being built.
-            """
-            if len(curr) == len(nums):  # Base case: Permutation is complete
-                ans.append(curr[:])  # Add a copy to avoid modification
+            # Base case: built complete permutation
+            if len(curr) == len(nums):
+                ans.append(curr[:])
                 return
 
+            # Try each number not yet used
             for num in nums:
-                if num not in curr:  # Check if the number is already used
-                    curr.append(num)  # Add the number to the permutation
-                    _permute(curr)  # Recursively call for the next position
-                    curr.pop()  # Backtrack: Remove the number for other permutations
+                if num not in curr:
+                    curr.append(num)
+                    _permute(curr)
+                    curr.pop()  # Backtrack
 
-        ans = []  # Initialize the result list
-        _permute([])  # Start the recursion with an empty list
+        ans: list[list[int]] = []
+        _permute([])
         return ans
 
 
 class TestPermute(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+        self.maxDiff = None
+
     def test_empty_list(self):
-        self.assertEqual(Solution().permute([]), [[]])
+        self.assertEqual(self.solution.permute([]), [[]])
 
     def test_single_element(self):
-        self.assertEqual(Solution().permute([1]), [[1]])
+        self.assertEqual(self.solution.permute([1]), [[1]])
 
     def test_multiple_elements(self):
         expected = [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
-        self.assertEqual(sorted(Solution().permute([1, 2, 3])), sorted(expected))
+        self.assertCountEqual(self.solution.permute([1, 2, 3]), expected)
 
 
 if __name__ == "__main__":

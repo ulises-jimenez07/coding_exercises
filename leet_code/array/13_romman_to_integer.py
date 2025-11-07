@@ -1,22 +1,23 @@
+"""
+Problem: Convert a Roman numeral string to an integer
+
+Approach:
+- Process characters left to right, handling subtractive notation
+- If current symbol is less than next, subtract it; otherwise add it
+- Time complexity: O(n)
+- Space complexity: O(1)
+"""
+
 import unittest
 
 
 class Solution:
     def romanToInt(self, s: str) -> int:
-        """
-        Converts a Roman numeral string to an integer.
-
-        Args:
-            s: The Roman numeral string.
-
-        Returns:
-            The integer representation of the Roman numeral.
-            Returns 0 if the input string is empty.
-        """
+        """Converts a Roman numeral string to an integer."""
         if len(s) < 1:
             return 0
 
-        roman_map = {  # Mapping of Roman numeral characters to their integer values
+        roman_map = {
             "I": 1,
             "V": 5,
             "X": 10,
@@ -29,24 +30,20 @@ class Solution:
         res = 0
         i = 0
         while i < len(s):
-            # Check for subtractive combinations (e.g., IV, IX, XL, XC, CD, CM)
+            # Handle subtractive combinations (IV, IX, XL, XC, CD, CM)
             if i + 1 < len(s) and roman_map[s[i]] < roman_map[s[i + 1]]:
-                res += (
-                    roman_map[s[i + 1]] - roman_map[s[i]]
-                )  # Add the subtractive value
-                i += 2  # Skip the next character as it's part of the combination
+                res += roman_map[s[i + 1]] - roman_map[s[i]]
+                i += 2
             else:
-                res += roman_map[s[i]]  # Add the individual character's value
-                i += 1  # Move to the next character
+                res += roman_map[s[i]]
+                i += 1
 
         return res
 
 
 class TestRomanToInt(unittest.TestCase):
     def setUp(self):
-        self.solution = (
-            Solution()
-        )  # Instantiate the Solution class once for all test methods
+        self.solution = Solution()
 
     def test_empty_string(self):
         self.assertEqual(self.solution.romanToInt(""), 0)

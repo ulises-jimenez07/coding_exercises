@@ -1,5 +1,6 @@
 from coding_interview.CrackingCoding.ch_3.stack import Stack
 
+
 class SortedStack(Stack):
     def __init__(self):
         super().__init__()
@@ -12,8 +13,8 @@ class SortedStack(Stack):
                 self.push(self.temp_stack.pop())
 
             self.temp_stack.push(tmp)
-        
-        while( not self.temp_stack.is_empty()):
+
+        while not self.temp_stack.is_empty():
             self.push(self.temp_stack.pop())
 
 
@@ -25,4 +26,3 @@ queue.push(4)
 
 queue.sort()
 print(queue)
-

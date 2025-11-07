@@ -1,5 +1,5 @@
 """
-write code to partition a linked list around a value x, 
+write code to partition a linked list around a value x,
 suchat that all nodes less than x cmo before all nodes greater than or equal to x
 """
 

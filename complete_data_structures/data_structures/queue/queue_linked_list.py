@@ -1,4 +1,6 @@
 class Node:
+    """Represents a node in a linked list."""
+
     def __init__(self, value=None):
         self.value = value
         self.next = None
@@ -8,6 +10,8 @@ class Node:
 
 
 class LinkedList:
+    """Implements a singly linked list."""
+
     def __init__(self):
         self.head = None
         self.tail = None
@@ -20,6 +24,8 @@ class LinkedList:
 
 
 class Queue:
+    """Implements a queue using a linked list."""
+
     def __init__(self):
         self.linked_list = LinkedList()
 
@@ -28,6 +34,7 @@ class Queue:
         return " ".join(values)
 
     def enqueue(self, value):
+        """Adds an element to the rear of the queue."""
         new_node = Node(value)
         if self.linked_list.head is None:
             self.linked_list.head = new_node
@@ -37,11 +44,13 @@ class Queue:
             self.linked_list.tail = new_node
 
     def is_empty(self):
+        """Checks if the queue is empty."""
         if self.linked_list.head is None:
             return True
         return False
 
     def dequeue(self):
+        """Removes and returns the element from the front of the queue."""
         if self.is_empty():
             return "There is not any element in the Queue"
         temp_node = self.linked_list.head
@@ -53,11 +62,13 @@ class Queue:
         return temp_node
 
     def peek(self):
+        """Returns the element at the front of the queue without removing it."""
         if self.is_empty():
             return "There is not any element in the Queue"
         return self.linked_list.head
 
     def delete(self):
+        """Deletes the entire queue."""
         self.linked_list.head = None
         self.linked_list.tail = None
 

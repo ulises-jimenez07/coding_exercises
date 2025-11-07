@@ -9,7 +9,7 @@ class LinkedList:
         self.next = None
 
     def add(self, val):
-        if self.next == None:
+        if self.next is None:
             self.next = LinkedList(val)
         else:
             self.next.add(val)
@@ -38,8 +38,10 @@ def depth(tree):
     return right_d
 
 
-def treeToLinkedList(tree, custDict={}, d=None):
-    if d == None:
+def treeToLinkedList(tree, custDict=None, d=None):
+    if custDict is None:
+        custDict = {}
+    if d is None:
         d = depth(tree)
     if custDict.get(d):
         custDict[d].add(tree.val)
@@ -48,8 +50,8 @@ def treeToLinkedList(tree, custDict={}, d=None):
     else:
         custDict[d] = LinkedList(tree.val)
 
-    if tree.left != None:
+    if tree.left is not None:
         custDict = treeToLinkedList(tree.left, custDict, d - 1)
-    if tree.right != None:
+    if tree.right is not None:
         custDict = treeToLinkedList(tree.right, custDict, d - 1)
     return custDict

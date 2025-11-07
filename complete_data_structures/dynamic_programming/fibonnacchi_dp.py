@@ -15,7 +15,7 @@ def fib_tabuluation(n):
     return tb[n]
 
 
-my_dic = {}
+my_dic: dict[int, int] = {}
 print(fib_memo(6, my_dic))
 
 print(fib_tabuluation(6))

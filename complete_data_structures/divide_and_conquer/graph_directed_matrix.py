@@ -4,7 +4,7 @@ class Graph:
         self.graph = [[0 for x in range(number_of_nodes)] for y in range(number_of_nodes)]
 
     def with_in_bounds(self, v1, v2):
-        return v1 >= 0 and v1 < self.number_of_nodes and v2 >= 0 and v2 < self.number_of_nodes
+        return 0 <= v1 < self.number_of_nodes and 0 <= v2 < self.number_of_nodes
 
     def print_graph(self):
         for i in range(self.number_of_nodes):

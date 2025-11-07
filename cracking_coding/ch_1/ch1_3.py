@@ -1,4 +1,3 @@
-
 def urlify_algo(string, length):
     """replace spaces with %20 and removes trailing spaces"""
     # convert to list because Python strings are immutable
@@ -17,4 +16,5 @@ def urlify_algo(string, length):
     # convert back to string
     return "".join(char_list[new_index:])
 
-urlify_algo  ("much ado about nothing      ", 22)
+
+urlify_algo("much ado about nothing      ", 22)

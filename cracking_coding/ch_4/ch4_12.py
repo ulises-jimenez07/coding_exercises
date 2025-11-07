@@ -1,9 +1,11 @@
 from coding_interview.CrackingCoding.ch_4.binary_tree import BinaryTree
 
+
 def count_sum_paths(tree, target):
     if not isinstance(tree, BinaryTree):
         return None
     return _count_sum_paths(tree.root, target)
+
 
 def _count_sum_paths(node, target_sum):
     if not node:
@@ -14,18 +16,17 @@ def _count_sum_paths(node, target_sum):
         + _count_sum_paths(node.right, target_sum)
     )
 
+
 def pathsfrom(node, target_sum):
     if not node:
         return 0
-    
+
     target_sum -= node.key
     counter = 0
     if target_sum == 0:
-        counter=+1
-    return (
-        counter+ pathsfrom(node.left, target_sum)+
-        pathsfrom(node.right, target_sum)
-    )
+        counter = +1
+    return counter + pathsfrom(node.left, target_sum) + pathsfrom(node.right, target_sum)
+
 
 t1 = BinaryTree()
 n1 = t1.insert(10, None)

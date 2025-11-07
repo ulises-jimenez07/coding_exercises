@@ -1,3 +1,6 @@
+"""This module calculates the longest path in a Directed Acyclic Graph (DAG)."""
+
+
 def longest_path_length(graph):
     """
     Calculates the length of the longest path in a Directed Acyclic Graph (DAG).
@@ -45,4 +48,4 @@ def longest_path_length(graph):
 graph = {0: [1, 2], 1: [3], 2: [3], 3: [4], 4: []}
 
 result = longest_path_length(graph)
-print("Length of the longest path:", result)  # Output: 4
+print("Length of the longest path:", result)

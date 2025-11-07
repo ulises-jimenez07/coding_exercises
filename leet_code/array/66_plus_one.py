@@ -1,19 +1,20 @@
-from typing import List
+"""
+Problem: Increment an integer represented as a list of digits by one
+
+Approach:
+- Process digits right to left, handling carry propagation
+- Insert new digit at front if final carry exists
+- Time complexity: O(n)
+- Space complexity: O(1) or O(n) if new digit needed
+"""
+
 import unittest
+from typing import List
 
 
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        """
-        Increments the large integer represented as a list of digits by one.
-
-        Args:
-            digits: A list of integers representing a non-negative integer.
-                   Each element in the list is a digit in the range [0, 9].
-
-        Returns:
-            A list of integers representing the incremented integer.
-        """
+        """Increments the integer represented as a list of digits by one."""
         carry = 1
         for i in range(len(digits) - 1, -1, -1):
             digits[i], carry = (digits[i] + carry) % 10, (digits[i] + carry) // 10
@@ -21,21 +22,6 @@ class Solution:
                 break
         if carry:
             digits.insert(0, carry)
-        return digits
-
-    def plusOne_2(self, digits: List[int]) -> List[int]:
-        n = len(digits)
-        carry = (digits[n - 1] + 1) // 10
-        digits[n - 1] = (digits[n - 1] + 1) % 10
-        j = 2
-        while carry > 0 and j <= n:
-            new_value = (digits[n - j] + carry) % 10
-            carry = (digits[n - j] + carry) // 10
-            digits[n - j] = new_value
-            j += 1
-            print(digits)
-        if carry > 0:
-            return [carry] + digits
         return digits
 
 
@@ -57,9 +43,8 @@ class TestPlusOne(unittest.TestCase):
         self.assertEqual(self.solution.plusOne([9, 9, 9]), [1, 0, 0, 0])
         self.assertEqual(self.solution.plusOne([9, 8, 9]), [9, 9, 0])
 
-    def test_leading_zeros(
-        self,
-    ):  # Though the problem states non-negative integers, it's good practice to handle edge cases.
+    def test_leading_zeros(self):
+        """Handle leading zeros."""
         self.assertEqual(self.solution.plusOne([0, 0, 1]), [0, 0, 2])
 
 

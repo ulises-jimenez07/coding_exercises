@@ -1,71 +1,69 @@
-# Definition for a binary tree node.
-class TreeNode(object):
+"""
+Problem: Determine if a binary tree is a mirror of itself (symmetric around center)
+
+Approach:
+- Check if left subtree mirrors right subtree
+- Recursively compare outer and inner nodes
+- Time complexity: O(n) where n is number of nodes
+- Space complexity: O(h) for recursion stack, h is height
+"""
+
+import unittest
+
+
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
 
-class Solution(object):
+class Solution:
     def isSymmetric(self, root):
-        """
-        Checks if a binary tree is symmetric around its center.
-
-        :type root: Optional[TreeNode]
-        :rtype: bool
-        """
         if root is None:
-            return True  # An empty tree is symmetric
+            return True
         return self.is_mirror(root.left, root.right)
 
     def is_mirror(self, t1, t2):
-        """
-        Recursively checks if two subtrees are mirror images of each other.
-
-        :type t1: TreeNode
-        :type t2: TreeNode
-        :rtype: bool
-        """
+        # Both subtrees empty, symmetric
         if t1 is None and t2 is None:
-            return True  # Both subtrees are empty, so they are mirrors
+            return True
+        # One empty, one not, not symmetric
         if t1 is None or t2 is None:
-            return False  # One subtree is empty and the other isn't, so not mirrors
+            return False
 
-        # Check if the values of the current nodes are equal and if their children are mirrors
-        first_mirror = self.is_mirror(t1.right, t2.left)  # Compare outer children
-        second_mirror = self.is_mirror(t1.left, t2.right)  # Compare inner children
-        return (
-            first_mirror and second_mirror and t1.val == t2.val
-        )  # All conditions must be true
+        # Check values match and mirror children
+        return t1.val == t2.val and self.is_mirror(t1.right, t2.left) and self.is_mirror(t1.left, t2.right)
 
 
-# Test cases
-def test_isSymmetric():
-    solution = Solution()
+class TestIsSymmetric(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
 
-    # Test case 1: Symmetric tree
-    root1 = TreeNode(
-        1, TreeNode(2, TreeNode(3), TreeNode(4)), TreeNode(2, TreeNode(4), TreeNode(3))
-    )
-    assert solution.isSymmetric(root1) == True
+    def test_symmetric_tree(self):
+        """Symmetric tree."""
+        root = TreeNode(1, TreeNode(2, TreeNode(3), TreeNode(4)), TreeNode(2, TreeNode(4), TreeNode(3)))
+        self.assertTrue(self.solution.isSymmetric(root))
 
-    # Test case 2: Non-symmetric tree
-    root2 = TreeNode(1, TreeNode(2, None, TreeNode(3)), TreeNode(2, None, TreeNode(3)))
-    assert solution.isSymmetric(root2) == False
+    def test_non_symmetric_tree(self):
+        """Non-symmetric tree."""
+        root = TreeNode(1, TreeNode(2, None, TreeNode(3)), TreeNode(2, None, TreeNode(3)))
+        self.assertFalse(self.solution.isSymmetric(root))
 
-    # Test case 3: Empty tree
-    root3 = None
-    assert solution.isSymmetric(root3) == True
+    def test_empty_tree(self):
+        """Empty tree."""
+        self.assertTrue(self.solution.isSymmetric(None))
 
-    # Test case 4: Single node tree
-    root4 = TreeNode(1)
-    assert solution.isSymmetric(root4) == True
+    def test_single_node(self):
+        """Single node tree."""
+        root = TreeNode(1)
+        self.assertTrue(self.solution.isSymmetric(root))
 
-    # Test case 5: Tree with unequal values at mirrored positions
-    root5 = TreeNode(1, TreeNode(2, TreeNode(3), None), TreeNode(2, None, TreeNode(4)))
-    assert solution.isSymmetric(root5) == False
+    def test_unequal_mirrored_values(self):
+        """Unequal values at mirrored positions."""
+        root = TreeNode(1, TreeNode(2, TreeNode(3), None), TreeNode(2, None, TreeNode(4)))
+        self.assertFalse(self.solution.isSymmetric(root))
 
-    print("All test cases passed!")
 
-
-test_isSymmetric()
+if __name__ == "__main__":
+    unittest.main()

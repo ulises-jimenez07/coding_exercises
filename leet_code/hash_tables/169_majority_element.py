@@ -1,57 +1,47 @@
-import unittest  # Import the unittest module for writing test cases
+"""
+Problem: Find element that appears more than n/2 times in array
+
+Approach:
+- Use hash table to count frequency of each element
+- Return element when count exceeds n/2
+- Time complexity: O(n)
+- Space complexity: O(n)
+"""
+
+import unittest
 
 
 class Solution:
     def majorityElement(self, nums: list[int]) -> int:
-        """
-        Finds the majority element in a list of integers.
-
-        The majority element is the element that appears more than n // 2 times, where n is the length of the list.
-
-        Args:
-            nums: A list of integers.
-
-        Returns:
-            The majority element.
-        """
-        majority = (
-            len(nums) // 2
-        )  # Calculate the threshold for majority (more than n//2)
-        counter = {}  # Initialize a dictionary to store element counts
+        majority = len(nums) // 2
+        counter: dict[int, int] = {}
 
         for num in nums:
-            counter[num] = (
-                counter.get(num, 0) + 1
-            )  # Increment the count for the current number
-            if (
-                counter[num] > majority
-            ):  # Check if the count exceeds the majority threshold
-                return num  # Return the number if it's the majority element
+            counter[num] = counter.get(num, 0) + 1
+            if counter[num] > majority:
+                return num
+        return -1  # Should never reach here as problem guarantees majority element exists
 
 
-# Test cases using the unittest module
 class TestMajorityElement(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
     def test_single_element_list(self):
-        self.assertEqual(
-            Solution().majorityElement([5]), 5
-        )  # Single element is the majority element
+        self.assertEqual(self.solution.majorityElement([5]), 5)
 
     def test_simple_majority(self):
-        self.assertEqual(Solution().majorityElement([2, 2, 1, 1, 1, 2, 2]), 2)
+        self.assertEqual(self.solution.majorityElement([2, 2, 1, 1, 1, 2, 2]), 2)
 
     def test_another_simple_majority(self):
-        self.assertEqual(Solution().majorityElement([3, 2, 3]), 3)
+        self.assertEqual(self.solution.majorityElement([3, 2, 3]), 3)
 
     def test_all_same_element(self):
-        self.assertEqual(
-            Solution().majorityElement([5, 5, 5, 5, 5]), 5
-        )  # All elements are the same
+        self.assertEqual(self.solution.majorityElement([5, 5, 5, 5, 5]), 5)
 
     def test_negative_numbers(self):
-        self.assertEqual(
-            Solution().majorityElement([-1, -1, 2, -1, -1]), -1
-        )  # Test with negative numbers
+        self.assertEqual(self.solution.majorityElement([-1, -1, 2, -1, -1]), -1)
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(argv=["first-arg-is-ignored"], exit=False)

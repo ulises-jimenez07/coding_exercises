@@ -1,7 +1,11 @@
+"""This module implements Dijkstra's algorithm."""
+
 import heapq
 
 
 class Edge:
+    """Represents an edge in a graph with a weight and connected vertices."""
+
     def __init__(self, weight, start_vertex, target_vertex):
         self.weight = weight
         self.start_vertex = start_vertex
@@ -9,6 +13,8 @@ class Edge:
 
 
 class Node:
+    """Represents a node (vertex) in a graph for Dijkstra's algorithm."""
+
     def __init__(self, name):
         self.name = name
         self.visited = False
@@ -20,15 +26,19 @@ class Node:
         return self.min_distance < other_node.min_distance
 
     def add_edge(self, weight, destination_vertex):
+        """Adds an edge from this node to a destination node."""
         edge = Edge(weight, self, destination_vertex)
         self.neighbors.append(edge)
 
 
 class Dijkstra:
+    """Implements Dijkstra's algorithm for finding the shortest paths in a graph."""
+
     def __init__(self):
         self.heap = []
 
     def calculate(self, start_vertex):
+        """Calculates the shortest paths from a starting vertex to all other vertices."""
         start_vertex.min_distance = 0
         heapq.heappush(self.heap, start_vertex)
         while self.heap:
@@ -46,6 +56,7 @@ class Dijkstra:
             actual_vertex.visited = True
 
     def get_shortest_path(self, vertex):
+        """Prints the shortest path to a given vertex."""
         print(f"The shortest path to the vertex is: {vertex.min_distance}")
         actual_vertex = vertex
         while actual_vertex is not None:
