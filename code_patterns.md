@@ -38,7 +38,7 @@ def findMaxAverage(nums, k):
 ```
 
 **LeetCode Problems:**
-- 643. Maximum Average Subarray I
+- 643. Maximum Average Subarray I - [Solution](leet_code/array/643_max_avg_subarray.py)
 - 1456. Maximum Number of Vowels in a Substring of Given Length
 - 1876. Substrings of Size Three with Distinct Characters
 - 2269. Find the K-Beauty of a Number
@@ -84,7 +84,7 @@ def lengthOfLongestSubstring(s):
 ```
 
 **LeetCode Problems:**
-- 3. Longest Substring Without Repeating Characters
+- 3. Longest Substring Without Repeating Characters - [Solution](leet_code/array/3_longest_substring_withouth_repeating.py)
 - 424. Longest Repeating Character Replacement
 - 1004. Max Consecutive Ones III
 - 1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
@@ -131,7 +131,7 @@ def minSubArrayLen(target, nums):
 
 **LeetCode Problems:**
 - 209. Minimum Size Subarray Sum
-- 76. Minimum Window Substring
+- 76. Minimum Window Substring - [Solution](leet_code/hash_tables/76_minimum_window_substr.py)
 - 862. Shortest Subarray with Sum at Least K
 - 1658. Minimum Operations to Reduce X to Zero
 ### Two Pointers
@@ -183,11 +183,11 @@ def twoSum(numbers, target):
 ```
 
 **LeetCode Problems:**
-- 167. Two Sum II - Input Array Is Sorted
-- 15. 3Sum
-- 11. Container With Most Water
-- 283. Move Zeroes
-- 344. Reverse String
+- 167. Two Sum II - Input Array Is Sorted - [Solution](leet_code/array/167_two_sum_2_sorted.py)
+- 15. 3Sum - [Solution](leet_code/array/15_3sum.py)
+- 11. Container With Most Water - [Solution](leet_code/array/11_container_wiht_most_water.py)
+- 283. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
+- 344. Reverse String - [Solution](leet_code/array/344_reverse_string.py)
 
 ### Binary Search
 **When to use:** Sorted data, finding boundaries, minimizing/maximizing with constraint
@@ -238,10 +238,10 @@ def searchRange(nums, target):
 ```
 
 **LeetCode Problems:**
-- 34. Find First and Last Position of Element in Sorted Array
+- 34. Find First and Last Position of Element in Sorted Array - [Solution](leet_code/binary_search/34_first_last_position_elem.py)
 - 704. Binary Search
-- 33. Search in Rotated Sorted Array
-- 875. Koko Eating Bananas
+- 33. Search in Rotated Sorted Array - [Solution](leet_code/binary_search/33_find_rotated_array.py)
+- 875. Koko Eating Bananas - [Solution](leet_code/binary_search/875_koko_eating_bananas.py)
 - 1011. Capacity To Ship Packages Within D Days
 ### Prefix Sum
 **When to use:** Range sum queries, subarray sum problems
@@ -283,7 +283,7 @@ def subarraySum(nums, k):
 ```
 
 **LeetCode Problems:**
-- 560. Subarray Sum Equals K
+- 560. Subarray Sum Equals K - [Solution](leet_code/array/560_subarray_sum_equals_k.py)
 - 303. Range Sum Query - Immutable
 - 525. Contiguous Array
 - 974. Subarray Sums Divisible by K
@@ -361,8 +361,8 @@ def orangesRotting(grid):
 
 **LeetCode Problems:**
 - 994. Rotting Oranges
-- 200. Number of Islands
-- 733. Flood Fill
+- 200. Number of Islands - [Solution](leet_code/graph/200_number_island.py)
+- 733. Flood Fill - [Solution](leet_code/graph/733_flood_fill.py)
 - 542. 01 Matrix
 - 1091. Shortest Path in Binary Matrix
 
@@ -516,11 +516,11 @@ def isValid(s):
 ```
 
 **LeetCode Problems:**
-- 20. Valid Parentheses
+- 20. Valid Parentheses - [Solution](leet_code/queues_stacks/20_valid_parenthesis.py)
 - 22. Generate Parentheses
 - 32. Longest Valid Parentheses
 - 1541. Minimum Insertions to Balance a Parentheses String
-- 921. Minimum Add to Make Parentheses Valid
+- 921. Minimum Add to Make Parentheses Valid - [Solution](leet_code/strings/921_minimum_add_make_parenthisis_valid.py)
 
 ## Tree Patterns
 
@@ -586,11 +586,11 @@ def isValidBST(root):
 ```
 
 **LeetCode Problems:**
-- 98. Validate Binary Search Tree
-- 104. Maximum Depth of Binary Tree
-- 112. Path Sum
-- 543. Diameter of Binary Tree
-- 236. Lowest Common Ancestor of a Binary Tree
+- 98. Validate Binary Search Tree - [Solution](leet_code/trees/98_validate_BST.py)
+- 104. Maximum Depth of Binary Tree - [Solution](leet_code/trees/104_max_depth.py)
+- 112. Path Sum - [Solution](leet_code/trees/112_path_sum.py)
+- 543. Diameter of Binary Tree - [Solution](leet_code/trees/543_diameter_binary_tree.py)
+- 236. Lowest Common Ancestor of a Binary Tree - [Solution](leet_code/trees/236_lowest_common_ancester.py)
 
 ### BFS (Level Order)
 **When to use:** Level-by-level traversal, shortest path in tree
@@ -651,11 +651,11 @@ def levelOrder(root):
 ```
 
 **LeetCode Problems:**
-- 102. Binary Tree Level Order Traversal
+- 102. Binary Tree Level Order Traversal - [Solution](leet_code/trees/102_binary_tree_level_order.py)
 - 107. Binary Tree Level Order Traversal II
-- 199. Binary Tree Right Side View
+- 199. Binary Tree Right Side View - [Solution](leet_code/trees/199_binary_tree_right.py)
 - 637. Average of Levels in Binary Tree
-- 103. Binary Tree Zigzag Level Order Traversal
+- 103. Binary Tree Zigzag Level Order Traversal - [Solution](leet_code/queues_stacks/103_binary_tree_zigzag.py)
 
 ### Trie (Prefix Tree)
 **When to use:** Word search, autocomplete, prefix matching
@@ -775,7 +775,7 @@ def cloneGraph(node):
 ```
 
 **LeetCode Problems:**
-- 133. Clone Graph
+- 133. Clone Graph - [Solution](leet_code/graph/133_clone_graph.py)
 - 127. Word Ladder
 - 286. Walls and Gates
 - 1091. Shortest Path in Binary Matrix
@@ -843,7 +843,7 @@ def canFinish(numCourses, prerequisites):
 ```
 
 **LeetCode Problems:**
-- 207. Course Schedule
+- 207. Course Schedule - [Solution](leet_code/graph/207_course_schedule.py)
 - 210. Course Schedule II
 - 261. Graph Valid Tree
 - 797. All Paths From Source to Target
@@ -975,10 +975,10 @@ def subsets(nums):
 ```
 
 **LeetCode Problems:**
-- 78. Subsets
+- 78. Subsets - [Solution](leet_code/back_tracking/78_subset.py)
 - 90. Subsets II
 - 77. Combinations
-- 39. Combination Sum
+- 39. Combination Sum - [Solution](leet_code/back_tracking/39_combination_sum.py)
 - 40. Combination Sum II
 
 ### Backtracking (Permutations)
@@ -1038,8 +1038,8 @@ def permute(nums):
 ```
 
 **LeetCode Problems:**
-- 46. Permutations
-- 47. Permutations II
+- 46. Permutations - [Solution](leet_code/back_tracking/46_permutations.py)
+- 47. Permutations II - [Solution](leet_code/back_tracking/47_permutations_2.py)
 - 784. Letter Case Permutation
 - 996. Number of Squareful Arrays
 - 1096. Brace Expansion II
@@ -1112,9 +1112,9 @@ def exist(board, word):
 ```
 
 **LeetCode Problems:**
-- 79. Word Search
+- 79. Word Search - [Solution](leet_code/back_tracking/79_word_search.py)
 - 212. Word Search II
-- 51. N-Queens
+- 51. N-Queens - [Solution](leet_code/back_tracking/51_n_queens.py)
 - 37. Sudoku Solver
 - 980. Unique Paths III
 
@@ -1161,10 +1161,10 @@ def rob(nums):
 ```
 
 **LeetCode Problems:**
-- 198. House Robber
-- 70. Climbing Stairs
-- 746. Min Cost Climbing Stairs
-- 91. Decode Ways
+- 198. House Robber - [Solution](leet_code/dynamic_programming/198_house_robber.py)
+- 70. Climbing Stairs - [Solution](leet_code/dynamic_programming/70_climbing_stairs.py)
+- 746. Min Cost Climbing Stairs - [Solution](leet_code/dynamic_programming/746_min_cost_climbing_stairs.py)
+- 91. Decode Ways - [Solution](leet_code/dynamic_programming/91_decoded_ways.py)
 - 1137. N-th Tribonacci Number
 
 ### 2D DP
@@ -1213,9 +1213,9 @@ def longestCommonSubsequence(text1, text2):
 ```
 
 **LeetCode Problems:**
-- 1143. Longest Common Subsequence
+- 1143. Longest Common Subsequence - [Solution](leet_code/dynamic_programming/1143_longest_common_subsequence.py)
 - 72. Edit Distance
-- 62. Unique Paths
+- 62. Unique Paths - [Solution](leet_code/dynamic_programming/62_unique_paths.py)
 - 64. Minimum Path Sum
 - 221. Maximal Square
 
@@ -1267,7 +1267,7 @@ def canPartition(nums):
 
 **LeetCode Problems:**
 - 416. Partition Equal Subset Sum
-- 494. Target Sum
+- 494. Target Sum - [Solution](leet_code/dynamic_programming/494_target_sum.py)
 - 1049. Last Stone Weight II
 - 474. Ones and Zeroes
 - 518. Coin Change II
@@ -1322,11 +1322,11 @@ def findKthLargest(nums, k):
 ```
 
 **LeetCode Problems:**
-- 215. Kth Largest Element in an Array
-- 347. Top K Frequent Elements
+- 215. Kth Largest Element in an Array - [Solution](leet_code/heap/215_k_largest_element_heap.py)
+- 347. Top K Frequent Elements - [Solution](leet_code/heap/347_top_k_frequent_elements.py)
 - 692. Top K Frequent Words
 - 973. K Closest Points to Origin
-- 703. Kth Largest Element in a Stream
+- 703. Kth Largest Element in a Stream - [Solution](leet_code/heap/703_kt_largest_element_stream.py)
 
 ### K-Way Merge
 **When to use:** Merge K sorted lists
@@ -1382,7 +1382,7 @@ def mergeKLists(lists):
 ```
 
 **LeetCode Problems:**
-- 23. Merge k Sorted Lists
+- 23. Merge k Sorted Lists - [Solution](leet_code/linked_lists/23_merge_k_sorted_lists.py)
 - 378. Kth Smallest Element in a Sorted Matrix
 - 632. Smallest Range Covering Elements from K Lists
 - 373. Find K Pairs with Smallest Sums
