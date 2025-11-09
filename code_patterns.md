@@ -134,6 +134,57 @@ def minSubArrayLen(target, nums):
 - 76. Minimum Window Substring - [Solution](leet_code/hash_tables/76_minimum_window_substr.py)
 - 862. Shortest Subarray with Sum at Least K
 - 1658. Minimum Operations to Reduce X to Zero
+### Fast & Slow Pointers (Floyd's Cycle Detection)
+**When to use:** Linked list cycle detection, finding middle of list, finding start of cycle
+
+```python
+def has_cycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False
+
+def find_middle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+```
+
+**Example: Linked List Cycle**
+```python
+def hasCycle(head):
+    slow = fast = head
+
+    # Move slow by 1, fast by 2
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+
+        # If they meet, there's a cycle
+        if slow == fast:
+            return True
+
+    return False
+
+# Example: 3 -> 2 -> 0 -> -4 (with -4 pointing back to 2)
+# slow: 3 -> 2 -> 0 -> -4 -> 2 -> 0
+# fast: 3 -> 0 -> 2 -> -4 -> 0 -> 2
+# They meet at position 2 (cycle detected)
+# Answer: True
+```
+
+**LeetCode Problems:**
+- 141. Linked List Cycle - [Solution](leet_code/linked_lists/141_is_cycle_linked_list.py)
+- 142. Linked List Cycle II - [Solution](leet_code/linked_lists/142_linked_list_cycle_2.py)
+- 876. Middle of the Linked List - [Solution](leet_code/linked_lists/876_middle_linked_list.py)
+- 234. Palindrome Linked List - [Solution](leet_code/linked_lists/234_palindrome_linkded_list.py)
+- 202. Happy Number
+
 ### Two Pointers
 **When to use:** Sorted arrays, finding pairs, reversing (Two Sum, 3Sum, Container With Most Water)
 
@@ -288,6 +339,62 @@ def subarraySum(nums, k):
 - 525. Contiguous Array
 - 974. Subarray Sums Divisible by K
 - 1480. Running Sum of 1d Array
+
+### Merge Intervals
+**When to use:** Overlapping intervals, meeting rooms, scheduling problems
+
+```python
+def merge_intervals(intervals):
+    # Sort by start time
+    intervals.sort(key=lambda x: x[0])
+    merged = []
+
+    for interval in intervals:
+        # If merged is empty or no overlap, add interval
+        if not merged or merged[-1][1] < interval[0]:
+            merged.append(interval)
+        else:
+            # Merge by updating end time
+            merged[-1][1] = max(merged[-1][1], interval[1])
+
+    return merged
+```
+
+**Example: Merge Intervals**
+```python
+def merge(intervals):
+    if not intervals:
+        return []
+
+    # Sort intervals by start time
+    intervals.sort(key=lambda x: x[0])
+    merged = []
+
+    for interval in intervals:
+        # If merged is empty or current interval doesn't overlap
+        if not merged or merged[-1][1] < interval[0]:
+            merged.append(interval)
+        else:
+            # Merge overlapping intervals
+            merged[-1][1] = max(merged[-1][1], interval[1])
+
+    return merged
+
+# Example: intervals = [[1,3],[2,6],[8,10],[15,18]]
+# After sort: [[1,3],[2,6],[8,10],[15,18]]
+# Process [1,3]: merged = [[1,3]]
+# Process [2,6]: 3 >= 2 (overlap), merge -> [[1,6]]
+# Process [8,10]: 6 < 8 (no overlap), add -> [[1,6],[8,10]]
+# Process [15,18]: 10 < 15 (no overlap), add -> [[1,6],[8,10],[15,18]]
+# Answer: [[1,6],[8,10],[15,18]]
+```
+
+**LeetCode Problems:**
+- 56. Merge Intervals - [Solution](leet_code/array/56_merged_intervals.py)
+- 57. Insert Interval
+- 252. Meeting Rooms
+- 253. Meeting Rooms II
+- 435. Non-overlapping Intervals
 
 ### BFS on Matrix
 **When to use:** Shortest path, level-order traversal on grids (flood fill, rotting oranges)
@@ -521,6 +628,59 @@ def isValid(s):
 - 32. Longest Valid Parentheses
 - 1541. Minimum Insertions to Balance a Parentheses String
 - 921. Minimum Add to Make Parentheses Valid - [Solution](leet_code/strings/921_minimum_add_make_parenthisis_valid.py)
+
+## Linked List Patterns
+
+### In-Place Reversal
+**When to use:** Reversing linked list, reversing in groups, swapping nodes
+
+```python
+def reverse_list(head):
+    prev = None
+    current = head
+
+    while current:
+        next_node = current.next  # Save next
+        current.next = prev        # Reverse link
+        prev = current             # Move prev forward
+        current = next_node        # Move current forward
+
+    return prev  # New head
+```
+
+**Example: Reverse Linked List**
+```python
+def reverseList(head):
+    prev = None
+
+    while head:
+        next_node = head.next  # Save next node
+        head.next = prev       # Reverse the link
+        prev = head            # Move prev to current
+        head = next_node       # Move to next node
+
+    return prev  # New head of reversed list
+
+# Example: 1 -> 2 -> 3 -> 4 -> 5
+# Step 1: prev=None, head=1
+#   next=2, 1->None, prev=1, head=2
+# Step 2: prev=1, head=2
+#   next=3, 2->1, prev=2, head=3
+# Step 3: prev=2, head=3
+#   next=4, 3->2, prev=3, head=4
+# Step 4: prev=3, head=4
+#   next=5, 4->3, prev=4, head=5
+# Step 5: prev=4, head=5
+#   next=None, 5->4, prev=5, head=None
+# Answer: 5 -> 4 -> 3 -> 2 -> 1
+```
+
+**LeetCode Problems:**
+- 206. Reverse Linked List - [Solution](leet_code/linked_lists/206_reverse_linked_list.py)
+- 92. Reverse Linked List II
+- 25. Reverse Nodes in k-Group
+- 24. Swap Nodes in Pairs
+- 61. Rotate List
 
 ## Tree Patterns
 
@@ -1272,6 +1432,121 @@ def canPartition(nums):
 - 474. Ones and Zeroes
 - 518. Coin Change II
 
+### Kadane's Algorithm (Maximum Subarray)
+**When to use:** Maximum/minimum subarray sum, maximum product subarray
+
+```python
+def max_subarray(nums):
+    max_sum = nums[0]
+    current_sum = 0
+
+    for num in nums:
+        current_sum = max(0, current_sum) + num  # Reset if negative
+        max_sum = max(max_sum, current_sum)
+
+    return max_sum
+```
+
+**Example: Maximum Subarray Sum**
+```python
+def maxSubArray(nums):
+    max_sum = nums[0]
+    current_sum = 0
+
+    for num in nums:
+        # Reset to 0 if negative (start new subarray)
+        current_sum = max(0, current_sum) + num
+        max_sum = max(max_sum, current_sum)
+
+    return max_sum
+
+# Example: nums = [-2,1,-3,4,-1,2,1,-5,4]
+# num=-2: current=max(0,0)+(-2)=-2, max=-2
+# num=1:  current=max(0,-2)+1=1, max=1
+# num=-3: current=max(0,1)+(-3)=-2, max=1
+# num=4:  current=max(0,-2)+4=4, max=4
+# num=-1: current=max(0,4)+(-1)=3, max=4
+# num=2:  current=max(0,3)+2=5, max=5
+# num=1:  current=max(0,5)+1=6, max=6 (subarray: [4,-1,2,1])
+# num=-5: current=max(0,6)+(-5)=1, max=6
+# num=4:  current=max(0,1)+4=5, max=6
+# Answer: 6
+```
+
+**LeetCode Problems:**
+- 53. Maximum Subarray - [Solution](leet_code/array/53_max_sub_subarray.py)
+- 918. Maximum Sum Circular Subarray
+- 152. Maximum Product Subarray
+- 978. Longest Turbulent Subarray
+- 1191. K-Concatenation Maximum Sum
+
+## Bit Manipulation Patterns
+
+### Common Bit Operations
+**When to use:** Finding single numbers, subset generation, optimization tricks
+
+```python
+# XOR properties: a ^ a = 0, a ^ 0 = a
+# Useful for finding unique elements
+
+# Check if bit is set
+def is_bit_set(num, i):
+    return (num & (1 << i)) != 0
+
+# Set a bit
+def set_bit(num, i):
+    return num | (1 << i)
+
+# Clear a bit
+def clear_bit(num, i):
+    return num & ~(1 << i)
+
+# Toggle a bit
+def toggle_bit(num, i):
+    return num ^ (1 << i)
+
+# Count set bits
+def count_bits(num):
+    count = 0
+    while num:
+        count += num & 1
+        num >>= 1
+    return count
+```
+
+**Example: Single Number (XOR)**
+```python
+def singleNumber(nums):
+    result = 0
+
+    # XOR all numbers: duplicates cancel out (a ^ a = 0)
+    for num in nums:
+        result ^= num
+
+    return result
+
+# Example: nums = [4,1,2,1,2]
+# result = 0
+# result ^= 4 -> result = 4 (binary: 100)
+# result ^= 1 -> result = 5 (binary: 101)
+# result ^= 2 -> result = 7 (binary: 111)
+# result ^= 1 -> result = 6 (binary: 110)
+# result ^= 2 -> result = 4 (binary: 100)
+# Answer: 4 (only number appearing once)
+
+# XOR properties:
+# 1 ^ 1 = 0 (same numbers cancel)
+# 2 ^ 2 = 0 (same numbers cancel)
+# 4 ^ 0 = 4 (unique number remains)
+```
+
+**LeetCode Problems:**
+- 136. Single Number - [Solution](leet_code/bit_manipulation/136_single_number.py)
+- 268. Missing Number - [Solution](leet_code/bit_manipulation/268_missing_number.py)
+- 191. Number of 1 Bits
+- 338. Counting Bits
+- 371. Sum of Two Integers
+
 ## Heap Patterns
 
 ### Top K Elements
@@ -1388,17 +1663,115 @@ def mergeKLists(lists):
 - 373. Find K Pairs with Smallest Sums
 - 264. Ugly Number II
 
+## Greedy Patterns
+
+### Greedy Choice
+**When to use:** Jump game, gas station, activity selection, interval scheduling
+
+```python
+# General greedy template
+def greedy_solution(items):
+    # Sort items based on greedy criterion
+    items.sort(key=some_criterion)
+
+    result = initial_value
+    for item in items:
+        if can_take(item):
+            result = update(result, item)
+
+    return result
+```
+
+**Example: Jump Game**
+```python
+def canJump(nums):
+    max_reach = 0  # Furthest index we can reach
+
+    for i in range(len(nums)):
+        # If current position is unreachable
+        if i > max_reach:
+            return False
+
+        # Update furthest reachable position
+        max_reach = max(max_reach, i + nums[i])
+
+        # Early exit if we can reach the end
+        if max_reach >= len(nums) - 1:
+            return True
+
+    return True
+
+# Example: nums = [2,3,1,1,4]
+# i=0: max_reach = max(0, 0+2) = 2 (can reach index 2)
+# i=1: max_reach = max(2, 1+3) = 4 (can reach index 4)
+# i=2: max_reach >= 4 (reached end!)
+# Answer: True
+
+# Example: nums = [3,2,1,0,4]
+# i=0: max_reach = max(0, 0+3) = 3
+# i=1: max_reach = max(3, 1+2) = 3
+# i=2: max_reach = max(3, 2+1) = 3
+# i=3: max_reach = max(3, 3+0) = 3
+# i=4: 4 > 3 (cannot reach index 4!)
+# Answer: False
+```
+
+**Example: Gas Station**
+```python
+def canCompleteCircuit(gas, cost):
+    # Check if solution exists
+    if sum(gas) < sum(cost):
+        return -1
+
+    total = 0
+    start = 0
+
+    for i in range(len(gas)):
+        total += gas[i] - cost[i]
+
+        # If we can't reach next station, start from next
+        if total < 0:
+            total = 0
+            start = i + 1
+
+    return start
+
+# Example: gas = [1,2,3,4,5], cost = [3,4,5,1,2]
+# i=0: total = 1-3 = -2 (can't start here, start=1)
+# i=1: total = 0 + 2-4 = -2 (can't start here, start=2)
+# i=2: total = 0 + 3-5 = -2 (can't start here, start=3)
+# i=3: total = 0 + 4-1 = 3 (good start!)
+# i=4: total = 3 + 5-2 = 6 (still good)
+# Answer: 3 (start at index 3)
+```
+
+**LeetCode Problems:**
+- 55. Jump Game - [Solution](leet_code/dynamic_programming/55_jump_game.py)
+- 45. Jump Game II
+- 134. Gas Station
+- 135. Candy
+- 406. Queue Reconstruction by Height
+- 621. Task Scheduler
+- 763. Partition Labels
+
 ---
 
 ## Quick Pattern Recognition Guide
 
 **See contiguous subarray/substring?** → Sliding Window or Prefix Sum
+**See maximum/minimum subarray sum?** → Kadane's Algorithm
 **See sorted array + find pair?** → Two Pointers
+**See linked list cycle or middle?** → Fast & Slow Pointers
+**See overlapping intervals?** → Merge Intervals
+**See reverse linked list?** → In-Place Reversal
 **See "find all combinations"?** → Backtracking
 **See "optimize/min/max with subproblems"?** → Dynamic Programming
+**See greedy choice (jump, gas, schedule)?** → Greedy
 **See tree traversal?** → DFS or BFS
 **See "shortest path" unweighted?** → BFS
 **See "top K" or "Kth largest"?** → Heap
 **See sorted + search?** → Binary Search
 **See graph + dependencies?** → Topological Sort
 **See connected components?** → Union Find or DFS
+**See single/unique element?** → Bit Manipulation (XOR)
+**See subset generation?** → Backtracking or Bit Manipulation
