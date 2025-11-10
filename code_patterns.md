@@ -41,7 +41,7 @@ def findMaxAverage(nums, k):
 - 643. Maximum Average Subarray I - [Solution](leet_code/array/643_max_avg_subarray.py)
 - 1456. Maximum Number of Vowels in a Substring of Given Length - [Solution](leet_code/array/1456_max_number_vowels_substring_giving_length.py)
 - 1876. Substrings of Size Three with Distinct Characters - [Solution](leet_code/array/1876_substrings_of_size3_distinct_characters.py)
-- 2269. Find the K-Beauty of a Number
+- 2269. Find the K-Beauty of a Number - [Solution](leet_code/array/2269_find_k_beauty.py)
 
 ### Sliding Window (Flexible - Longest)
 **When to use:** Longest substring/subarray with constraint (longest substring with k unique chars)
