@@ -86,7 +86,7 @@ def lengthOfLongestSubstring(s):
 **LeetCode Problems:**
 - 3. Longest Substring Without Repeating Characters - [Solution](leet_code/array/3_longest_substring_withouth_repeating.py)
 - 424. Longest Repeating Character Replacement
-- 1004. Max Consecutive Ones III
+- 1004. Max Consecutive Ones III - [Solution](1004_max_consecutive_ones_iii.py)
 - 1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
 
 ### Sliding Window (Flexible - Shortest)
