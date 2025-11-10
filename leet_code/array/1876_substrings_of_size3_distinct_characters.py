@@ -26,7 +26,7 @@ class Solution:
         # Slide window of size 3 through the string
         for right in range(2, len(s)):
             # Check if all 3 characters in window are distinct
-            if len(set(s[left:right + 1])) == 3:
+            if len(set(s[left : right + 1])) == 3:
                 unique_three_sub += 1
             left += 1
 
