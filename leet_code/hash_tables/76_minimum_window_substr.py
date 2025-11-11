@@ -10,58 +10,60 @@ Approach:
 """
 
 import unittest
+from collections import defaultdict
 
 
 class Solution:
-    def minWindow(self, s: str, t: str) -> str:
-        len1 = len(s)
-        len2 = len(t)
+    """Solution for finding minimum window substring containing all target characters."""
 
-        if len1 < len2:
+    def minWindow(self, s: str, t: str) -> str:
+        len_str = len(s)
+        len_target = len(t)
+
+        # Can't find t in s if t is longer
+        if len_str < len_target:
             return ""
 
-        hash_pat: dict[str, int] = {}
-        hash_str: dict[str, int] = {}
+        # Track char frequencies in both strings
+        hash_str: defaultdict[str, int] = defaultdict(int)
+        hash_target: defaultdict[str, int] = defaultdict(int)
 
-        # Count characters in target string
-        for i in range(len2):
-            char = t[i]
-            hash_pat[char] = hash_pat.get(char, 0) + 1
+        # Count what we need from target string
+        for ch in t:
+            hash_target[ch] += 1
 
-        count = 0
-        left = 0
-        start_index = -1
-        min_len = float("inf")
+        count = 0  # How many chars we've matched so far
+        left = 0  # Left pointer of our window
+        min_length_win = len_str + 1  # Track smallest window found
+        start_index = -1  # Where the min window starts
 
         # Expand window with right pointer
-        for right in range(len1):
-            char = s[right]
-            hash_str[char] = hash_str.get(char, 0) + 1
+        for right, ch in enumerate(s):
+            hash_str[ch] += 1
 
-            if char in hash_pat and hash_str[char] <= hash_pat[char]:
+            # Only count if it's needed and we haven't exceeded the requirement
+            if ch in hash_target and hash_str[ch] <= hash_target[ch]:
                 count += 1
 
-            # Shrink window from left when valid
-            if count == len2:
-                while s[left] not in hash_pat or hash_str[s[left]] > hash_pat[s[left]]:
-                    left_char = s[left]
-                    if left_char in hash_pat and hash_str[left_char] > hash_pat.get(left_char, 0):
-                        hash_str[left_char] -= 1
+            # When we have all chars, try to shrink window from left
+            if count == len_target:
+                # Remove chars that aren't needed or are extra
+                while s[left] not in hash_target or hash_str[s[left]] > hash_target[s[left]]:
+                    if s[left] in hash_target and hash_str[s[left]] > hash_target[s[left]]:
+                        hash_str[s[left]] -= 1
                     left += 1
 
-                window_len = right - left + 1
-
-                if min_len > window_len:
-                    min_len = window_len
+                # Check if this window is smaller than what we've seen
+                if min_length_win > right - left + 1:
+                    min_length_win = right - left + 1
                     start_index = left
 
-        if start_index == -1:
-            return ""
-
-        return s[start_index : start_index + int(min_len)]
+        return s[start_index : start_index + min_length_win] if start_index != -1 else ""
 
 
 class TestMinWindow(unittest.TestCase):
+    """Test cases for the minimum window substring solution."""
+
     def setUp(self):
         self.solution = Solution()
 
