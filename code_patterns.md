@@ -87,7 +87,10 @@ def lengthOfLongestSubstring(s):
 - 3. Longest Substring Without Repeating Characters - [Solution](leet_code/array/3_longest_substring_withouth_repeating.py)
 - 424. Longest Repeating Character Replacement - [Solution](leet_code/array/424_longest_repeating_char_replacement.py)
 - 1004. Max Consecutive Ones III - [Solution](leet_code/array/1004_max_consecutive_ones_iii.py)
-- 1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+- 1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit - [Solution](leet_code/array/1438_longest_continous_subarray_with_abs_diff.py)
+- 239. Sliding Window Maximum [Solution](leet_code/queues_stacks/239_sliding_window_maximum.py)
+- 992. Subarrays with K Different Integers
+
 
 ### Sliding Window (Flexible - Shortest)
 **When to use:** Shortest substring/subarray meeting condition (min window substring)
@@ -130,7 +133,7 @@ def minSubArrayLen(target, nums):
 ```
 
 **LeetCode Problems:**
-- 209. Minimum Size Subarray Sum
+- 209. Minimum Size Subarray Sum - [Solution](leet_code/array/209_min_siz_subarray_sum.py)
 - 76. Minimum Window Substring - [Solution](leet_code/hash_tables/76_minimum_window_substr.py)
 - 862. Shortest Subarray with Sum at Least K
 - 1658. Minimum Operations to Reduce X to Zero
