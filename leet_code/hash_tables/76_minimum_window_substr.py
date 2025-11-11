@@ -49,7 +49,7 @@ class Solution:
             if count == len_target:
                 # Remove chars that aren't needed or are extra
                 while s[left] not in hash_target or hash_str[s[left]] > hash_target[s[left]]:
-                    if s[left] in hash_target and hash_str[s[left]] > hash_target[s[left]]:
+                    if s[left] in hash_target:
                         hash_str[s[left]] -= 1
                     left += 1
 
