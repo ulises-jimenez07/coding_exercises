@@ -135,7 +135,7 @@ def minSubArrayLen(target, nums):
 **LeetCode Problems:**
 - 209. Minimum Size Subarray Sum - [Solution](leet_code/array/209_min_siz_subarray_sum.py)
 - 76. Minimum Window Substring - [Solution](leet_code/hash_tables/76_minimum_window_substr.py)
-- 862. Shortest Subarray with Sum at Least K
+- 862. Shortest Subarray with Sum at Least K - [Solution](leet_code/array/862_shortest_subarray_sum_at_least_k.py)
 - 1658. Minimum Operations to Reduce X to Zero  - [Solution](leet_code/array/1658_min_op_to_reduce_x_zero.py)
 ### Fast & Slow Pointers (Floyd's Cycle Detection)
 **When to use:** Linked list cycle detection, finding middle of list, finding start of cycle
