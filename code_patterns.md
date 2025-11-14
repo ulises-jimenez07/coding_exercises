@@ -397,6 +397,7 @@ def merge(intervals):
 - 57. Insert Interval
 - 252. Meeting Rooms
 - 253. Meeting Rooms II
+- Parking Lot Capacity - [Solution](leet_code/array/parking_lot.py)
 - 435. Non-overlapping Intervals
 
 ### BFS on Matrix
@@ -1765,7 +1766,7 @@ def canCompleteCircuit(gas, cost):
 **See maximum/minimum subarray sum?** → Kadane's Algorithm
 **See sorted array + find pair?** → Two Pointers
 **See linked list cycle or middle?** → Fast & Slow Pointers
-**See overlapping intervals?** → Merge Intervals
+**See overlapping intervals?** → Merge Intervals or Sweep Line
 **See reverse linked list?** → In-Place Reversal
 **See "find all combinations"?** → Backtracking
 **See "optimize/min/max with subproblems"?** → Dynamic Programming
