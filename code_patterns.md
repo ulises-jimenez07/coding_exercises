@@ -1012,6 +1012,7 @@ def canFinish(numCourses, prerequisites):
 - 261. Graph Valid Tree
 - 797. All Paths From Source to Target
 - 802. Find Eventual Safe States
+- Organization Hierarchy (Count Reports with DFS + Memoization) - [Solution](leet_code/graph/organization_hierarchy.py)
 
 ### Topological Sort
 **When to use:** Task scheduling, course prerequisites (DAGs only)
