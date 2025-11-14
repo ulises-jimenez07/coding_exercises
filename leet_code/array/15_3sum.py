@@ -20,7 +20,7 @@ class Solution:
         dups: set[int] = set()
 
         for i, target in enumerate(nums):
-            seen: dict[int, int] = {}
+            seen: set[int] = set()
             if target not in dups:
                 dups.add(target)
 
@@ -30,13 +30,13 @@ class Solution:
                     if complement in seen:
                         ans.add(tuple(sorted([target, complement, num])))
                     else:
-                        seen[num] = i
+                        seen.add(num)
 
         return [list(t) for t in ans]
 
 
 class TestThreeSum(unittest.TestCase):
-    """Unit tests for the ThreeSum solution."""
+    """Test cases for the three sum problem."""
 
     def setUp(self):
         self.solver = Solution()
