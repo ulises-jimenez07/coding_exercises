@@ -89,7 +89,7 @@ def lengthOfLongestSubstring(s):
 - 1004. Max Consecutive Ones III - [Solution](leet_code/array/1004_max_consecutive_ones_iii.py)
 - 1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit - [Solution](leet_code/array/1438_longest_continous_subarray_with_abs_diff.py)
 - 239. Sliding Window Maximum [Solution](leet_code/queues_stacks/239_sliding_window_maximum.py)
-- 992. Subarrays with K Different Integers
+- 992. Subarrays with K Different Integers - [Solution](leet_code/array/992_subarrays_with_k_different_int.py)
 
 
 ### Sliding Window (Flexible - Shortest)
