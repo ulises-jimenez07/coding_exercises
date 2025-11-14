@@ -186,7 +186,7 @@ def hasCycle(head):
 - 142. Linked List Cycle II - [Solution](leet_code/linked_lists/142_linked_list_cycle_2.py)
 - 876. Middle of the Linked List - [Solution](leet_code/linked_lists/876_middle_linked_list.py)
 - 234. Palindrome Linked List - [Solution](leet_code/linked_lists/234_palindrome_linkded_list.py)
-- 202. Happy Number
+- 202. Happy Number - [Solution](leet_code/linked_lists/202_happy_number.py)
 
 ### Two Pointers
 **When to use:** Sorted arrays, finding pairs, reversing (Two Sum, 3Sum, Container With Most Water)
