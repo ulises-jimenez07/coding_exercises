@@ -26,12 +26,6 @@ class SolutionHashSet:
     def isHappy(self, n: int) -> bool:
         """
         Determines if a number is happy using a HashSet to detect cycles.
-
-        Args:
-            n: A positive integer to check
-
-        Returns:
-            True if n is a happy number, False otherwise
         """
 
         def get_next(n):
@@ -56,12 +50,6 @@ class SolutionFloydCycle:
     def isHappy(self, n: int) -> bool:
         """
         Determines if a number is happy using Floyd's Cycle Detection.
-
-        Args:
-            n: A positive integer to check
-
-        Returns:
-            True if n is a happy number, False otherwise
         """
 
         def get_next(n):
