@@ -13,19 +13,21 @@ from typing import List
 
 
 class Solution:
+    """Solution for finding all unique triplets that sum to zero."""
+
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         ans: set[tuple[int, ...]] = set()
         dups: set[int] = set()
-        seen: dict[int, int] = {}
 
         for i, target in enumerate(nums):
+            seen: dict[int, int] = {}
             if target not in dups:
                 dups.add(target)
 
                 for num in nums[i + 1 :]:
                     complement = -target - num
                     # Check if complement was seen in current target's context
-                    if complement in seen and seen[complement] == i:
+                    if complement in seen:
                         ans.add(tuple(sorted([target, complement, num])))
                     else:
                         seen[num] = i
@@ -34,6 +36,8 @@ class Solution:
 
 
 class TestThreeSum(unittest.TestCase):
+    """Unit tests for the ThreeSum solution."""
+
     def setUp(self):
         self.solver = Solution()
 
