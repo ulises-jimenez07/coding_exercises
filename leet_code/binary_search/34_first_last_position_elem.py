@@ -9,9 +9,18 @@ Approach:
 """
 
 import unittest
+from typing import List
 
 
 class Solution:
+    """
+    Solution using boundary condition checks:
+    - Use two binary searches to find leftmost and rightmost occurrences
+    - Check boundary conditions immediately when target is found
+    - Time complexity: O(log n)
+    - Space complexity: O(1)
+    """
+
     def searchRange(self, nums, target):
         left = self.getLeftPosition(nums, target)
         right = self.getRightPosition(nums, target)
@@ -54,7 +63,55 @@ class Solution:
         return -1
 
 
+class Solution2:
+    """
+    Alternative approach using ans variable:
+    - Update ans whenever target is found
+    - Continue searching to find leftmost/rightmost occurrence
+    - Time complexity: O(log n)
+    - Space complexity: O(1)
+    """
+
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        first = self.find_first(nums, target)
+        last = self.find_last(nums, target)
+        return [first, last]
+
+    def find_first(self, nums, target):
+        start = 0
+        end = len(nums) - 1
+        ans = -1
+
+        while start <= end:
+            mid = (start + end) // 2
+            if nums[mid] < target:
+                start = mid + 1
+            elif nums[mid] > target:
+                end = mid - 1
+            else:
+                ans = mid
+                end = mid - 1
+        return ans
+
+    def find_last(self, nums, target):
+        start = 0
+        end = len(nums) - 1
+        ans = -1
+        while start <= end:
+            mid = (start + end) // 2
+            if nums[mid] < target:
+                start = mid + 1
+            elif nums[mid] > target:
+                end = mid - 1
+            else:
+                ans = mid
+                start = mid + 1
+        return ans
+
+
 class TestSearchRange(unittest.TestCase):
+    """Test cases for searchRange method."""
+
     def setUp(self):
         self.solution = Solution()
 
