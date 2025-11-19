@@ -296,7 +296,7 @@ def searchRange(nums, target):
 - 704. Binary Search - [Solution](leet_code/binary_search/704_binary_search.py)
 - 33. Search in Rotated Sorted Array - [Solution](leet_code/binary_search/33_find_rotated_array.py)
 - 875. Koko Eating Bananas - [Solution](leet_code/binary_search/875_koko_eating_bananas.py)
-- 1011. Capacity To Ship Packages Within D Days
+- 1011. Capacity To Ship Packages Within D Days - [Solution](leet_code/binary_search/1011_capacity_ship_d_days.py)
 ### Prefix Sum
 **When to use:** Range sum queries, subarray sum problems
 
