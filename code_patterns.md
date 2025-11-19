@@ -1763,20 +1763,62 @@ def canCompleteCircuit(gas, cost):
 
 ## Quick Pattern Recognition Guide
 
-**See contiguous subarray/substring?** → Sliding Window or Prefix Sum
-**See maximum/minimum subarray sum?** → Kadane's Algorithm
-**See sorted array + find pair?** → Two Pointers
-**See linked list cycle or middle?** → Fast & Slow Pointers
-**See overlapping intervals?** → Merge Intervals or Sweep Line
-**See reverse linked list?** → In-Place Reversal
-**See "find all combinations"?** → Backtracking
-**See "optimize/min/max with subproblems"?** → Dynamic Programming
-**See greedy choice (jump, gas, schedule)?** → Greedy
-**See tree traversal?** → DFS or BFS
-**See "shortest path" unweighted?** → BFS
-**See "top K" or "Kth largest"?** → Heap
-**See sorted + search?** → Binary Search
-**See graph + dependencies?** → Topological Sort
-**See connected components?** → Union Find or DFS
-**See single/unique element?** → Bit Manipulation (XOR)
-**See subset generation?** → Backtracking or Bit Manipulation
+### Array/String Problems
+- **Contiguous subarray/substring** → [Sliding Window](#sliding-window-fixed-size) or [Prefix Sum](#prefix-sum)
+- **Maximum/minimum subarray sum** → [Kadane's Algorithm](#kadanes-algorithm-maximum-subarray)
+- **Sorted array + find pair/triplet** → [Two Pointers](#two-pointers)
+- **Range sum queries** → [Prefix Sum](#prefix-sum)
+- **Sorted array + search** → [Binary Search](#binary-search)
+- **Minimize/maximize with constraint** → [Binary Search](#binary-search)
+- **Overlapping intervals** → [Merge Intervals](#merge-intervals)
+
+### Linked List Problems
+- **Cycle detection or find middle** → [Fast & Slow Pointers](#fast--slow-pointers-floyds-cycle-detection)
+- **Reverse linked list** → [In-Place Reversal](#in-place-reversal)
+- **Merge K sorted lists** → [Heap (K-Way Merge)](#k-way-merge)
+
+### Tree Problems
+- **Tree traversal or path problems** → [DFS](#dfs-inorderpreorderpostorder)
+- **Level-by-level traversal** → [BFS (Level Order)](#bfs-level-order)
+- **Prefix/word matching** → [Trie](#trie-prefix-tree)
+- **Validate BST or tree properties** → [DFS](#dfs-inorderpreorderpostorder)
+
+### Graph Problems
+- **Shortest path (unweighted)** → [BFS](#bfs-on-graphs)
+- **Connected components** → [Union Find](#union-find-disjoint-set) or [DFS](#dfs-on-graphs)
+- **Cycle detection** → [DFS](#dfs-on-graphs)
+- **Task scheduling/dependencies** → [Topological Sort](#topological-sort)
+- **Grid/matrix traversal** → [BFS on Matrix](#bfs-on-matrix) or [DFS](#dfs-on-graphs)
+
+### Combinatorial Problems
+- **Find all combinations/subsets** → [Backtracking (Combinations)](#backtracking-combinationssubsets)
+- **Find all permutations** → [Backtracking (Permutations)](#backtracking-permutations)
+- **Word search on board** → [Backtracking (Board)](#backtracking-word-searchboard)
+- **Subset generation** → [Backtracking](#backtracking-combinationssubsets) or [Bit Manipulation](#common-bit-operations)
+
+### Optimization Problems
+- **Overlapping subproblems** → [Dynamic Programming](#dynamic-programming-patterns)
+- **Fibonacci-like sequence** → [1D DP](#1d-dp)
+- **Grid paths or LCS** → [2D DP](#2d-dp)
+- **Subset sum or knapsack** → [Knapsack DP](#knapsack-01)
+- **Greedy choice (jump, gas, schedule)** → [Greedy Algorithm](#greedy-choice)
+
+### Stack/Queue Problems
+- **Next greater/smaller element** → [Monotonic Stack](#monotonic-stack)
+- **Valid parentheses** → [Stack for Parentheses](#stack-for-parenthesesbrackets)
+- **Sliding window maximum** → [Monotonic Stack](#monotonic-stack)
+
+### Heap Problems
+- **Top K elements or Kth largest** → [Heap (Min/Max Heap)](#top-k-elements)
+- **Merge K sorted lists/arrays** → [Heap (K-Way Merge)](#k-way-merge)
+- **Running median** → Two Heaps
+
+### Bit Manipulation
+- **Find single/unique element** → [XOR](#common-bit-operations)
+- **Count set bits** → [Bit operations](#common-bit-operations)
+- **Power of 2 checks** → [Bit operations](#common-bit-operations)
+
+### Special Patterns
+- **Fast exponentiation** → Binary exponentiation
+- **Matrix traversal** → [BFS on Matrix](#bfs-on-matrix)
+- **String matching** → [Two Pointers](#two-pointers) or [Sliding Window](#sliding-window-fixed-size)
