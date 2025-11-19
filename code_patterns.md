@@ -293,7 +293,7 @@ def searchRange(nums, target):
 
 **LeetCode Problems:**
 - 34. Find First and Last Position of Element in Sorted Array - [Solution](leet_code/binary_search/34_first_last_position_elem.py)
-- 704. Binary Search
+- 704. Binary Search - [Solution](leet_code/binary_search/704_binary_search.py)
 - 33. Search in Rotated Sorted Array - [Solution](leet_code/binary_search/33_find_rotated_array.py)
 - 875. Koko Eating Bananas - [Solution](leet_code/binary_search/875_koko_eating_bananas.py)
 - 1011. Capacity To Ship Packages Within D Days
