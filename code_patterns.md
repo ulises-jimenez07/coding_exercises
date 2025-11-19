@@ -5,6 +5,8 @@
 ### Sliding Window (Fixed Size)
 **When to use:** Finding subarrays of exact size k (max sum of k elements, avg of k elements)
 
+**How it works:** Maintain a window of exactly k elements. As you move right, add the new element and remove the leftmost element. This way you only process each element once instead of recalculating the entire window every time.
+
 ```python
 def sliding_window_fixed(input, window_size):
     ans = window = input[0:window_size]
@@ -45,6 +47,8 @@ def findMaxAverage(nums, k):
 
 ### Sliding Window (Flexible - Longest)
 **When to use:** Longest substring/subarray with constraint (longest substring with k unique chars)
+
+**How it works:** Expand the window by moving right pointer. When the window becomes invalid, shrink it from the left until it's valid again. Track the maximum valid window size. This ensures you explore all possible valid windows efficiently.
 
 ```python
 def sliding_window_flexible_longest(input):
@@ -95,6 +99,8 @@ def lengthOfLongestSubstring(s):
 ### Sliding Window (Flexible - Shortest)
 **When to use:** Shortest substring/subarray meeting condition (min window substring)
 
+**How it works:** Expand the window by moving right pointer until the condition is met. Once valid, try to shrink from the left to find the smallest valid window. Track the minimum valid window size. This approach ensures you find the optimal solution without checking every possible subarray.
+
 ```python
 def sliding_window_flexible_shortest(input):
     initialize window, ans
@@ -139,6 +145,8 @@ def minSubArrayLen(target, nums):
 - 1658. Minimum Operations to Reduce X to Zero  - [Solution](leet_code/array/1658_min_op_to_reduce_x_zero.py)
 ### Fast & Slow Pointers (Floyd's Cycle Detection)
 **When to use:** Linked list cycle detection, finding middle of list, finding start of cycle
+
+**How it works:** Use two pointers moving at different speeds. Slow moves one step, fast moves two steps. If there's a cycle, they'll eventually meet. For finding the middle, when fast reaches the end, slow will be at the middle. This works because the fast pointer covers twice the distance.
 
 ```python
 def has_cycle(head):
@@ -190,6 +198,8 @@ def hasCycle(head):
 
 ### Two Pointers
 **When to use:** Sorted arrays, finding pairs, reversing (Two Sum, 3Sum, Container With Most Water)
+
+**How it works:** Use two pointers that move towards each other or in the same direction. For sorted arrays, start from both ends and move based on the comparison with the target. This avoids nested loops and reduces time complexity from O(n²) to O(n).
 
 ```python
 # Opposite direction
@@ -246,6 +256,8 @@ def twoSum(numbers, target):
 ### Binary Search
 **When to use:** Sorted data, finding boundaries, minimizing/maximizing with constraint
 
+**How it works:** Repeatedly divide the search space in half by comparing the middle element with the target. If the middle doesn't match, eliminate half of the remaining elements based on whether you need a larger or smaller value. This reduces search time from O(n) to O(log n).
+
 ```python
 def binary_search(arr: List[int], target: int) -> int:
     left, right = 0, len(arr) - 1
@@ -300,6 +312,8 @@ def searchRange(nums, target):
 ### Prefix Sum
 **When to use:** Range sum queries, subarray sum problems
 
+**How it works:** Build an array where each element stores the sum of all elements up to that index. To get the sum of any range, subtract the prefix sum at the start from the prefix sum at the end. This allows you to answer range queries in O(1) time after O(n) preprocessing.
+
 ```python
 # Build prefix sum
 prefix = [0]
@@ -345,6 +359,8 @@ def subarraySum(nums, k):
 
 ### Merge Intervals
 **When to use:** Overlapping intervals, meeting rooms, scheduling problems
+
+**How it works:** Sort intervals by start time. Then iterate through them, merging any interval that overlaps with the previous one by extending the end time. If there's no overlap, start a new interval. Sorting ensures you only need one pass through the data.
 
 ```python
 def merge_intervals(intervals):
@@ -402,6 +418,8 @@ def merge(intervals):
 
 ### BFS on Matrix
 **When to use:** Shortest path, level-order traversal on grids (flood fill, rotting oranges)
+
+**How it works:** Start from one or more source cells and explore neighbors level by level using a queue. Mark visited cells to avoid revisiting. Each level represents one step away from the source, making it perfect for finding shortest paths in unweighted grids.
 
 ```python
 from collections import deque
@@ -479,6 +497,9 @@ def orangesRotting(grid):
 
 ### Union Find (Disjoint Set)
 **When to use:** Connected components, cycle detection, dynamic connectivity
+
+**How it works:** Each element starts in its own set. Union operations connect two sets by making one root point to another. Find operations trace back to the root with path compression to speed up future queries. This efficiently tracks which elements belong to the same group.
+
 ```python
 class UnionFind:
     def __init__(self):
@@ -543,6 +564,8 @@ class UnionFind:
 ### Monotonic Stack
 **When to use:** Next greater/smaller element, histogram problems
 
+**How it works:** Maintain a stack that keeps elements in increasing or decreasing order. When you encounter an element that breaks the order, pop elements from the stack until order is restored. The popped elements have found their next greater or smaller element. This avoids nested loops for O(n) time.
+
 ```python
 def mono_stack(insert_entries):
     stack = []  # maintains decreasing order
@@ -589,6 +612,8 @@ def nextGreaterElement(nums):
 
 ### Stack for Parentheses/Brackets
 **When to use:** Valid parentheses, calculator problems
+
+**How it works:** Push opening brackets onto a stack. When you see a closing bracket, check if it matches the top of the stack. If it matches, pop the stack. At the end, the stack should be empty for valid parentheses. The stack naturally tracks nested structures.
 
 ```python
 stack = []
@@ -637,6 +662,8 @@ def isValid(s):
 
 ### In-Place Reversal
 **When to use:** Reversing linked list, reversing in groups, swapping nodes
+
+**How it works:** Keep track of three pointers: previous, current, and next. At each step, save the next node, reverse the current node's pointer to point to previous, then move all three pointers forward. This reverses the list in one pass without extra space.
 
 ```python
 def reverse_list(head):
@@ -690,6 +717,8 @@ def reverseList(head):
 
 ### DFS (Inorder/Preorder/Postorder)
 **When to use:** Path problems, tree construction, validation
+
+**How it works:** Explore as deep as possible down one branch before backtracking. Use recursion or a stack. Preorder processes node before children, inorder processes between children (useful for BST), postorder processes after children. This explores all paths systematically.
 
 ```python
 # Recursive DFS
@@ -759,6 +788,8 @@ def isValidBST(root):
 ### BFS (Level Order)
 **When to use:** Level-by-level traversal, shortest path in tree
 
+**How it works:** Use a queue to process nodes level by level. Add the root to the queue, then repeatedly remove a node, process it, and add its children. Track the level size to process one level at a time. This ensures you visit all nodes at distance k before visiting nodes at distance k+1.
+
 ```python
 from collections import deque
 
@@ -824,6 +855,8 @@ def levelOrder(root):
 ### Trie (Prefix Tree)
 **When to use:** Word search, autocomplete, prefix matching
 
+**How it works:** Build a tree where each node represents a character. Words share common prefixes by sharing paths in the tree. To insert, follow the path creating nodes as needed. To search, follow the path and check if it ends at a word marker. This makes prefix operations very fast.
+
 ```python
 class TrieNode:
     def __init__(self):
@@ -887,6 +920,8 @@ trie.startsWith("app")  # Returns True
 ### BFS on Graphs
 **When to use:** Shortest path (unweighted), level exploration
 
+**How it works:** Start from a source node and explore all neighbors before moving to the next level. Use a queue and mark visited nodes to avoid cycles. Each level represents one step away from the source, guaranteeing the shortest path in unweighted graphs.
+
 ```python
 from collections import deque
 
@@ -947,6 +982,8 @@ def cloneGraph(node):
 
 ### DFS on Graphs
 **When to use:** Cycle detection, connected components, path finding
+
+**How it works:** Explore as deep as possible along each branch before backtracking. Use recursion or a stack. Mark nodes as visiting (for cycle detection) or visited. If you encounter a node that's currently being visited, you've found a cycle. This explores entire connected components.
 
 ```python
 def dfs(node, visited):
@@ -1016,6 +1053,8 @@ def canFinish(numCourses, prerequisites):
 
 ### Topological Sort
 **When to use:** Task scheduling, course prerequisites (DAGs only)
+
+**How it works:** Count incoming edges (indegree) for each node. Start with nodes that have no dependencies (indegree 0). Process them and remove their outgoing edges, which may free up other nodes. Repeat until all nodes are processed. If you can't process all nodes, there's a cycle.
 
 ```python
 from collections import deque
@@ -1101,6 +1140,8 @@ def findOrder(numCourses, prerequisites):
 ### Backtracking (Combinations/Subsets)
 **When to use:** Generate all combinations, subsets, permutations
 
+**How it works:** Build solutions incrementally by making choices. Try adding each element, explore all possibilities with that choice, then remove it and try the next element. This systematically explores all combinations by trying every possible path through the decision tree.
+
 ```python
 def backtrack(start_index, path, result):
     result.append(path[:])  # add current state to result
@@ -1148,6 +1189,8 @@ def subsets(nums):
 
 ### Backtracking (Permutations)
 **When to use:** All orderings matter
+
+**How it works:** Similar to combinations but track which elements you've used. Try each unused element in the current position, mark it as used, recurse to fill the next position, then mark it as unused. This generates all possible orderings by exploring every arrangement.
 
 ```python
 def backtrack(path, used, result):
@@ -1211,6 +1254,8 @@ def permute(nums):
 
 ### Backtracking (Word Search/Board)
 **When to use:** Finding paths in grids with constraints
+
+**How it works:** From each cell, try moving in all four directions to match the next character. Mark cells as visited to avoid reusing them, explore all paths, then unmark when backtracking. This systematically tries every possible path until finding a match or exhausting all options.
 
 ```python
 def backtrack(row, col, index):
@@ -1288,6 +1333,8 @@ def exist(board, word):
 ### 1D DP
 **When to use:** Fibonacci-like, house robber, climbing stairs
 
+**How it works:** Build solutions from smaller subproblems. Store results in an array where each position depends on previous positions. Start with base cases, then fill the array using the recurrence relation. This avoids recalculating the same subproblems by remembering previous results.
+
 ```python
 # Bottom-up
 dp = [0] * (n + 1)
@@ -1334,6 +1381,8 @@ def rob(nums):
 
 ### 2D DP
 **When to use:** Longest common subsequence, edit distance, grid paths
+
+**How it works:** Use a 2D table where each cell represents a subproblem involving two dimensions (like two strings or grid positions). Fill the table row by row, where each cell depends on previous cells (usually top, left, or diagonal). This breaks down complex problems into manageable pieces.
 
 ```python
 # Grid paths example
@@ -1386,6 +1435,8 @@ def longestCommonSubsequence(text1, text2):
 
 ### Knapsack (0/1)
 **When to use:** Subset sum, partition equal subset
+
+**How it works:** For each item, decide whether to include it or not. Build a table where each cell represents the best solution using a subset of items with a weight limit. Each item can be taken once (0/1 choice). Work through items one by one, updating possible sums or values.
 
 ```python
 # dp[i][w] = max value using first i items with weight limit w
@@ -1440,6 +1491,8 @@ def canPartition(nums):
 ### Kadane's Algorithm (Maximum Subarray)
 **When to use:** Maximum/minimum subarray sum, maximum product subarray
 
+**How it works:** Keep a running sum of the current subarray. If the sum becomes negative, reset it to zero (start a new subarray). Track the maximum sum seen so far. This works because a negative sum will only make future sums smaller, so it's better to start fresh.
+
 ```python
 def max_subarray(nums):
     max_sum = nums[0]
@@ -1489,6 +1542,8 @@ def maxSubArray(nums):
 
 ### Common Bit Operations
 **When to use:** Finding single numbers, subset generation, optimization tricks
+
+**How it works:** XOR has useful properties: any number XOR itself equals 0, and any number XOR 0 equals itself. This means XORing all numbers cancels out duplicates, leaving only unique elements. Bit shifts and masks let you check, set, or clear specific bits efficiently.
 
 ```python
 # XOR properties: a ^ a = 0, a ^ 0 = a
@@ -1557,6 +1612,8 @@ def singleNumber(nums):
 ### Top K Elements
 **When to use:** Kth largest/smallest, top K frequent
 
+**How it works:** Use a min heap of size k to track the k largest elements. As you process elements, add them to the heap. If the heap exceeds size k, remove the smallest. At the end, the heap contains the k largest elements, with the smallest of those at the root.
+
 ```python
 import heapq
 
@@ -1610,6 +1667,8 @@ def findKthLargest(nums, k):
 
 ### K-Way Merge
 **When to use:** Merge K sorted lists
+
+**How it works:** Use a min heap to track the smallest element from each list. Pop the smallest element from the heap and add it to the result. Then push the next element from that same list into the heap. This ensures you always pick the globally smallest element among all lists.
 
 ```python
 import heapq
@@ -1672,6 +1731,8 @@ def mergeKLists(lists):
 
 ### Greedy Choice
 **When to use:** Jump game, gas station, activity selection, interval scheduling
+
+**How it works:** Make the locally optimal choice at each step without reconsidering previous choices. Often requires sorting first to establish an ordering. Works when local optimization leads to global optimization. The key is proving that the greedy choice doesn't prevent finding the optimal solution.
 
 ```python
 # General greedy template
