@@ -13,6 +13,8 @@ from typing import List
 
 
 class Solution:
+    """Solution class for subarray sum equals k problem."""
+
     def subarraySum_bruteforce(self, nums: List[int], k: int) -> int:
         """Brute-force approach with O(n^2) time complexity."""
         ans = 0
@@ -43,6 +45,8 @@ class Solution:
 
 
 class TestSubarraySum(unittest.TestCase):
+    """Test cases for subarray sum solution."""
+
     def setUp(self):
         self.sol = Solution()
         self.tests = [
