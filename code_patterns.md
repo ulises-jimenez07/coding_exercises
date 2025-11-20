@@ -353,7 +353,7 @@ def subarraySum(nums, k):
 **LeetCode Problems:**
 - 560. Subarray Sum Equals K - [Solution](leet_code/prefix_sum/560_subarray_sum_equals_k.py)
 - 303. Range Sum Query - Immutable - [Solution](leet_code/prefix_sum/303_range_sum_query_inmmutable.py)
-- 525. Contiguous Array
+- 525. Contiguous Array - [Solution](leet_code/prefix_sum/525_contigous_array.py)
 - 974. Subarray Sums Divisible by K
 - 1480. Running Sum of 1d Array
 
