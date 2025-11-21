@@ -410,7 +410,7 @@ def merge(intervals):
 
 **LeetCode Problems:**
 - 56. Merge Intervals - [Solution](leet_code/array/56_merged_intervals.py)
-- 57. Insert Interval
+- 57. Insert Interval - [Solution](leet_code/binary_search/57_insert_interval.py)
 - 252. Meeting Rooms
 - 253. Meeting Rooms II
 - Parking Lot Capacity - [Solution](leet_code/array/parking_lot.py)
