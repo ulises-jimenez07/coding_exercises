@@ -354,8 +354,8 @@ def subarraySum(nums, k):
 - 560. Subarray Sum Equals K - [Solution](leet_code/prefix_sum/560_subarray_sum_equals_k.py)
 - 303. Range Sum Query - Immutable - [Solution](leet_code/prefix_sum/303_range_sum_query_inmmutable.py)
 - 525. Contiguous Array - [Solution](leet_code/prefix_sum/525_contigous_array.py)
-- 974. Subarray Sums Divisible by K
-- 1480. Running Sum of 1d Array
+- 974. Subarray Sums Divisible by K - [Solution](leet_code/prefix_sum/974_subarrays_sums_divisible_k.py)
+- 1480. Running Sum of 1d Array - [Solution](leet_code/prefix_sum/1480_running_sum_1d_array.py)
 
 ### Merge Intervals
 **When to use:** Overlapping intervals, meeting rooms, scheduling problems

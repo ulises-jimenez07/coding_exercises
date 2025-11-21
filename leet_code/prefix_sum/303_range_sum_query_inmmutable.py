@@ -23,10 +23,6 @@ class NumArray:
     def __init__(self, nums: List[int]):
         """
         Initialize the NumArray with a prefix sum array.
-
-        Args:
-            nums: List of integers to process
-
         Time complexity: O(n)
         Space complexity: O(n)
         """
@@ -40,13 +36,6 @@ class NumArray:
     def sumRange(self, left: int, right: int) -> int:
         """
         Calculate sum of elements between indices left and right (inclusive).
-
-        Args:
-            left: Starting index (0-based)
-            right: Ending index (0-based, inclusive)
-
-        Returns:
-            Sum of elements from nums[left] to nums[right]
 
         Time complexity: O(1)
         """
