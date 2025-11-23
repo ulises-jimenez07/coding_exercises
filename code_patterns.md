@@ -416,7 +416,7 @@ def merge(intervals):
 - 252. Meeting Rooms - [Solution](leet_code/array/252_meeting_rooms.py)
 - 253. Meeting Rooms II - [Solution](leet_code/array/253_meeting_rooms_2.py)
 - Parking Lot Capacity - [Solution](leet_code/array/parking_lot.py)
-- 435. Non-overlapping Intervals
+- 435. Non-overlapping Intervals - [Solution](leet_code/array/435_non_overlapping_intervals.py)
 
 ### BFS on Matrix
 **When to use:** Shortest path, level-order traversal on grids (flood fill, rotting oranges)
