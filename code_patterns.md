@@ -143,6 +143,8 @@ def minSubArrayLen(target, nums):
 - 76. Minimum Window Substring - [Solution](leet_code/hash_tables/76_minimum_window_substr.py)
 - 862. Shortest Subarray with Sum at Least K - [Solution](leet_code/array/862_shortest_subarray_sum_at_least_k.py)
 - 1658. Minimum Operations to Reduce X to Zero  - [Solution](leet_code/array/1658_min_op_to_reduce_x_zero.py)
+
+
 ### Fast & Slow Pointers (Floyd's Cycle Detection)
 **When to use:** Linked list cycle detection, finding middle of list, finding start of cycle
 
@@ -412,7 +414,7 @@ def merge(intervals):
 - 56. Merge Intervals - [Solution](leet_code/array/56_merged_intervals.py)
 - 57. Insert Interval - [Solution](leet_code/binary_search/57_insert_interval.py)
 - 252. Meeting Rooms - [Solution](leet_code/array/252_meeting_rooms.py)
-- 253. Meeting Rooms II
+- 253. Meeting Rooms II - [Solution](leet_code/array/253_meeting_rooms_2.py)
 - Parking Lot Capacity - [Solution](leet_code/array/parking_lot.py)
 - 435. Non-overlapping Intervals
 
