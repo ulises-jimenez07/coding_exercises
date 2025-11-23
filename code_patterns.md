@@ -411,7 +411,7 @@ def merge(intervals):
 **LeetCode Problems:**
 - 56. Merge Intervals - [Solution](leet_code/array/56_merged_intervals.py)
 - 57. Insert Interval - [Solution](leet_code/binary_search/57_insert_interval.py)
-- 252. Meeting Rooms
+- 252. Meeting Rooms - [Solution](leet_code/array/252_meeting_rooms.py)
 - 253. Meeting Rooms II
 - Parking Lot Capacity - [Solution](leet_code/array/parking_lot.py)
 - 435. Non-overlapping Intervals
