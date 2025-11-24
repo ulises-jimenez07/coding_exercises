@@ -491,7 +491,7 @@ def orangesRotting(grid):
 ```
 
 **LeetCode Problems:**
-- 994. Rotting Oranges
+- 994. Rotting Oranges - [Solution](leet_code/graph/994_rotting_oranges.py)
 - 200. Number of Islands - [Solution](leet_code/graph/200_number_island.py)
 - 733. Flood Fill - [Solution](leet_code/graph/733_flood_fill.py)
 - 542. 01 Matrix

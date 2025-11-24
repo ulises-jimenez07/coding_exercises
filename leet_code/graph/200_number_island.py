@@ -27,11 +27,8 @@ class Solution:
         It iterates through every cell in the grid. If a '1' (land) is found,
         it increments the island count and initiates a Depth First Search (DFS)
         to mark the entire island as visited (by changing '1's to '2's).
-
-        :param grid: The 2D grid representing the map. '1' is land, '0' is water.
-        :return: The total number of islands.
         """
-        self.grid = grid  # Store the grid instance for easy access in helper methods
+        self.grid = grid  # pylint: disable=attribute-defined-outside-init
         count = 0  # Initialize island count
         rows = len(grid)
         if rows == 0:
@@ -52,10 +49,6 @@ class Solution:
         A cell is valid if:
         1. It is within the grid boundaries.
         2. It contains '1' (land that hasn't been visited yet).
-
-        :param row: The row index.
-        :param col: The column index.
-        :return: True if the cell is valid and contains land ('1'), False otherwise.
         """
         # Check boundary conditions for rows
         if row < 0 or row >= len(self.grid):
@@ -74,10 +67,6 @@ class Solution:
 
         It marks the current land cell as visited ('2') and recursively
         explores all four adjacent cells (up, down, left, right).
-
-        :param row: The current row index.
-        :param col: The current column index.
-        :return: None
         """
         if self.is_valid(row, col):
             # Mark the current cell as visited (e.g., changing '1' to '2')
