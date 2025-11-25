@@ -495,7 +495,7 @@ def orangesRotting(grid):
 - 200. Number of Islands - [Solution](leet_code/graph/200_number_island.py)
 - 733. Flood Fill - [Solution](leet_code/graph/733_flood_fill.py)
 - 542. 01 Matrix - [Solution](leet_code/dynamic_programming/542_matrix.py)
-- 1091. Shortest Path in Binary Matrix
+- 1091. Shortest Path in Binary Matrix - [Solution](leet_code/graph/1091_shortest_path_binary_matrix.py)
 
 ### Union Find (Disjoint Set)
 **When to use:** Connected components, cycle detection, dynamic connectivity
