@@ -14,46 +14,44 @@ Example: [[0,0,0],[0,1,0],[1,1,1]] -> [[0,0,0],[0,1,0],[1,2,1]]
 
 import unittest
 from collections import deque
+from math import inf
 from typing import List
 
 
 class Solution:
-    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
-        m = len(mat)
-        n = len(mat[0])
+    """Solution for LeetCode 542: 01 Matrix using multi-source BFS."""
 
-        distance = [[0 for _ in range(n)] for _ in range(m)]
-        q: deque[tuple[int, int]] = deque()
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int | float]]:  # pylint: disable=too-many-locals
+        rows, cols = len(mat), len(mat[0])
+        distances: List[List[int | float]] = [[0 for _ in range(cols)] for _ in range(rows)]
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        queue: deque[tuple[int, int]] = deque()
 
         # Initialize: add all 0 cells to queue
-        for i in range(m):
-            for j in range(n):
+        for i in range(rows):
+            for j in range(cols):
                 if mat[i][j] == 1:
-                    distance[i][j] = 10**9
+                    distances[i][j] = inf
                 else:
-                    distance[i][j] = 0
-                    q.append((i, j))
+                    queue.append((i, j))
 
         # Multi-source BFS from all 0 cells
-        while q:
-            row, col = q.popleft()
-            new_distance = distance[row][col] + 1
+        while queue:
+            row, col = queue.popleft()
+            new_distance = distances[row][col] + 1
 
-            # Check all 4 neighbors
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
             for dr, dc in directions:
                 nr, nc = row + dr, col + dc
-                if self._is_valid(nr, nc, m, n) and distance[nr][nc] > new_distance:
-                    distance[nr][nc] = new_distance
-                    q.append((nr, nc))
+                if 0 <= nr < rows and 0 <= nc < cols and distances[nr][nc] > new_distance:
+                    distances[nr][nc] = new_distance
+                    queue.append((nr, nc))
 
-        return distance
-
-    def _is_valid(self, row: int, col: int, m: int, n: int) -> bool:
-        return 0 <= row < m and 0 <= col < n
+        return distances
 
 
 class TestSolution(unittest.TestCase):
+    """Unit tests for Solution class."""
+
     def setUp(self):
         self.solution = Solution()
 

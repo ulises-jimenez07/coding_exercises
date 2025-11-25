@@ -494,7 +494,7 @@ def orangesRotting(grid):
 - 994. Rotting Oranges - [Solution](leet_code/graph/994_rotting_oranges.py)
 - 200. Number of Islands - [Solution](leet_code/graph/200_number_island.py)
 - 733. Flood Fill - [Solution](leet_code/graph/733_flood_fill.py)
-- 542. 01 Matrix
+- 542. 01 Matrix - [Solution](leet_code/dynamic_programming/542_matrix.py)
 - 1091. Shortest Path in Binary Matrix
 
 ### Union Find (Disjoint Set)
