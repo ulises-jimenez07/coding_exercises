@@ -606,8 +606,8 @@ def nextGreaterElement(nums):
 ```
 
 **LeetCode Problems:**
-- 496. Next Greater Element I
-- 503. Next Greater Element II
+- 496. Next Greater Element I - [Solution](leet_code/queues_stacks/469_next_greater_element_1.py)
+- 503. Next Greater Element II - [Solution](leet_code/queues_stacks/503_next_greater_element_2.py)
 - 739. Daily Temperatures
 - 84. Largest Rectangle in Histogram
 - 42. Trapping Rain Water
