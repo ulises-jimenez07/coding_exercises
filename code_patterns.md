@@ -609,7 +609,7 @@ def nextGreaterElement(nums):
 - 496. Next Greater Element I - [Solution](leet_code/queues_stacks/469_next_greater_element_1.py)
 - 503. Next Greater Element II - [Solution](leet_code/queues_stacks/503_next_greater_element_2.py)
 - 739. Daily Temperatures - [Solution](leet_code/queues_stacks/739_daily_temperatures.py)
-- 84. Largest Rectangle in Histogram
+- 84. Largest Rectangle in Histogram - [Solution](leet_code/queues_stacks/84_largest_rectangle_in_histogram.py)
 - 42. Trapping Rain Water
 
 ### Stack for Parentheses/Brackets
