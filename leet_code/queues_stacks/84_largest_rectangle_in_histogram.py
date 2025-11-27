@@ -45,89 +45,131 @@ class Solution:
         return max_area
 
 
+class Solution2:
+    """Alternative solution using appended sentinel (0-height bar at end)."""
+
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        """
+        Find the largest rectangular area using modified heights with sentinel.
+
+        Appends a 0-height bar to ensure all elements are eventually processed.
+        """
+        max_area = 0
+        stack: list[int] = []  # Empty stack
+        heights_mod = heights + [0]  # Append 0-height sentinel bar
+
+        # Process each bar including the sentinel
+        for curr_bar, bar_height in enumerate(heights_mod):
+            # Pop bars taller than current and calculate their areas
+            while stack and heights_mod[stack[-1]] >= bar_height:
+                h = heights_mod[stack.pop()]
+                # Left boundary: -1 if stack empty, else last index in stack
+                left_boundary_index = stack[-1] if stack else -1
+                w = curr_bar - left_boundary_index - 1
+                max_area = max(max_area, h * w)
+
+            stack.append(curr_bar)
+
+        return max_area
+
+
 class TestLargestRectangleArea(unittest.TestCase):
     """Test cases for Largest Rectangle in Histogram solution."""
 
     def setUp(self):
         self.solution = Solution()
+        self.solution2 = Solution2()
 
     def test_basic_case(self):
         """Test with basic example with varying heights."""
         heights = [2, 1, 5, 6, 2, 3]
         expected = 10  # Rectangle with height 5 and width 2
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_increasing_heights(self):
         """Test with strictly increasing heights."""
         heights = [1, 2, 3, 4, 5]
         expected = 9  # Rectangle with height 3 and width 3
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_decreasing_heights(self):
         """Test with strictly decreasing heights."""
         heights = [5, 4, 3, 2, 1]
         expected = 9  # Rectangle with height 3 and width 3
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_all_same_height(self):
         """Test where all bars have the same height."""
         heights = [4, 4, 4, 4]
         expected = 16  # Rectangle spanning all bars
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_single_bar(self):
         """Test with single bar."""
         heights = [5]
         expected = 5
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_two_bars_same_height(self):
         """Test with two bars of same height."""
         heights = [3, 3]
         expected = 6  # Rectangle spanning both bars
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_two_bars_different_height(self):
         """Test with two bars of different heights."""
         heights = [2, 4]
         expected = 4  # Single bar with height 4
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_peak_in_middle(self):
         """Test with peak height in the middle."""
         heights = [1, 2, 5, 2, 1]
         expected = 6  # Rectangle with height 2 and width 3
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_valley_pattern(self):
         """Test with valley pattern (high-low-high)."""
         heights = [5, 1, 5]
         expected = 5  # Either of the tall bars
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_multiple_same_max_areas(self):
         """Test where multiple rectangles can have same max area."""
         heights = [2, 2, 2]
         expected = 6  # Rectangle spanning all bars
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_zero_height(self):
         """Test with zero height bars."""
         heights = [0, 2, 0]
         expected = 2  # Single bar with height 2
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_large_rectangle_at_start(self):
         """Test where largest rectangle is at the start."""
         heights = [6, 5, 4, 1, 1]
         expected = 12  # Rectangle with height 4 and width 3
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
     def test_large_rectangle_at_end(self):
         """Test where largest rectangle is at the end."""
         heights = [1, 1, 4, 5, 6]
         expected = 12  # Rectangle with height 4 and width 3
         self.assertEqual(self.solution.largestRectangleArea(heights), expected)
+        self.assertEqual(self.solution2.largestRectangleArea(heights), expected)
 
 
 if __name__ == "__main__":
