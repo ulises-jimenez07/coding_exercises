@@ -655,7 +655,7 @@ def isValid(s):
 
 **LeetCode Problems:**
 - 20. Valid Parentheses - [Solution](leet_code/queues_stacks/20_valid_parenthesis.py)
-- 22. Generate Parentheses
+- 22. Generate Parentheses - [Solution](leet_code/back_tracking/22_generate_parenthesis.py)
 - 32. Longest Valid Parentheses
 - 1541. Minimum Insertions to Balance a Parentheses String
 - 921. Minimum Add to Make Parentheses Valid - [Solution](leet_code/strings/921_minimum_add_make_parenthisis_valid.py)
