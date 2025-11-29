@@ -710,7 +710,7 @@ def reverseList(head):
 
 **LeetCode Problems:**
 - 206. Reverse Linked List - [Solution](leet_code/linked_lists/206_reverse_linked_list.py)
-- 92. Reverse Linked List II
+- 92. Reverse Linked List II - [Solution](leet_code/linked_lists/92_reverse_linked_list_2.py)
 - 25. Reverse Nodes in k-Group
 - 24. Swap Nodes in Pairs
 - 61. Rotate List
