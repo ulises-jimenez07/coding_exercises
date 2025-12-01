@@ -713,7 +713,7 @@ def reverseList(head):
 - 92. Reverse Linked List II - [Solution](leet_code/linked_lists/92_reverse_linked_list_2.py)
 - 25. Reverse Nodes in k-Group
 - 24. Swap Nodes in Pairs - [Solution](leet_code/linked_lists/24_swap_nodes_pairs.py)
-- 61. Rotate List
+- 61. Rotate List - [Solution](leet_code/linked_lists/61_rotate_list.py)
 
 ## Tree Patterns
 
