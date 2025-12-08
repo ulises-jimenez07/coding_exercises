@@ -559,7 +559,7 @@ class UnionFind:
 - 547. Number of Provinces - [Solution](leet_code/disjoint_set/547_number_of_provinces.py)
 - 684. Redundant Connection - [Solution](leet_code/disjoint_set/684_redundant_connection.py)
 - 200. Number of Islands (can also use Union Find) - [Solution](leet_code/disjoint_set/200_number_of_island.py)
-- 1319. Number of Operations to Make Network Connected
+- 1319. Number of Operations to Make Network Connected - [Solition](leet_code/disjoint_set/1319_number_of_operations_network_connected.py)
 
 ## Stack & Queue Patterns
 
