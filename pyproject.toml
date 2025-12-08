@@ -45,4 +45,6 @@ disable = [
     "too-few-public-methods",
     "redefined-outer-name",
     "invalid-name",
+    "too-many-locals",
+    "duplicate-code",
 ]

@@ -30,10 +30,6 @@ class Solution:
         Calculates the number of provinces in a given adjacency matrix.
 
         A province is a group of directly or indirectly connected cities.
-
-        :param isConnected: An n x n matrix where isConnected[i][j] == 1
-                            if city i and city j are directly connected.
-        :return: The total number of provinces.
         """
         uf = UnionFind()
         n = len(isConnected)
@@ -68,9 +64,6 @@ class UnionFind:
     def find(self, x):
         """
         Finds the root of element x with path compression.
-
-        :param x: The element to find the root for.
-        :return: The root (representative) of the set containing x.
         """
         # Initialize node if it's the first time seeing it (sets its own parent)
         if x not in self.parent:
@@ -90,9 +83,6 @@ class UnionFind:
         Performs a union-by-rank/size optimization is typically added here for
         better performance, but not strictly necessary for this problem.
         This implementation performs a simple union.
-
-        :param x: An element in the first set.
-        :param y: An element in the second set.
         """
         root_x, root_y = self.find(x), self.find(y)
 
