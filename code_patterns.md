@@ -557,7 +557,7 @@ class UnionFind:
 **LeetCode Problems:**
 - 323. Number of Connected Components in an Undirected Graph - [Solution](leet_code/disjoint_set/323_number_connected_components_udg.py)
 - 547. Number of Provinces - [Solution](leet_code/disjoint_set/547_number_of_provinces.py)
-- 684. Redundant Connection
+- 684. Redundant Connection - [Solution](leet_code/disjoint_set/684_redundant_connection.py)
 - 200. Number of Islands (can also use Union Find) - [Solution](leet_code/disjoint_set/200_number_of_island.py)
 - 1319. Number of Operations to Make Network Connected
 
