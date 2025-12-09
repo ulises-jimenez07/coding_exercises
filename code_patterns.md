@@ -911,7 +911,7 @@ trie.startsWith("app")  # Returns True
 ```
 
 **LeetCode Problems:**
-- 208. Implement Trie (Prefix Tree)
+- 208. Implement Trie (Prefix Tree) - [Solution](leet_code/trie/208_implement_trie.py)
 - 211. Design Add and Search Words Data Structure
 - 212. Word Search II
 - 648. Replace Words
