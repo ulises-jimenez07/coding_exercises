@@ -914,7 +914,7 @@ trie.startsWith("app")  # Returns True
 - 208. Implement Trie (Prefix Tree) - [Solution](leet_code/trie/208_implement_trie.py)
 - . Design Add and Search Words Data Structure - [Solution](leet_code/trie/211_design_add_search_words_ds.py)
 - 212. Word Search II
-- 648. Replace Words
+- 648. Replace Words - [Solution](leet_code/trie/648_replace_words.py)
 - 677. Map Sum Pairs
 
 ## Graph Patterns
