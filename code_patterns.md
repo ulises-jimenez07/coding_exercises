@@ -915,7 +915,7 @@ trie.startsWith("app")  # Returns True
 - . Design Add and Search Words Data Structure - [Solution](leet_code/trie/211_design_add_search_words_ds.py)
 - 212. Word Search II
 - 648. Replace Words - [Solution](leet_code/trie/648_replace_words.py)
-- 677. Map Sum Pairs
+- 677. Map Sum Pairs - [Solution](leet_code/trie/677_map_sum_pairs.py)
 
 ## Graph Patterns
 
