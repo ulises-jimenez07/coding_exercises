@@ -979,7 +979,7 @@ def cloneGraph(node):
 - 133. Clone Graph - [Solution](leet_code/graph/133_clone_graph.py)
 - 127. Word Ladder
 - 286. Walls and Gates
-- 1091. Shortest Path in Binary Matrix
+- 1091. Shortest Path in Binary Matrix - [Solution](leet_code/graph/1091_shortest_path_binary_matrix.py)
 - 934. Shortest Bridge
 
 ### DFS on Graphs
