@@ -980,7 +980,7 @@ def cloneGraph(node):
 - 127. Word Ladder
 - 286. Walls and Gates - [Solution](leet_code/graph/286_walls_and_gates.py)
 - 1091. Shortest Path in Binary Matrix - [Solution](leet_code/graph/1091_shortest_path_binary_matrix.py)
-- 934. Shortest Bridge
+- 934. Shortest Bridge - [Solution](leet_code/graph/934_shortest_bridge.py)
 
 ### DFS on Graphs
 **When to use:** Cycle detection, connected components, path finding
