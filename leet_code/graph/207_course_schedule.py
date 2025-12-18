@@ -25,14 +25,6 @@ class Solution_v1:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         """
         Determines if it's possible to finish all courses given the prerequisites.
-
-        Args:
-            numCourses: The total number of courses.
-            prerequisites: A list of prerequisite pairs, where [a, b] means you must
-                           take course b before taking course a.
-
-        Returns:
-            True if all courses can be finished, False otherwise.
         """
         # Adjacency list to represent the graph where an edge from 'b' to 'a' means
         # 'a' is a prerequisite for 'b'.
@@ -59,12 +51,6 @@ class Solution_v1:
     def dfs(self, node: int) -> bool:
         """
         Performs a Depth First Search from a given node to detect cycles.
-
-        Args:
-            node: The current course (node) being visited.
-
-        Returns:
-            True if no cycle is detected from this node, False otherwise.
         """
         # Mark the current node as 'visiting'.
         self.state[node] = "v"
