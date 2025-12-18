@@ -1048,7 +1048,7 @@ def canFinish(numCourses, prerequisites):
 **LeetCode Problems:**
 - 207. Course Schedule - [Solution](leet_code/graph/207_course_schedule.py)
 - 210. Course Schedule II - [Solution](leet_code/graph/210_course_schedule_2.py)
-- 261. Graph Valid Tree
+- 261. Graph Valid Tree - [Solution](leet_code/graph/261_valid_tree.py)
 - 797. All Paths From Source to Target
 - 802. Find Eventual Safe States
 - Organization Hierarchy (Count Reports with DFS + Memoization) - [Solution](leet_code/graph/organization_hierarchy.py)
