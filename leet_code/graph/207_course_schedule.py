@@ -9,10 +9,8 @@ Approach:
 """
 
 import unittest
-from typing import (
-    Dict,
-    List,
-)
+from collections import defaultdict
+from typing import List
 
 
 class Solution_v1:
@@ -79,37 +77,38 @@ class Solution:
 
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         # Build adjacency list: course -> list of prerequisites
-        graph: Dict[int, List[int]] = {i: [] for i in range(numCourses)}
+        graph = defaultdict(list)
         for course, prereq in prerequisites:
             graph[course].append(prereq)
 
-        # 0 = unvisited, 1 = visiting, 2 = visited
-        state: List[int] = [0] * numCourses
+        # State tracking: 0 = unvisited, 1 = visiting, 2 = visited
+        state = [0] * numCourses
+        UNVISITED, VISITING, VISITED = 0, 1, 2
 
-        def has_cycle(course):
+        def has_cycle(node):
             # If we see a node currently being visited, it's a cycle (back edge)
-            if state[course] == 1:
+            if state[node] == VISITING:
                 return True
             # If already fully processed, no cycle here
-            if state[course] == 2:
+            if state[node] == VISITED:
                 return False
 
             # Mark as visiting
-            state[course] = 1
-            for prereq in graph[course]:
+            state[node] = VISITING
+
+            for prereq in graph[node]:
                 if has_cycle(prereq):
                     return True
 
             # Mark as visited (processed)
-            state[course] = 2
-
+            state[node] = VISITED
             return False
 
+        # Iterate through all courses and start a DFS traversal from unvisited nodes.
         for course in range(numCourses):
-            if state[course] == 0:
+            if state[course] == UNVISITED:
                 if has_cycle(course):
                     return False
-
         return True
 
 
