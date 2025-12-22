@@ -255,6 +255,40 @@ def twoSum(numbers, target):
 - 283. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
 - 344. Reverse String - [Solution](leet_code/array/344_reverse_string.py)
 
+### Two Pointers (Unidirectional Traversal)
+**When to use:** Moving elements to one side (Move Zeroes)
+
+**How it works:** One pointer iterates, another tracks the position to swap. This "bubbles" the desired elements forward or backward in a single pass.
+
+```python
+def moveZeroes(nums):
+    slow = 0
+    for fast in range(len(nums)):
+        if nums[fast] != 0:
+            nums[slow], nums[fast] = nums[fast], nums[slow]
+            slow += 1
+```
+
+**LeetCode Problems:**
+- 283. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
+- 27. Remove Element - [Solution](leet_code/array/27_remove_element.py)
+- 26. Remove Duplicates from Sorted Array - [Solution](leet_code/array/26_remove_duplicates_from_sorted_array.py)
+
+### Two Pointers (Staged Traversal)
+**When to use:** Finding specific sequences (Next Permutation)
+
+**How it works:** First find a pivot point from one direction, then find a successor to swap with, and finally transform the remaining part (like reversing or sorting).
+
+```python
+def nextPermutation(nums):
+    # 1. Find pivot (first decreasing)
+    # 2. Find successor to pivot
+    # 3. Swap and reverse suffix
+```
+
+**LeetCode Problems:**
+- 31. Next Permutation - [Solution](leet_code/array/31_next_permutation.py)
+
 ### Binary Search
 **When to use:** Sorted data, finding boundaries, minimizing/maximizing with constraint
 
@@ -311,6 +345,16 @@ def searchRange(nums, target):
 - 33. Search in Rotated Sorted Array - [Solution](leet_code/binary_search/33_find_rotated_array.py)
 - 875. Koko Eating Bananas - [Solution](leet_code/binary_search/875_koko_eating_bananas.py)
 - 1011. Capacity To Ship Packages Within D Days - [Solution](leet_code/binary_search/1011_capacity_ship_d_days.py)
+
+### Binary Search (Search Space)
+**When to use:** Optimization problems, find median without merging
+
+**How it works:** Instead of searching in an array, search in the "answer range" (min possible value to max possible value). Use a helper function `feasible(x)` to determine if a value can satisfy the problem constraints.
+
+**LeetCode Problems:**
+- 4. Median of Two Sorted Arrays
+- 528. Random Pick with Weight
+- 410. Split Array Largest Sum
 ### Prefix Sum
 **When to use:** Range sum queries, subarray sum problems
 
@@ -358,6 +402,15 @@ def subarraySum(nums, k):
 - 525. Contiguous Array - [Solution](leet_code/prefix_sum/525_contigous_array.py)
 - 974. Subarray Sums Divisible by K - [Solution](leet_code/prefix_sum/974_subarrays_sums_divisible_k.py)
 - 1480. Running Sum of 1d Array - [Solution](leet_code/prefix_sum/1480_running_sum_1d_array.py)
+
+### Hash Table Optimization
+**When to use:** Longest consecutive chains, triplet detection
+
+**How it works:** Use sets for $O(1)$ lookups and identify sequence starts (e.g., `num-1` not in set). For triplets, use two hash maps (left and right frequencies) to count occurrences in $O(n)$ time.
+
+**LeetCode Problems:**
+- 128. Longest Consecutive Sequence - [Solution](leet_code/hash_tables/128_longest_consecutive_sequence.py)
+- Geometric Sequence Triplets
 
 ### Merge Intervals
 **When to use:** Overlapping intervals, meeting rooms, scheduling problems
@@ -417,6 +470,29 @@ def merge(intervals):
 - 253. Meeting Rooms II - [Solution](leet_code/array/253_meeting_rooms_2.py)
 - Parking Lot Capacity - [Solution](leet_code/array/parking_lot.py)
 - 435. Non-overlapping Intervals - [Solution](leet_code/array/435_non_overlapping_intervals.py)
+
+### Sorting Patterns (Dutch National Flag)
+**When to use:** Sorting three distinct types of elements (Sort Colors)
+
+**How it works:** Use three pointers (`low`, `mid`, `high`) to partition the array into three regions. `low` tracks the boundary for the first type, `high` for the third, and `mid` iterates through.
+
+```python
+def sortColors(nums):
+    low, mid, high = 0, 0, len(nums) - 1
+    while mid <= high:
+        if nums[mid] == 0:
+            nums[low], nums[mid] = nums[mid], nums[low]
+            low += 1
+            mid += 1
+        elif nums[mid] == 1:
+            mid += 1
+        else:
+            nums[mid], nums[high] = nums[high], nums[mid]
+            high -= 1
+```
+
+**LeetCode Problems:**
+- 75. Sort Colors - [Solution](leet_code/array/75_sort_colors.py)
 
 ### BFS on Matrix
 **When to use:** Shortest path, level-order traversal on grids (flood fill, rotting oranges)
@@ -660,6 +736,14 @@ def isValid(s):
 - 1541. Minimum Insertions to Balance a Parentheses String - [Solution](leet_code/strings/1541_minimum_insertions_to_balance.py)
 - 921. Minimum Add to Make Parentheses Valid - [Solution](leet_code/strings/921_minimum_add_make_parenthisis_valid.py)
 
+### Queue Implementation using Stacks
+**When to use:** Simulating queue behavior with LIFO structures
+
+**How it works:** Use two stacks: `input` and `output`. Push to `input`. When popping, if `output` is empty, move all elements from `input` to `output`. This reverses the order twice, maintaining FIFO.
+
+**LeetCode Problems:**
+- 232. Implement Queue using Stacks
+
 ## Linked List Patterns
 
 ### In-Place Reversal
@@ -714,6 +798,14 @@ def reverseList(head):
 - 25. Reverse Nodes in k-Group - [Solution](leet_code/linked_lists/25_reverse_nodes_k_groups.py)
 - 24. Swap Nodes in Pairs - [Solution](leet_code/linked_lists/24_swap_nodes_pairs.py)
 - 61. Rotate List - [Solution](leet_code/linked_lists/61_rotate_list.py)
+
+### Flattening Multi-Level Lists
+**When to use:** Merging nested list structures in-place
+
+**How it works:** Iterate through the list. When a node has a child, find the end of the child list and connect it back to the current node's next. This simplifies the structure while traversing.
+
+**LeetCode Problems:**
+- 430. Flatten a Multilevel Doubly Linked List
 
 ## Tree Patterns
 
@@ -853,6 +945,15 @@ def levelOrder(root):
 - 199. Binary Tree Right Side View - [Solution](leet_code/trees/199_binary_tree_right.py)
 - 637. Average of Levels in Binary Tree - [Solution](leet_code/trees/637_average_of_levels_binary_tree.py)
 - 103. Binary Tree Zigzag Level Order Traversal - [Solution](leet_code/queues_stacks/103_binary_tree_zigzag.py)
+
+### Binary Tree Columns
+**When to use:** Vertical order grouping
+
+**How it works:** Use BFS and track a column ID for each node (root is 0, left is -1, right is +1). Use a hash map to group node values by their column ID.
+
+**LeetCode Problems:**
+- 314. Binary Tree Vertical Order Traversal - [Solution](leet_code/trees/314_binary_tree_vertical_traversal.py)
+- 987. Vertical Order Traversal of a Binary Tree
 
 ### Trie (Prefix Tree)
 **When to use:** Word search, autocomplete, prefix matching
@@ -1136,6 +1237,14 @@ def findOrder(numCourses, prerequisites):
 - 269. Alien Dictionary
 - 310. Minimum Height Trees
 - 1136. Parallel Courses
+
+### Connect the Dots (MST)
+**When to use:** Minimum cost to connect all points, network design
+
+**How it works:** Use Kruskal's algorithm with Union-Find. Sort all possible edges by weight and add them to the MST if they don't form a cycle. Stop when you have $n-1$ edges.
+
+**LeetCode Problems:**
+- 1584. Min Cost to Connect All Points
 
 ## Backtracking Patterns
 
@@ -1608,6 +1717,18 @@ def singleNumber(nums):
 - 191. Number of 1 Bits
 - 338. Counting Bits
 - 371. Sum of Two Integers
+
+## Math and Geometry Patterns
+
+### The Josephus Problem
+**When to use:** Elimination problems, finding the last survivor
+
+**How it works:** Use the recursive formula $f(n, k) = (f(n-1, k) + k) \pmod n$ with base case $f(1, k) = 0$. This solves the elimination game in $O(n)$ time.
+
+### Triangle Numbers Pattern
+**When to use:** Row properties in Pascal-like triangles
+
+**How it works:** Recognize cyclic or algebraic patterns within rows or columns to find properties (like sum or presence of a number) in $O(1)$ time instead of building the triangle.
 
 ## Heap Patterns
 
