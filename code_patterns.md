@@ -274,7 +274,7 @@ def moveZeroes(nums):
 - 27. Remove Element - [Solution](leet_code/array/27_remove_element.py)
 - 26. Remove Duplicates from Sorted Array - [Solution](leet_code/array/26_remove_duplicates_from_sorted_array.py)
 - 80. Remove Duplicates from Sorted Array II - [Solution](leet_code/array/80_remove_duplicates_from_sorted_array_2.py)
-- 905. Sort Array By Parity
+- 905. Sort Array By Parity - [Solution](leet_code/array/905_sort_array_by_parity.py)
 
 **Example: Move Zeroes**
 ```python
