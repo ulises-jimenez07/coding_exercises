@@ -273,6 +273,27 @@ def moveZeroes(nums):
 - 283. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
 - 27. Remove Element - [Solution](leet_code/array/27_remove_element.py)
 - 26. Remove Duplicates from Sorted Array - [Solution](leet_code/array/26_remove_duplicates_from_sorted_array.py)
+- 80. Remove Duplicates from Sorted Array II
+- 905. Sort Array By Parity
+
+**Example: Move Zeroes**
+```python
+def moveZeroes(nums):
+    slow = 0
+    for fast in range(len(nums)):
+        # If current element is non-zero, swap with slow pointer
+        if nums[fast] != 0:
+            nums[slow], nums[fast] = nums[fast], nums[slow]
+            slow += 1
+
+# Example: nums = [0,1,0,3,12]
+# fast=0 (nums[0]=0): skip
+# fast=1 (nums[1]=1): swap nums[0] and nums[1] -> [1,0,0,3,12], slow=1
+# fast=2 (nums[2]=0): skip
+# fast=3 (nums[3]=3): swap nums[1] and nums[3] -> [1,3,0,0,12], slow=2
+# fast=4 (nums[4]=12): swap nums[2] and nums[4] -> [1,3,12,0,0], slow=3
+# Answer: [1,3,12,0,0]
+```
 
 ### Two Pointers (Staged Traversal)
 **When to use:** Finding specific sequences (Next Permutation)
@@ -288,6 +309,42 @@ def nextPermutation(nums):
 
 **LeetCode Problems:**
 - 31. Next Permutation - [Solution](leet_code/array/31_next_permutation.py)
+- 556. Next Greater Element III
+- 189. Rotate Array
+- 443. String Compression
+- 844. Backspace String Compare
+
+**Example: Next Permutation**
+```python
+def nextPermutation(nums):
+    n = len(nums)
+    # 1. Find the first pair from right where nums[i] < nums[i+1]
+    i = n - 2
+    while i >= 0 and nums[i] >= nums[i+1]:
+        i -= 1
+
+    if i >= 0:
+        # 2. Find the smallest element in suffix larger than nums[i]
+        j = n - 1
+        while nums[j] <= nums[i]:
+            j -= 1
+        # 3. Swap them
+        nums[i], nums[j] = nums[j], nums[i]
+
+    # 4. Reverse the suffix to get the smallest possible arrangement
+    left, right = i + 1, n - 1
+    while left < right:
+        nums[left], nums[right] = nums[right], nums[left]
+        left += 1
+        right -= 1
+
+# Example: nums = [1,2,3]
+# 1. i=1 (nums[1]=2 < nums[2]=3)
+# 2. j=2 (nums[2]=3 > 2)
+# 3. Swap 2 and 3 -> [1,3,2]
+# 4. Reverse [1,3,2][2:] -> [1,3,2]
+# Answer: [1,3,2]
+```
 
 ### Binary Search
 **When to use:** Sorted data, finding boundaries, minimizing/maximizing with constraint
@@ -355,6 +412,35 @@ def searchRange(nums, target):
 - 4. Median of Two Sorted Arrays
 - 528. Random Pick with Weight
 - 410. Split Array Largest Sum
+- 1283. Find the Smallest Divisor Given a Threshold
+- 1482. Minimum Number of Days to Make m Bouquets
+
+**Example: Random Pick with Weight**
+```python
+import random
+import bisect
+
+class Solution:
+    def __init__(self, w):
+        # Build prefix sum of weights
+        self.prefix_sums = []
+        current = 0
+        for weight in w:
+            current += weight
+            self.prefix_sums.append(current)
+        self.total = current
+
+    def pickIndex(self):
+        # Generate random number between 1 and total weight
+        target = random.random() * self.total
+        # Binary search on prefix sums to find the first sum >= target
+        return bisect.bisect_left(self.prefix_sums, target)
+
+# Example: weights = [1, 3]
+# prefix_sums = [1, 4]
+# target = 2.5 (random)
+# bisect_left(prefix_sums, 2.5) -> index 1
+```
 ### Prefix Sum
 **When to use:** Range sum queries, subarray sum problems
 
@@ -410,7 +496,32 @@ def subarraySum(nums, k):
 
 **LeetCode Problems:**
 - 128. Longest Consecutive Sequence - [Solution](leet_code/hash_tables/128_longest_consecutive_sequence.py)
-- Geometric Sequence Triplets
+- 149. Max Points on a Line
+- 954. Array of Doubled Pairs
+- 454. 4Sum II
+- 523. Continuous Subarray Sum
+
+**Example: Longest Consecutive Sequence**
+```python
+def longestConsecutive(nums):
+    num_set = set(nums)
+    longest = 0
+
+    for n in num_set:
+        # Check if n is the start of a sequence
+        if (n - 1) not in num_set:
+            length = 1
+            while (n + length) in num_set:
+                length += 1
+            longest = max(longest, length)
+    return longest
+
+# Example: nums = [100,4,200,1,3,2]
+# num_set = {100,4,200,1,3,2}
+# n=1: 0 not in set, sequence [1,2,3,4], length=4
+# n=100: 99 not in set, sequence [100], length=1
+# Answer: 4
+```
 
 ### Merge Intervals
 **When to use:** Overlapping intervals, meeting rooms, scheduling problems
@@ -493,6 +604,32 @@ def sortColors(nums):
 
 **LeetCode Problems:**
 - 75. Sort Colors - [Solution](leet_code/array/75_sort_colors.py)
+- 905. Sort Array By Parity
+- 922. Sort Array By Parity II
+- 280. Wiggle Sort
+- 324. Wiggle Sort II
+
+**Example: Sort Colors**
+```python
+def sortColors(nums):
+    low, mid, high = 0, 0, len(nums) - 1
+    while mid <= high:
+        if nums[mid] == 0:  # Red
+            nums[low], nums[mid] = nums[mid], nums[low]
+            low += 1
+            mid += 1
+        elif nums[mid] == 1:  # White
+            mid += 1
+        else:  # Blue (2)
+            nums[mid], nums[high] = nums[high], nums[mid]
+            high -= 1
+
+# Example: nums = [2,0,2,1,1,0]
+# mid=0 (2): swap with high -> [0,0,2,1,1,2], high=4
+# mid=0 (0): swap with low -> [0,0,2,1,1,2], low=1, mid=1
+# ... continues until partitioned
+# Answer: [0,0,1,1,2,2]
+```
 
 ### BFS on Matrix
 **When to use:** Shortest path, level-order traversal on grids (flood fill, rotting oranges)
@@ -743,6 +880,31 @@ def isValid(s):
 
 **LeetCode Problems:**
 - 232. Implement Queue using Stacks
+- 225. Implement Stack using Queues
+- 155. Min Stack - [Solution](leet_code/queues_stacks/155_min_stack.py)
+- 622. Design Circular Queue
+- 641. Design Circular Deque
+
+**Example: Queue using Stacks**
+```python
+class MyQueue:
+    def __init__(self):
+        self.in_stack = []
+        self.out_stack = []
+
+    def push(self, x):
+        self.in_stack.append(x)
+
+    def pop(self):
+        self.peek()  # Ensure out_stack has elements
+        return self.out_stack.pop()
+
+    def peek(self):
+        if not self.out_stack:
+            while self.in_stack:
+                self.out_stack.append(self.in_stack.pop())
+        return self.out_stack[-1]
+```
 
 ## Linked List Patterns
 
@@ -806,6 +968,33 @@ def reverseList(head):
 
 **LeetCode Problems:**
 - 430. Flatten a Multilevel Doubly Linked List
+- 341. Flatten Nested List Iterator
+- 114. Flatten Binary Tree to Linked List
+- 426. Convert Binary Search Tree to Sorted Doubly Linked List
+- 1206. Design Skiplist
+
+**Example: Flatten Doubly Linked List**
+```python
+def flatten(head):
+    curr = head
+    while curr:
+        if curr.child:
+            # 1. Save the next node
+            nxt = curr.next
+            # 2. Find tail of child list
+            child = curr.child
+            while child.next:
+                child = child.next
+            # 3. Stitch child list into main list
+            curr.next = curr.child
+            curr.child.prev = curr
+            if nxt:
+                child.next = nxt
+                nxt.prev = child
+            curr.child = None
+        curr = curr.next
+    return head
+```
 
 ## Tree Patterns
 
@@ -954,6 +1143,33 @@ def levelOrder(root):
 **LeetCode Problems:**
 - 314. Binary Tree Vertical Order Traversal - [Solution](leet_code/trees/314_binary_tree_vertical_traversal.py)
 - 987. Vertical Order Traversal of a Binary Tree
+- 545. Boundary of Binary Tree
+- 655. Print Binary Tree
+- 1104. Path In Zigzag Labelled Binary Tree
+
+**Example: Vertical Order Traversal**
+```python
+from collections import deque, defaultdict
+
+def verticalOrder(root):
+    if not root: return []
+    cols = defaultdict(list)
+    queue = deque([(root, 0)])
+
+    while queue:
+        node, x = queue.popleft()
+        cols[x].append(node.val)
+        if node.left: queue.append((node.left, x - 1))
+        if node.right: queue.append((node.right, x + 1))
+
+    return [cols[x] for x in sorted(cols.keys())]
+
+# Example Tree: [3,9,20,None,None,15,7]
+# 3 is at x=0
+# 9 is at x=-1, 20 is at x=1
+# 15 is at x=0, 7 is at x=2
+# Output: [[9], [3,15], [20], [7]]
+```
 
 ### Trie (Prefix Tree)
 **When to use:** Word search, autocomplete, prefix matching
@@ -1245,6 +1461,35 @@ def findOrder(numCourses, prerequisites):
 
 **LeetCode Problems:**
 - 1584. Min Cost to Connect All Points
+- 1135. Connecting Cities With Minimum Cost
+- 1489. Find Critical and Pseudo-Critical Edges in MST
+- 1697. Checking Existence of Edge Length Limited Paths
+- 1168. Optimize Water Distribution in a Village
+
+**Example: Minimum Spanning Tree (Kruskal's)**
+```python
+def minCostConnectPoints(points):
+    n = len(points)
+    edges = []
+    # 1. Calculate all possible Manhattan distances
+    for i in range(n):
+        for j in range(i + 1, n):
+            dist = abs(points[i][0] - points[j][0]) + abs(points[i][1] - points[j][1])
+            edges.append((dist, i, j))
+
+    # 2. Sort edges by distance
+    edges.sort()
+
+    # 3. Union-Find to collect n-1 edges without cycles
+    uf = UnionFind(n)
+    cost, edges_used = 0, 0
+    for d, u, v in edges:
+        if uf.union(u, v):
+            cost += d
+            edges_used += 1
+            if edges_used == n - 1: break
+    return cost
+```
 
 ## Backtracking Patterns
 
@@ -1725,10 +1970,52 @@ def singleNumber(nums):
 
 **How it works:** Use the recursive formula $f(n, k) = (f(n-1, k) + k) \pmod n$ with base case $f(1, k) = 0$. This solves the elimination game in $O(n)$ time.
 
+**Example: The Josephus Problem**
+```python
+def josephus(n, k):
+    # Iterative solution: O(n) time, O(1) space
+    res = 0
+    for i in range(2, n + 1):
+        res = (res + k) % i
+    return res + 1 # 1-indexed
+
+# Example: n=5, k=3
+# i=2: res = (0+3)%2 = 1
+# i=3: res = (1+3)%3 = 1
+# i=4: res = (1+3)%4 = 0
+# i=5: res = (0+3)%5 = 3
+# Final Answer: 3+1 = 4
+```
+
+**LeetCode Problems:**
+- 1823. Find the Winner of the Circular Game
+- 390. Elimination Game
+- 62. Unique Paths
+- 1342. Number of Steps to Reduce a Number to Zero
+- 172. Factorial Trailing Zeroes
+
 ### Triangle Numbers Pattern
 **When to use:** Row properties in Pascal-like triangles
 
 **How it works:** Recognize cyclic or algebraic patterns within rows or columns to find properties (like sum or presence of a number) in $O(1)$ time instead of building the triangle.
+
+**Example: Pascal's Triangle Row Sum**
+```python
+def getRowSum(n):
+    # Sum of n-th row in Pascal's triangle is 2^n
+    return 1 << n
+
+# Example: n=3 (row: 1, 3, 3, 1)
+# 1+3+3+1 = 8
+# 1 << 3 = 8
+```
+
+**LeetCode Problems:**
+- 118. Pascal's Triangle
+- 119. Pascal's Triangle II
+- 120. Triangle
+- 64. Minimum Path Sum
+- 1641. Count Sorted Vowel Strings
 
 ## Heap Patterns
 
@@ -1951,21 +2238,28 @@ def canCompleteCircuit(gas, cost):
 - **Contiguous subarray/substring** → [Sliding Window](#sliding-window-fixed-size) or [Prefix Sum](#prefix-sum)
 - **Maximum/minimum subarray sum** → [Kadane's Algorithm](#kadanes-algorithm-maximum-subarray)
 - **Sorted array + find pair/triplet** → [Two Pointers](#two-pointers)
+- **Move elements in-place / remove zeros** → [Unidirectional Traversal](#two-pointers-unidirectional-traversal)
+- **Find next lexicographical sequence** → [Staged Traversal](#two-pointers-staged-traversal)
+- **Sort 3 types of elements / sort colors** → [Dutch National Flag](#sorting-patterns-dutch-national-flag)
 - **Range sum queries** → [Prefix Sum](#prefix-sum)
 - **Sorted array + search** → [Binary Search](#binary-search)
 - **Minimize/maximize with constraint** → [Binary Search](#binary-search)
+- **Find median / random selection with weight** → [Search Space Binary Search](#binary-search-search-space)
 - **Overlapping intervals** → [Merge Intervals](#merge-intervals)
+- **Longest consecutive chain / triplet matching** → [Hash Table Optimization](#hash-table-optimization)
 
 ### Linked List Problems
 - **Cycle detection or find middle** → [Fast & Slow Pointers](#fast--slow-pointers-floyds-cycle-detection)
 - **Reverse linked list** → [In-Place Reversal](#in-place-reversal)
 - **Merge K sorted lists** → [Heap (K-Way Merge)](#k-way-merge)
+- **Flatten nested/multi-level structure** → [Flattening Lists](#flattening-multi-level-lists)
 
 ### Tree Problems
 - **Tree traversal or path problems** → [DFS](#dfs-inorderpreorderpostorder)
 - **Level-by-level traversal** → [BFS (Level Order)](#bfs-level-order)
 - **Prefix/word matching** → [Trie](#trie-prefix-tree)
 - **Validate BST or tree properties** → [DFS](#dfs-inorderpreorderpostorder)
+- **Vertical order / group by columns** → [Binary Tree Columns](#binary-tree-columns)
 
 ### Graph Problems
 - **Shortest path (unweighted)** → [BFS](#bfs-on-graphs)
@@ -1973,6 +2267,7 @@ def canCompleteCircuit(gas, cost):
 - **Cycle detection** → [DFS](#dfs-on-graphs)
 - **Task scheduling/dependencies** → [Topological Sort](#topological-sort)
 - **Grid/matrix traversal** → [BFS on Matrix](#bfs-on-matrix) or [DFS](#dfs-on-graphs)
+- **Connect all points with minimum cost** → [MST (Kruskal's)](#connect-the-dots-mst)
 
 ### Combinatorial Problems
 - **Find all combinations/subsets** → [Backtracking (Combinations)](#backtracking-combinationssubsets)
@@ -1991,6 +2286,7 @@ def canCompleteCircuit(gas, cost):
 - **Next greater/smaller element** → [Monotonic Stack](#monotonic-stack)
 - **Valid parentheses** → [Stack for Parentheses](#stack-for-parenthesesbrackets)
 - **Sliding window maximum** → [Monotonic Stack](#monotonic-stack)
+- **Implement Queue with stacks (FIFO via LIFO)** → [Queue Implementation](#queue-implementation-using-stacks)
 
 ### Heap Problems
 - **Top K elements or Kth largest** → [Heap (Min/Max Heap)](#top-k-elements)
@@ -2002,7 +2298,9 @@ def canCompleteCircuit(gas, cost):
 - **Count set bits** → [Bit operations](#common-bit-operations)
 - **Power of 2 checks** → [Bit operations](#common-bit-operations)
 
-### Special Patterns
+### Math and Geometry
+- **Elimination game / last survivor** → [The Josephus Problem](#the-josephus-problem)
+- **Cycle/Sum properties in Pascal triangles** → [Triangle Numbers](#triangle-numbers-pattern)
 - **Fast exponentiation** → Binary exponentiation
 - **Matrix traversal** → [BFS on Matrix](#bfs-on-matrix)
 - **String matching** → [Two Pointers](#two-pointers) or [Sliding Window](#sliding-window-fixed-size)
