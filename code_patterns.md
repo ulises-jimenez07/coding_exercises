@@ -310,8 +310,8 @@ def nextPermutation(nums):
 **LeetCode Problems:**
 - 31. Next Permutation - [Solution](leet_code/array/31_next_permutation.py)
 - 556. Next Greater Element III - [Solution](leet_code/array/556_next_greate_element_3.py)
-- 189. Rotate Array
-- 443. String Compression
+- 189. Rotate Array - [Solution](leet_code/array/189_rotate_array.py)
+- 443. String Compression - [Solution](leet_code/array/443_string_compression.py)
 - 844. Backspace String Compare
 
 **Example: Next Permutation**
