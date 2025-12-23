@@ -309,7 +309,7 @@ def nextPermutation(nums):
 
 **LeetCode Problems:**
 - 31. Next Permutation - [Solution](leet_code/array/31_next_permutation.py)
-- 556. Next Greater Element III
+- 556. Next Greater Element III - [Solution](leet_code/array/556_next_greate_element_3.py)
 - 189. Rotate Array
 - 443. String Compression
 - 844. Backspace String Compare
