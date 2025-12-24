@@ -409,7 +409,7 @@ def searchRange(nums, target):
 **How it works:** Instead of searching in an array, search in the "answer range" (min possible value to max possible value). Use a helper function `feasible(x)` to determine if a value can satisfy the problem constraints.
 
 **LeetCode Problems:**
-- 4. Median of Two Sorted Arrays
+- 4. Median of Two Sorted Arrays - [Solution](leet_code/binary_search/4_median_of_two_sorted_arrays.py)
 - 528. Random Pick with Weight
 - 410. Split Array Largest Sum
 - 1283. Find the Smallest Divisor Given a Threshold
