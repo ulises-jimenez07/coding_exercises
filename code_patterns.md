@@ -410,7 +410,7 @@ def searchRange(nums, target):
 
 **LeetCode Problems:**
 - 4. Median of Two Sorted Arrays - [Solution](leet_code/binary_search/4_median_of_two_sorted_arrays.py)
-- 528. Random Pick with Weight
+- 528. Random Pick with Weight - [Solution](leet_code/binary_search/528_random_pick_with_weight.py)
 - 410. Split Array Largest Sum
 - 1283. Find the Smallest Divisor Given a Threshold
 - 1482. Minimum Number of Days to Make m Bouquets
