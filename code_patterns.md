@@ -413,7 +413,7 @@ def searchRange(nums, target):
 - 528. Random Pick with Weight - [Solution](leet_code/binary_search/528_random_pick_with_weight.py)
 - 410. Split Array Largest Sum - [Solution](leet_code/binary_search/410_split_array_largest_sum.py)
 - 1283. Find the Smallest Divisor Given a Threshold - [Solution](leet_code/binary_search/1283_find_smallest_divisor_given_a_threshold.py)
-- 1482. Minimum Number of Days to Make m Bouquets
+- 1482. Minimum Number of Days to Make m Bouquets - [Solution](leet_code/binary_search/1482_minimum_number_of_days_to_make_m_bouquetes.py)
 
 **Example: Random Pick with Weight**
 ```python
