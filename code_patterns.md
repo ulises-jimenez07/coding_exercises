@@ -496,7 +496,7 @@ def subarraySum(nums, k):
 
 **LeetCode Problems:**
 - 128. Longest Consecutive Sequence - [Solution](leet_code/hash_tables/128_longest_consecutive_sequence.py)
-- 149. Max Points on a Line
+- 149. Max Points on a Line - [Solution](leet_code/hash_tables/149_max_points_on_a_line.py)
 - 954. Array of Doubled Pairs
 - 454. 4Sum II
 - 523. Continuous Subarray Sum
