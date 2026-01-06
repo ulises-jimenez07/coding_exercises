@@ -31,12 +31,6 @@ class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """
         Reverses a singly linked list iteratively.
-
-        Args:
-            head: The head of the linked list.
-
-        Returns:
-            The head of the reversed linked list.
         """
         prev = None
         while head:
@@ -52,12 +46,6 @@ class Solution:
     def reverseListRecursive(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """
         Reverses a singly linked list recursively.
-
-        Args:
-            head: The head of the linked list.
-
-        Returns:
-            The head of the reversed linked list.
         """
         # Base case: if list is empty or has only one node, it's already reversed
         if not head or not head.next:
