@@ -14,21 +14,19 @@ from typing import Optional
 
 
 class ListNode:
+    """Node definition for a singly linked list."""
+
     def __init__(self, val=0, next_node=None):
         self.val = val
         self.next = next_node
 
 
 class Solution:
+    """Provides a solution for checking if a linked list is a palindrome."""
+
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         """
         Determines if a singly linked list is a palindrome.
-
-        Args:
-            head (Optional[ListNode]): The head of the singly linked list.
-
-        Returns:
-            bool: True if the linked list is a palindrome, False otherwise.
         """
 
         def find_middle(head: Optional[ListNode]) -> Optional[ListNode]:
@@ -57,7 +55,7 @@ class Solution:
         second_half = second_half_reversed
 
         # Compare both halves
-        while second_half:
+        while first_half and second_half:
             if first_half.val != second_half.val:
                 return False
             first_half = first_half.next
@@ -67,6 +65,8 @@ class Solution:
 
 
 class TestIsPalindrome(unittest.TestCase):
+    """Unit tests for verifying the isPalindrome implementation."""
+
     def setUp(self):
         self.solution = Solution()
 
