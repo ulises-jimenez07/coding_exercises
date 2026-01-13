@@ -40,10 +40,10 @@ def findMaxAverage(nums, k):
 ```
 
 **LeetCode Problems:**
-- 643. Maximum Average Subarray I - [Solution](leet_code/array/643_max_avg_subarray.py)
-- 1456. Maximum Number of Vowels in a Substring of Given Length - [Solution](leet_code/array/1456_max_number_vowels_substring_giving_length.py)
-- 1876. Substrings of Size Three with Distinct Characters - [Solution](leet_code/array/1876_substrings_of_size3_distinct_characters.py)
-- 2269. Find the K-Beauty of a Number - [Solution](leet_code/array/2269_find_k_beauty.py)
+- 643\. Maximum Average Subarray I - [Solution](leet_code/array/643_max_avg_subarray.py)
+- 1456\. Maximum Number of Vowels in a Substring of Given Length - [Solution](leet_code/array/1456_max_number_vowels_substring_giving_length.py)
+- 1876\. Substrings of Size Three with Distinct Characters - [Solution](leet_code/array/1876_substrings_of_size3_distinct_characters.py)
+- 2269\. Find the K-Beauty of a Number - [Solution](leet_code/array/2269_find_k_beauty.py)
 
 ### Sliding Window (Flexible - Longest)
 **When to use:** Longest substring/subarray with constraint (longest substring with k unique chars)
@@ -88,12 +88,12 @@ def lengthOfLongestSubstring(s):
 ```
 
 **LeetCode Problems:**
-- 3. Longest Substring Without Repeating Characters - [Solution](leet_code/array/3_longest_substring_withouth_repeating.py)
-- 424. Longest Repeating Character Replacement - [Solution](leet_code/array/424_longest_repeating_char_replacement.py)
-- 1004. Max Consecutive Ones III - [Solution](leet_code/array/1004_max_consecutive_ones_iii.py)
-- 1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit - [Solution](leet_code/array/1438_longest_continous_subarray_with_abs_diff.py)
-- 239. Sliding Window Maximum [Solution](leet_code/queues_stacks/239_sliding_window_maximum.py)
-- 992. Subarrays with K Different Integers - [Solution](leet_code/array/992_subarrays_with_k_different_int.py)
+- 3\. Longest Substring Without Repeating Characters - [Solution](leet_code/array/3_longest_substring_withouth_repeating.py)
+- 424\. Longest Repeating Character Replacement - [Solution](leet_code/array/424_longest_repeating_char_replacement.py)
+- 1004\. Max Consecutive Ones III - [Solution](leet_code/array/1004_max_consecutive_ones_iii.py)
+- 1438\. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit - [Solution](leet_code/array/1438_longest_continous_subarray_with_abs_diff.py)
+- 239\. Sliding Window Maximum [Solution](leet_code/queues_stacks/239_sliding_window_maximum.py)
+- 992\. Subarrays with K Different Integers - [Solution](leet_code/array/992_subarrays_with_k_different_int.py)
 
 
 ### Sliding Window (Flexible - Shortest)
@@ -139,10 +139,10 @@ def minSubArrayLen(target, nums):
 ```
 
 **LeetCode Problems:**
-- 209. Minimum Size Subarray Sum - [Solution](leet_code/array/209_min_siz_subarray_sum.py)
-- 76. Minimum Window Substring - [Solution](leet_code/hash_tables/76_minimum_window_substr.py)
-- 862. Shortest Subarray with Sum at Least K - [Solution](leet_code/array/862_shortest_subarray_sum_at_least_k.py)
-- 1658. Minimum Operations to Reduce X to Zero  - [Solution](leet_code/array/1658_min_op_to_reduce_x_zero.py)
+- 209\. Minimum Size Subarray Sum - [Solution](leet_code/array/209_min_siz_subarray_sum.py)
+- 76\. Minimum Window Substring - [Solution](leet_code/hash_tables/76_minimum_window_substr.py)
+- 862\. Shortest Subarray with Sum at Least K - [Solution](leet_code/array/862_shortest_subarray_sum_at_least_k.py)
+- 1658\. Minimum Operations to Reduce X to Zero  - [Solution](leet_code/array/1658_min_op_to_reduce_x_zero.py)
 
 
 ### Fast & Slow Pointers (Floyd's Cycle Detection)
@@ -192,11 +192,11 @@ def hasCycle(head):
 ```
 
 **LeetCode Problems:**
-- 141. Linked List Cycle - [Solution](leet_code/linked_lists/141_is_cycle_linked_list.py)
-- 142. Linked List Cycle II - [Solution](leet_code/linked_lists/142_linked_list_cycle_2.py)
-- 876. Middle of the Linked List - [Solution](leet_code/linked_lists/876_middle_linked_list.py)
-- 234. Palindrome Linked List - [Solution](leet_code/linked_lists/234_palindrome_linkded_list.py)
-- 202. Happy Number - [Solution](leet_code/linked_lists/202_happy_number.py)
+- 141\. Linked List Cycle - [Solution](leet_code/linked_lists/141_is_cycle_linked_list.py)
+- 142\. Linked List Cycle II - [Solution](leet_code/linked_lists/142_linked_list_cycle_2.py)
+- 876\. Middle of the Linked List - [Solution](leet_code/linked_lists/876_middle_linked_list.py)
+- 234\. Palindrome Linked List - [Solution](leet_code/linked_lists/234_palindrome_linkded_list.py)
+- 202\. Happy Number - [Solution](leet_code/linked_lists/202_happy_number.py)
 
 ### Two Pointers
 **When to use:** Sorted arrays, finding pairs, reversing (Two Sum, 3Sum, Container With Most Water)
@@ -249,11 +249,11 @@ def twoSum(numbers, target):
 ```
 
 **LeetCode Problems:**
-- 167. Two Sum II - Input Array Is Sorted - [Solution](leet_code/array/167_two_sum_2_sorted.py)
-- 15. 3Sum - [Solution](leet_code/array/15_3sum.py)
-- 11. Container With Most Water - [Solution](leet_code/array/11_container_wiht_most_water.py)
-- 283. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
-- 344. Reverse String - [Solution](leet_code/array/344_reverse_string.py)
+- 167\. Two Sum II - Input Array Is Sorted - [Solution](leet_code/array/167_two_sum_2_sorted.py)
+- 15\. 3Sum - [Solution](leet_code/array/15_3sum.py)
+- 11\. Container With Most Water - [Solution](leet_code/array/11_container_wiht_most_water.py)
+- 283\. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
+- 344\. Reverse String - [Solution](leet_code/array/344_reverse_string.py)
 
 ### Two Pointers (Unidirectional Traversal)
 **When to use:** Moving elements to one side (Move Zeroes)
@@ -270,11 +270,11 @@ def moveZeroes(nums):
 ```
 
 **LeetCode Problems:**
-- 283. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
-- 27. Remove Element - [Solution](leet_code/array/27_remove_element.py)
-- 26. Remove Duplicates from Sorted Array - [Solution](leet_code/array/26_remove_duplicates_from_sorted_array.py)
-- 80. Remove Duplicates from Sorted Array II - [Solution](leet_code/array/80_remove_duplicates_from_sorted_array_2.py)
-- 905. Sort Array By Parity - [Solution](leet_code/array/905_sort_array_by_parity.py)
+- 283\. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
+- 27\. Remove Element - [Solution](leet_code/array/27_remove_element.py)
+- 26\. Remove Duplicates from Sorted Array - [Solution](leet_code/array/26_remove_duplicates_from_sorted_array.py)
+- 80\. Remove Duplicates from Sorted Array II - [Solution](leet_code/array/80_remove_duplicates_from_sorted_array_2.py)
+- 905\. Sort Array By Parity - [Solution](leet_code/array/905_sort_array_by_parity.py)
 
 **Example: Move Zeroes**
 ```python
@@ -308,11 +308,11 @@ def nextPermutation(nums):
 ```
 
 **LeetCode Problems:**
-- 31. Next Permutation - [Solution](leet_code/array/31_next_permutation.py)
-- 556. Next Greater Element III - [Solution](leet_code/array/556_next_greate_element_3.py)
-- 189. Rotate Array - [Solution](leet_code/array/189_rotate_array.py)
-- 443. String Compression - [Solution](leet_code/array/443_string_compression.py)
-- 844. Backspace String Compare - [Solution](leet_code/array/844_backspace_string_compare.py)
+- 31\. Next Permutation - [Solution](leet_code/array/31_next_permutation.py)
+- 556\. Next Greater Element III - [Solution](leet_code/array/556_next_greate_element_3.py)
+- 189\. Rotate Array - [Solution](leet_code/array/189_rotate_array.py)
+- 443\. String Compression - [Solution](leet_code/array/443_string_compression.py)
+- 844\. Backspace String Compare - [Solution](leet_code/array/844_backspace_string_compare.py)
 
 **Example: Next Permutation**
 ```python
@@ -397,11 +397,11 @@ def searchRange(nums, target):
 ```
 
 **LeetCode Problems:**
-- 34. Find First and Last Position of Element in Sorted Array - [Solution](leet_code/binary_search/34_first_last_position_elem.py)
-- 704. Binary Search - [Solution](leet_code/binary_search/704_binary_search.py)
-- 33. Search in Rotated Sorted Array - [Solution](leet_code/binary_search/33_find_rotated_array.py)
-- 875. Koko Eating Bananas - [Solution](leet_code/binary_search/875_koko_eating_bananas.py)
-- 1011. Capacity To Ship Packages Within D Days - [Solution](leet_code/binary_search/1011_capacity_ship_d_days.py)
+- 34\. Find First and Last Position of Element in Sorted Array - [Solution](leet_code/binary_search/34_first_last_position_elem.py)
+- 704\. Binary Search - [Solution](leet_code/binary_search/704_binary_search.py)
+- 33\. Search in Rotated Sorted Array - [Solution](leet_code/binary_search/33_find_rotated_array.py)
+- 875\. Koko Eating Bananas - [Solution](leet_code/binary_search/875_koko_eating_bananas.py)
+- 1011\. Capacity To Ship Packages Within D Days - [Solution](leet_code/binary_search/1011_capacity_ship_d_days.py)
 
 ### Binary Search (Search Space)
 **When to use:** Optimization problems, find median without merging
@@ -409,11 +409,11 @@ def searchRange(nums, target):
 **How it works:** Instead of searching in an array, search in the "answer range" (min possible value to max possible value). Use a helper function `feasible(x)` to determine if a value can satisfy the problem constraints.
 
 **LeetCode Problems:**
-- 4. Median of Two Sorted Arrays - [Solution](leet_code/binary_search/4_median_of_two_sorted_arrays.py)
-- 528. Random Pick with Weight - [Solution](leet_code/binary_search/528_random_pick_with_weight.py)
-- 410. Split Array Largest Sum - [Solution](leet_code/binary_search/410_split_array_largest_sum.py)
-- 1283. Find the Smallest Divisor Given a Threshold - [Solution](leet_code/binary_search/1283_find_smallest_divisor_given_a_threshold.py)
-- 1482. Minimum Number of Days to Make m Bouquets - [Solution](leet_code/binary_search/1482_minimum_number_of_days_to_make_m_bouquetes.py)
+- 4\. Median of Two Sorted Arrays - [Solution](leet_code/binary_search/4_median_of_two_sorted_arrays.py)
+- 528\. Random Pick with Weight - [Solution](leet_code/binary_search/528_random_pick_with_weight.py)
+- 410\. Split Array Largest Sum - [Solution](leet_code/binary_search/410_split_array_largest_sum.py)
+- 1283\. Find the Smallest Divisor Given a Threshold - [Solution](leet_code/binary_search/1283_find_smallest_divisor_given_a_threshold.py)
+- 1482\. Minimum Number of Days to Make m Bouquets - [Solution](leet_code/binary_search/1482_minimum_number_of_days_to_make_m_bouquetes.py)
 
 **Example: Random Pick with Weight**
 ```python
@@ -483,11 +483,11 @@ def subarraySum(nums, k):
 ```
 
 **LeetCode Problems:**
-- 560. Subarray Sum Equals K - [Solution](leet_code/prefix_sum/560_subarray_sum_equals_k.py)
-- 303. Range Sum Query - Immutable - [Solution](leet_code/prefix_sum/303_range_sum_query_inmmutable.py)
-- 525. Contiguous Array - [Solution](leet_code/prefix_sum/525_contigous_array.py)
-- 974. Subarray Sums Divisible by K - [Solution](leet_code/prefix_sum/974_subarrays_sums_divisible_k.py)
-- 1480. Running Sum of 1d Array - [Solution](leet_code/prefix_sum/1480_running_sum_1d_array.py)
+- 560\. Subarray Sum Equals K - [Solution](leet_code/prefix_sum/560_subarray_sum_equals_k.py)
+- 303\. Range Sum Query - Immutable - [Solution](leet_code/prefix_sum/303_range_sum_query_inmmutable.py)
+- 525\. Contiguous Array - [Solution](leet_code/prefix_sum/525_contigous_array.py)
+- 974\. Subarray Sums Divisible by K - [Solution](leet_code/prefix_sum/974_subarrays_sums_divisible_k.py)
+- 1480\. Running Sum of 1d Array - [Solution](leet_code/prefix_sum/1480_running_sum_1d_array.py)
 
 ### Hash Table Optimization
 **When to use:** Longest consecutive chains, triplet detection
@@ -495,11 +495,11 @@ def subarraySum(nums, k):
 **How it works:** Use sets for $O(1)$ lookups and identify sequence starts (e.g., `num-1` not in set). For triplets, use two hash maps (left and right frequencies) to count occurrences in $O(n)$ time.
 
 **LeetCode Problems:**
-- 128. Longest Consecutive Sequence - [Solution](leet_code/hash_tables/128_longest_consecutive_sequence.py)
-- 149. Max Points on a Line - [Solution](leet_code/hash_tables/149_max_points_on_a_line.py)
-- 954. Array of Doubled Pairs - [Solution](leet_code/hash_tables/954_array_doubled_pairs.py)
-- 454. 4Sum II - [Solution](leet_code/hash_tables/454_four_sum.py)
-- 523. Continuous Subarray Sum  - [Solution](leet_code/hash_tables/523_continuos_subarray_sum.py)
+- 128\. Longest Consecutive Sequence - [Solution](leet_code/hash_tables/128_longest_consecutive_sequence.py)
+- 149\. Max Points on a Line - [Solution](leet_code/hash_tables/149_max_points_on_a_line.py)
+- 954\. Array of Doubled Pairs - [Solution](leet_code/hash_tables/954_array_doubled_pairs.py)
+- 454\. 4Sum II - [Solution](leet_code/hash_tables/454_four_sum.py)
+- 523\. Continuous Subarray Sum  - [Solution](leet_code/hash_tables/523_continuos_subarray_sum.py)
 
 **Example: Longest Consecutive Sequence**
 ```python
@@ -575,12 +575,12 @@ def merge(intervals):
 ```
 
 **LeetCode Problems:**
-- 56. Merge Intervals - [Solution](leet_code/array/56_merged_intervals.py)
-- 57. Insert Interval - [Solution](leet_code/binary_search/57_insert_interval.py)
-- 252. Meeting Rooms - [Solution](leet_code/array/252_meeting_rooms.py)
-- 253. Meeting Rooms II - [Solution](leet_code/array/253_meeting_rooms_2.py)
+- 56\. Merge Intervals - [Solution](leet_code/array/56_merged_intervals.py)
+- 57\. Insert Interval - [Solution](leet_code/binary_search/57_insert_interval.py)
+- 252\. Meeting Rooms - [Solution](leet_code/array/252_meeting_rooms.py)
+- 253\. Meeting Rooms II - [Solution](leet_code/array/253_meeting_rooms_2.py)
 - Parking Lot Capacity - [Solution](leet_code/array/parking_lot.py)
-- 435. Non-overlapping Intervals - [Solution](leet_code/array/435_non_overlapping_intervals.py)
+- 435\. Non-overlapping Intervals - [Solution](leet_code/array/435_non_overlapping_intervals.py)
 
 ### Sorting Patterns (Dutch National Flag)
 **When to use:** Sorting three distinct types of elements (Sort Colors)
@@ -603,11 +603,11 @@ def sortColors(nums):
 ```
 
 **LeetCode Problems:**
-- 75. Sort Colors - [Solution](leet_code/array/75_sort_colors.py)
-- 905. Sort Array By Parity
-- 922. Sort Array By Parity II
-- 280. Wiggle Sort
-- 324. Wiggle Sort II
+- 75\. Sort Colors - [Solution](leet_code/array/75_sort_colors.py)
+- 905\. Sort Array By Parity
+- 922\. Sort Array By Parity II
+- 280\. Wiggle Sort
+- 324\. Wiggle Sort II
 
 **Example: Sort Colors**
 ```python
@@ -704,11 +704,11 @@ def orangesRotting(grid):
 ```
 
 **LeetCode Problems:**
-- 994. Rotting Oranges - [Solution](leet_code/graph/994_rotting_oranges.py)
-- 200. Number of Islands - [Solution](leet_code/graph/200_number_island.py)
-- 733. Flood Fill - [Solution](leet_code/graph/733_flood_fill.py)
-- 542. 01 Matrix - [Solution](leet_code/dynamic_programming/542_matrix.py)
-- 1091. Shortest Path in Binary Matrix - [Solution](leet_code/graph/1091_shortest_path_binary_matrix.py)
+- 994\. Rotting Oranges - [Solution](leet_code/graph/994_rotting_oranges.py)
+- 200\. Number of Islands - [Solution](leet_code/graph/200_number_island.py)
+- 733\. Flood Fill - [Solution](leet_code/graph/733_flood_fill.py)
+- 542\. 01 Matrix - [Solution](leet_code/dynamic_programming/542_matrix.py)
+- 1091\. Shortest Path in Binary Matrix - [Solution](leet_code/graph/1091_shortest_path_binary_matrix.py)
 
 ### Union Find (Disjoint Set)
 **When to use:** Connected components, cycle detection, dynamic connectivity
@@ -768,11 +768,11 @@ class UnionFind:
 ```
 
 **LeetCode Problems:**
-- 323. Number of Connected Components in an Undirected Graph - [Solution](leet_code/disjoint_set/323_number_connected_components_udg.py)
-- 547. Number of Provinces - [Solution](leet_code/disjoint_set/547_number_of_provinces.py)
-- 684. Redundant Connection - [Solution](leet_code/disjoint_set/684_redundant_connection.py)
-- 200. Number of Islands (can also use Union Find) - [Solution](leet_code/disjoint_set/200_number_of_island.py)
-- 1319. Number of Operations to Make Network Connected - [Solition](leet_code/disjoint_set/1319_number_of_operations_network_connected.py)
+- 323\. Number of Connected Components in an Undirected Graph - [Solution](leet_code/disjoint_set/323_number_connected_components_udg.py)
+- 547\. Number of Provinces - [Solution](leet_code/disjoint_set/547_number_of_provinces.py)
+- 684\. Redundant Connection - [Solution](leet_code/disjoint_set/684_redundant_connection.py)
+- 200\. Number of Islands (can also use Union Find) - [Solution](leet_code/disjoint_set/200_number_of_island.py)
+- 1319\. Number of Operations to Make Network Connected - [Solition](leet_code/disjoint_set/1319_number_of_operations_network_connected.py)
 
 ## Stack & Queue Patterns
 
@@ -819,11 +819,11 @@ def nextGreaterElement(nums):
 ```
 
 **LeetCode Problems:**
-- 496. Next Greater Element I - [Solution](leet_code/queues_stacks/469_next_greater_element_1.py)
-- 503. Next Greater Element II - [Solution](leet_code/queues_stacks/503_next_greater_element_2.py)
-- 739. Daily Temperatures - [Solution](leet_code/queues_stacks/739_daily_temperatures.py)
-- 84. Largest Rectangle in Histogram - [Solution](leet_code/queues_stacks/84_largest_rectangle_in_histogram.py)
-- 42. Trapping Rain Water - [Solution](leet_code/queues_stacks/42_trapping_rain_water.py)
+- 496\. Next Greater Element I - [Solution](leet_code/queues_stacks/469_next_greater_element_1.py)
+- 503\. Next Greater Element II - [Solution](leet_code/queues_stacks/503_next_greater_element_2.py)
+- 739\. Daily Temperatures - [Solution](leet_code/queues_stacks/739_daily_temperatures.py)
+- 84\. Largest Rectangle in Histogram - [Solution](leet_code/queues_stacks/84_largest_rectangle_in_histogram.py)
+- 42\. Trapping Rain Water - [Solution](leet_code/queues_stacks/42_trapping_rain_water.py)
 
 ### Stack for Parentheses/Brackets
 **When to use:** Valid parentheses, calculator problems
@@ -867,11 +867,11 @@ def isValid(s):
 ```
 
 **LeetCode Problems:**
-- 20. Valid Parentheses - [Solution](leet_code/queues_stacks/20_valid_parenthesis.py)
-- 22. Generate Parentheses - [Solution](leet_code/back_tracking/22_generate_parenthesis.py)
-- 32. Longest Valid Parentheses - [Solution](leet_code/queues_stacks/32_longest_valid_parenthesis.py)
-- 1541. Minimum Insertions to Balance a Parentheses String - [Solution](leet_code/strings/1541_minimum_insertions_to_balance.py)
-- 921. Minimum Add to Make Parentheses Valid - [Solution](leet_code/strings/921_minimum_add_make_parenthisis_valid.py)
+- 20\. Valid Parentheses - [Solution](leet_code/queues_stacks/20_valid_parenthesis.py)
+- 22\. Generate Parentheses - [Solution](leet_code/back_tracking/22_generate_parenthesis.py)
+- 32\. Longest Valid Parentheses - [Solution](leet_code/queues_stacks/32_longest_valid_parenthesis.py)
+- 1541\. Minimum Insertions to Balance a Parentheses String - [Solution](leet_code/strings/1541_minimum_insertions_to_balance.py)
+- 921\. Minimum Add to Make Parentheses Valid - [Solution](leet_code/strings/921_minimum_add_make_parenthisis_valid.py)
 
 ### Queue Implementation using Stacks
 **When to use:** Simulating queue behavior with LIFO structures
@@ -879,11 +879,11 @@ def isValid(s):
 **How it works:** Use two stacks: `input` and `output`. Push to `input`. When popping, if `output` is empty, move all elements from `input` to `output`. This reverses the order twice, maintaining FIFO.
 
 **LeetCode Problems:**
-- 232. Implement Queue using Stacks
-- 225. Implement Stack using Queues
-- 155. Min Stack - [Solution](leet_code/queues_stacks/155_min_stack.py)
-- 622. Design Circular Queue
-- 641. Design Circular Deque
+- 232\. Implement Queue using Stacks
+- 225\. Implement Stack using Queues
+- 155\. Min Stack - [Solution](leet_code/queues_stacks/155_min_stack.py)
+- 622\. Design Circular Queue
+- 641\. Design Circular Deque
 
 **Example: Queue using Stacks**
 ```python
@@ -955,11 +955,11 @@ def reverseList(head):
 ```
 
 **LeetCode Problems:**
-- 206. Reverse Linked List - [Solution](leet_code/linked_lists/206_reverse_linked_list.py)
-- 92. Reverse Linked List II - [Solution](leet_code/linked_lists/92_reverse_linked_list_2.py)
-- 25. Reverse Nodes in k-Group - [Solution](leet_code/linked_lists/25_reverse_nodes_k_groups.py)
-- 24. Swap Nodes in Pairs - [Solution](leet_code/linked_lists/24_swap_nodes_pairs.py)
-- 61. Rotate List - [Solution](leet_code/linked_lists/61_rotate_list.py)
+- 206\. Reverse Linked List - [Solution](leet_code/linked_lists/206_reverse_linked_list.py)
+- 92\. Reverse Linked List II - [Solution](leet_code/linked_lists/92_reverse_linked_list_2.py)
+- 25\. Reverse Nodes in k-Group - [Solution](leet_code/linked_lists/25_reverse_nodes_k_groups.py)
+- 24\. Swap Nodes in Pairs - [Solution](leet_code/linked_lists/24_swap_nodes_pairs.py)
+- 61\. Rotate List - [Solution](leet_code/linked_lists/61_rotate_list.py)
 
 ### Flattening Multi-Level Lists
 **When to use:** Merging nested list structures in-place
@@ -967,11 +967,11 @@ def reverseList(head):
 **How it works:** Iterate through the list. When a node has a child, find the end of the child list and connect it back to the current node's next. This simplifies the structure while traversing.
 
 **LeetCode Problems:**
-- 430. Flatten a Multilevel Doubly Linked List
-- 341. Flatten Nested List Iterator
-- 114. Flatten Binary Tree to Linked List
-- 426. Convert Binary Search Tree to Sorted Doubly Linked List
-- 1206. Design Skiplist
+- 430\. Flatten a Multilevel Doubly Linked List
+- 341\. Flatten Nested List Iterator
+- 114\. Flatten Binary Tree to Linked List
+- 426\. Convert Binary Search Tree to Sorted Doubly Linked List
+- 1206\. Design Skiplist
 
 **Example: Flatten Doubly Linked List**
 ```python
@@ -1062,11 +1062,11 @@ def isValidBST(root):
 ```
 
 **LeetCode Problems:**
-- 98. Validate Binary Search Tree - [Solution](leet_code/trees/98_validate_BST.py)
-- 104. Maximum Depth of Binary Tree - [Solution](leet_code/trees/104_max_depth.py)
-- 112. Path Sum - [Solution](leet_code/trees/112_path_sum.py)
-- 543. Diameter of Binary Tree - [Solution](leet_code/trees/543_diameter_binary_tree.py)
-- 236. Lowest Common Ancestor of a Binary Tree - [Solution](leet_code/trees/236_lowest_common_ancester.py)
+- 98\. Validate Binary Search Tree - [Solution](leet_code/trees/98_validate_BST.py)
+- 104\. Maximum Depth of Binary Tree - [Solution](leet_code/trees/104_max_depth.py)
+- 112\. Path Sum - [Solution](leet_code/trees/112_path_sum.py)
+- 543\. Diameter of Binary Tree - [Solution](leet_code/trees/543_diameter_binary_tree.py)
+- 236\. Lowest Common Ancestor of a Binary Tree - [Solution](leet_code/trees/236_lowest_common_ancester.py)
 
 ### BFS (Level Order)
 **When to use:** Level-by-level traversal, shortest path in tree
@@ -1129,11 +1129,11 @@ def levelOrder(root):
 ```
 
 **LeetCode Problems:**
-- 102. Binary Tree Level Order Traversal - [Solution](leet_code/trees/102_binary_tree_level_order.py)
-- 107. Binary Tree Level Order Traversal II - [Solution](leet_code/trees/107_binary_tree_level_order_2.py)
-- 199. Binary Tree Right Side View - [Solution](leet_code/trees/199_binary_tree_right.py)
-- 637. Average of Levels in Binary Tree - [Solution](leet_code/trees/637_average_of_levels_binary_tree.py)
-- 103. Binary Tree Zigzag Level Order Traversal - [Solution](leet_code/queues_stacks/103_binary_tree_zigzag.py)
+- 102\. Binary Tree Level Order Traversal - [Solution](leet_code/trees/102_binary_tree_level_order.py)
+- 107\. Binary Tree Level Order Traversal II - [Solution](leet_code/trees/107_binary_tree_level_order_2.py)
+- 199\. Binary Tree Right Side View - [Solution](leet_code/trees/199_binary_tree_right.py)
+- 637\. Average of Levels in Binary Tree - [Solution](leet_code/trees/637_average_of_levels_binary_tree.py)
+- 103\. Binary Tree Zigzag Level Order Traversal - [Solution](leet_code/queues_stacks/103_binary_tree_zigzag.py)
 
 ### Binary Tree Columns
 **When to use:** Vertical order grouping
@@ -1141,11 +1141,11 @@ def levelOrder(root):
 **How it works:** Use BFS and track a column ID for each node (root is 0, left is -1, right is +1). Use a hash map to group node values by their column ID.
 
 **LeetCode Problems:**
-- 314. Binary Tree Vertical Order Traversal - [Solution](leet_code/trees/314_binary_tree_vertical_traversal.py)
-- 987. Vertical Order Traversal of a Binary Tree
-- 545. Boundary of Binary Tree
-- 655. Print Binary Tree
-- 1104. Path In Zigzag Labelled Binary Tree
+- 314\. Binary Tree Vertical Order Traversal - [Solution](leet_code/trees/314_binary_tree_vertical_traversal.py)
+- 987\. Vertical Order Traversal of a Binary Tree
+- 545\. Boundary of Binary Tree
+- 655\. Print Binary Tree
+- 1104\. Path In Zigzag Labelled Binary Tree
 
 **Example: Vertical Order Traversal**
 ```python
@@ -1228,11 +1228,11 @@ trie.startsWith("app")  # Returns True
 ```
 
 **LeetCode Problems:**
-- 208. Implement Trie (Prefix Tree) - [Solution](leet_code/trie/208_implement_trie.py)
+- 208\. Implement Trie (Prefix Tree) - [Solution](leet_code/trie/208_implement_trie.py)
 - . Design Add and Search Words Data Structure - [Solution](leet_code/trie/211_design_add_search_words_ds.py)
-- 212. Word Search II - [Solution](leet_code/trie/212_word_search_2.py)
-- 648. Replace Words - [Solution](leet_code/trie/648_replace_words.py)
-- 677. Map Sum Pairs - [Solution](leet_code/trie/677_map_sum_pairs.py)
+- 212\. Word Search II - [Solution](leet_code/trie/212_word_search_2.py)
+- 648\. Replace Words - [Solution](leet_code/trie/648_replace_words.py)
+- 677\. Map Sum Pairs - [Solution](leet_code/trie/677_map_sum_pairs.py)
 
 ## Graph Patterns
 
@@ -1293,11 +1293,11 @@ def cloneGraph(node):
 ```
 
 **LeetCode Problems:**
-- 133. Clone Graph - [Solution](leet_code/graph/133_clone_graph.py)
-- 127. Word Ladder - [Solution](leet_code/graph/127_word_ladder.py)
-- 286. Walls and Gates - [Solution](leet_code/graph/286_walls_and_gates.py)
-- 1091. Shortest Path in Binary Matrix - [Solution](leet_code/graph/1091_shortest_path_binary_matrix.py)
-- 934. Shortest Bridge - [Solution](leet_code/graph/934_shortest_bridge.py)
+- 133\. Clone Graph - [Solution](leet_code/graph/133_clone_graph.py)
+- 127\. Word Ladder - [Solution](leet_code/graph/127_word_ladder.py)
+- 286\. Walls and Gates - [Solution](leet_code/graph/286_walls_and_gates.py)
+- 1091\. Shortest Path in Binary Matrix - [Solution](leet_code/graph/1091_shortest_path_binary_matrix.py)
+- 934\. Shortest Bridge - [Solution](leet_code/graph/934_shortest_bridge.py)
 
 ### DFS on Graphs
 **When to use:** Cycle detection, connected components, path finding
@@ -1363,11 +1363,11 @@ def canFinish(numCourses, prerequisites):
 ```
 
 **LeetCode Problems:**
-- 207. Course Schedule - [Solution](leet_code/graph/207_course_schedule.py)
-- 210. Course Schedule II - [Solution](leet_code/graph/210_course_schedule_2.py)
-- 261. Graph Valid Tree - [Solution](leet_code/graph/261_valid_tree.py)
-- 797. All Paths From Source to Target - [Solution](leet_code/graph/797_all_paths_from_source_target.py)
-- 802. Find Eventual Safe States - [Solution](leet_code/graph/802_find_eventual_safe_states.py)
+- 207\. Course Schedule - [Solution](leet_code/graph/207_course_schedule.py)
+- 210\. Course Schedule II - [Solution](leet_code/graph/210_course_schedule_2.py)
+- 261\. Graph Valid Tree - [Solution](leet_code/graph/261_valid_tree.py)
+- 797\. All Paths From Source to Target - [Solution](leet_code/graph/797_all_paths_from_source_target.py)
+- 802\. Find Eventual Safe States - [Solution](leet_code/graph/802_find_eventual_safe_states.py)
 - Organization Hierarchy (Count Reports with DFS + Memoization) - [Solution](leet_code/graph/organization_hierarchy.py)
 
 ### Topological Sort
@@ -1448,11 +1448,11 @@ def findOrder(numCourses, prerequisites):
 ```
 
 **LeetCode Problems:**
-- 210. Course Schedule II
-- 207. Course Schedule
-- 269. Alien Dictionary
-- 310. Minimum Height Trees
-- 1136. Parallel Courses
+- 210\. Course Schedule II
+- 207\. Course Schedule
+- 269\. Alien Dictionary
+- 310\. Minimum Height Trees
+- 1136\. Parallel Courses
 
 ### Connect the Dots (MST)
 **When to use:** Minimum cost to connect all points, network design
@@ -1460,11 +1460,11 @@ def findOrder(numCourses, prerequisites):
 **How it works:** Use Kruskal's algorithm with Union-Find. Sort all possible edges by weight and add them to the MST if they don't form a cycle. Stop when you have $n-1$ edges.
 
 **LeetCode Problems:**
-- 1584. Min Cost to Connect All Points
-- 1135. Connecting Cities With Minimum Cost
-- 1489. Find Critical and Pseudo-Critical Edges in MST
-- 1697. Checking Existence of Edge Length Limited Paths
-- 1168. Optimize Water Distribution in a Village
+- 1584\. Min Cost to Connect All Points
+- 1135\. Connecting Cities With Minimum Cost
+- 1489\. Find Critical and Pseudo-Critical Edges in MST
+- 1697\. Checking Existence of Edge Length Limited Paths
+- 1168\. Optimize Water Distribution in a Village
 
 **Example: Minimum Spanning Tree (Kruskal's)**
 ```python
@@ -1537,11 +1537,11 @@ def subsets(nums):
 ```
 
 **LeetCode Problems:**
-- 78. Subsets - [Solution](leet_code/back_tracking/78_subset.py)
-- 90. Subsets II
-- 77. Combinations
-- 39. Combination Sum - [Solution](leet_code/back_tracking/39_combination_sum.py)
-- 40. Combination Sum II
+- 78\. Subsets - [Solution](leet_code/back_tracking/78_subset.py)
+- 90\. Subsets II
+- 77\. Combinations
+- 39\. Combination Sum - [Solution](leet_code/back_tracking/39_combination_sum.py)
+- 40\. Combination Sum II
 
 ### Backtracking (Permutations)
 **When to use:** All orderings matter
@@ -1602,11 +1602,11 @@ def permute(nums):
 ```
 
 **LeetCode Problems:**
-- 46. Permutations - [Solution](leet_code/back_tracking/46_permutations.py)
-- 47. Permutations II - [Solution](leet_code/back_tracking/47_permutations_2.py)
-- 784. Letter Case Permutation
-- 996. Number of Squareful Arrays
-- 1096. Brace Expansion II
+- 46\. Permutations - [Solution](leet_code/back_tracking/46_permutations.py)
+- 47\. Permutations II - [Solution](leet_code/back_tracking/47_permutations_2.py)
+- 784\. Letter Case Permutation
+- 996\. Number of Squareful Arrays
+- 1096\. Brace Expansion II
 
 ### Backtracking (Word Search/Board)
 **When to use:** Finding paths in grids with constraints
@@ -1678,11 +1678,11 @@ def exist(board, word):
 ```
 
 **LeetCode Problems:**
-- 79. Word Search - [Solution](leet_code/back_tracking/79_word_search.py)
-- 212. Word Search II
-- 51. N-Queens - [Solution](leet_code/back_tracking/51_n_queens.py)
-- 37. Sudoku Solver
-- 980. Unique Paths III
+- 79\. Word Search - [Solution](leet_code/back_tracking/79_word_search.py)
+- 212\. Word Search II
+- 51\. N-Queens - [Solution](leet_code/back_tracking/51_n_queens.py)
+- 37\. Sudoku Solver
+- 980\. Unique Paths III
 
 ## Dynamic Programming Patterns
 
@@ -1729,11 +1729,11 @@ def rob(nums):
 ```
 
 **LeetCode Problems:**
-- 198. House Robber - [Solution](leet_code/dynamic_programming/198_house_robber.py)
-- 70. Climbing Stairs - [Solution](leet_code/dynamic_programming/70_climbing_stairs.py)
-- 746. Min Cost Climbing Stairs - [Solution](leet_code/dynamic_programming/746_min_cost_climbing_stairs.py)
-- 91. Decode Ways - [Solution](leet_code/dynamic_programming/91_decoded_ways.py)
-- 1137. N-th Tribonacci Number
+- 198\. House Robber - [Solution](leet_code/dynamic_programming/198_house_robber.py)
+- 70\. Climbing Stairs - [Solution](leet_code/dynamic_programming/70_climbing_stairs.py)
+- 746\. Min Cost Climbing Stairs - [Solution](leet_code/dynamic_programming/746_min_cost_climbing_stairs.py)
+- 91\. Decode Ways - [Solution](leet_code/dynamic_programming/91_decoded_ways.py)
+- 1137\. N-th Tribonacci Number
 
 ### 2D DP
 **When to use:** Longest common subsequence, edit distance, grid paths
@@ -1783,11 +1783,11 @@ def longestCommonSubsequence(text1, text2):
 ```
 
 **LeetCode Problems:**
-- 1143. Longest Common Subsequence - [Solution](leet_code/dynamic_programming/1143_longest_common_subsequence.py)
-- 72. Edit Distance
-- 62. Unique Paths - [Solution](leet_code/dynamic_programming/62_unique_paths.py)
-- 64. Minimum Path Sum
-- 221. Maximal Square
+- 1143\. Longest Common Subsequence - [Solution](leet_code/dynamic_programming/1143_longest_common_subsequence.py)
+- 72\. Edit Distance
+- 62\. Unique Paths - [Solution](leet_code/dynamic_programming/62_unique_paths.py)
+- 64\. Minimum Path Sum
+- 221\. Maximal Square
 
 ### Knapsack (0/1)
 **When to use:** Subset sum, partition equal subset
@@ -1838,11 +1838,11 @@ def canPartition(nums):
 ```
 
 **LeetCode Problems:**
-- 416. Partition Equal Subset Sum
-- 494. Target Sum - [Solution](leet_code/dynamic_programming/494_target_sum.py)
-- 1049. Last Stone Weight II
-- 474. Ones and Zeroes
-- 518. Coin Change II
+- 416\. Partition Equal Subset Sum
+- 494\. Target Sum - [Solution](leet_code/dynamic_programming/494_target_sum.py)
+- 1049\. Last Stone Weight II
+- 474\. Ones and Zeroes
+- 518\. Coin Change II
 
 ### Kadane's Algorithm (Maximum Subarray)
 **When to use:** Maximum/minimum subarray sum, maximum product subarray
@@ -1888,11 +1888,11 @@ def maxSubArray(nums):
 ```
 
 **LeetCode Problems:**
-- 53. Maximum Subarray - [Solution](leet_code/array/53_max_sub_subarray.py)
-- 918. Maximum Sum Circular Subarray
-- 152. Maximum Product Subarray
-- 978. Longest Turbulent Subarray
-- 1191. K-Concatenation Maximum Sum
+- 53\. Maximum Subarray - [Solution](leet_code/array/53_max_sub_subarray.py)
+- 918\. Maximum Sum Circular Subarray
+- 152\. Maximum Product Subarray
+- 978\. Longest Turbulent Subarray
+- 1191\. K-Concatenation Maximum Sum
 
 ## Bit Manipulation Patterns
 
@@ -1957,11 +1957,11 @@ def singleNumber(nums):
 ```
 
 **LeetCode Problems:**
-- 136. Single Number - [Solution](leet_code/bit_manipulation/136_single_number.py)
-- 268. Missing Number - [Solution](leet_code/bit_manipulation/268_missing_number.py)
-- 191. Number of 1 Bits
-- 338. Counting Bits
-- 371. Sum of Two Integers
+- 136\. Single Number - [Solution](leet_code/bit_manipulation/136_single_number.py)
+- 268\. Missing Number - [Solution](leet_code/bit_manipulation/268_missing_number.py)
+- 191\. Number of 1 Bits
+- 338\. Counting Bits
+- 371\. Sum of Two Integers
 
 ## Math and Geometry Patterns
 
@@ -1988,11 +1988,11 @@ def josephus(n, k):
 ```
 
 **LeetCode Problems:**
-- 1823. Find the Winner of the Circular Game
-- 390. Elimination Game
-- 62. Unique Paths
-- 1342. Number of Steps to Reduce a Number to Zero
-- 172. Factorial Trailing Zeroes
+- 1823\. Find the Winner of the Circular Game
+- 390\. Elimination Game
+- 62\. Unique Paths
+- 1342\. Number of Steps to Reduce a Number to Zero
+- 172\. Factorial Trailing Zeroes
 
 ### Triangle Numbers Pattern
 **When to use:** Row properties in Pascal-like triangles
@@ -2011,11 +2011,11 @@ def getRowSum(n):
 ```
 
 **LeetCode Problems:**
-- 118. Pascal's Triangle
-- 119. Pascal's Triangle II
-- 120. Triangle
-- 64. Minimum Path Sum
-- 1641. Count Sorted Vowel Strings
+- 118\. Pascal's Triangle
+- 119\. Pascal's Triangle II
+- 120\. Triangle
+- 64\. Minimum Path Sum
+- 1641\. Count Sorted Vowel Strings
 
 ## Heap Patterns
 
@@ -2069,11 +2069,11 @@ def findKthLargest(nums, k):
 ```
 
 **LeetCode Problems:**
-- 215. Kth Largest Element in an Array - [Solution](leet_code/heap/215_k_largest_element_heap.py)
-- 347. Top K Frequent Elements - [Solution](leet_code/heap/347_top_k_frequent_elements.py)
-- 692. Top K Frequent Words
-- 973. K Closest Points to Origin
-- 703. Kth Largest Element in a Stream - [Solution](leet_code/heap/703_kt_largest_element_stream.py)
+- 215\. Kth Largest Element in an Array - [Solution](leet_code/heap/215_k_largest_element_heap.py)
+- 347\. Top K Frequent Elements - [Solution](leet_code/heap/347_top_k_frequent_elements.py)
+- 692\. Top K Frequent Words
+- 973\. K Closest Points to Origin
+- 703\. Kth Largest Element in a Stream - [Solution](leet_code/heap/703_kt_largest_element_stream.py)
 
 ### K-Way Merge
 **When to use:** Merge K sorted lists
@@ -2131,11 +2131,11 @@ def mergeKLists(lists):
 ```
 
 **LeetCode Problems:**
-- 23. Merge k Sorted Lists - [Solution](leet_code/linked_lists/23_merge_k_sorted_lists.py)
-- 378. Kth Smallest Element in a Sorted Matrix
-- 632. Smallest Range Covering Elements from K Lists
-- 373. Find K Pairs with Smallest Sums
-- 264. Ugly Number II
+- 23\. Merge k Sorted Lists - [Solution](leet_code/linked_lists/23_merge_k_sorted_lists.py)
+- 378\. Kth Smallest Element in a Sorted Matrix
+- 632\. Smallest Range Covering Elements from K Lists
+- 373\. Find K Pairs with Smallest Sums
+- 264\. Ugly Number II
 
 ## Greedy Patterns
 
@@ -2222,13 +2222,13 @@ def canCompleteCircuit(gas, cost):
 ```
 
 **LeetCode Problems:**
-- 55. Jump Game - [Solution](leet_code/dynamic_programming/55_jump_game.py)
-- 45. Jump Game II
-- 134. Gas Station
-- 135. Candy
-- 406. Queue Reconstruction by Height
-- 621. Task Scheduler
-- 763. Partition Labels
+- 55\. Jump Game - [Solution](leet_code/dynamic_programming/55_jump_game.py)
+- 45\. Jump Game II
+- 134\. Gas Station
+- 135\. Candy
+- 406\. Queue Reconstruction by Height
+- 621\. Task Scheduler
+- 763\. Partition Labels
 
 ---
 
