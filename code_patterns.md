@@ -269,13 +269,6 @@ def moveZeroes(nums):
             slow += 1
 ```
 
-**LeetCode Problems:**
-- 283\. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
-- 27\. Remove Element - [Solution](leet_code/array/27_remove_element.py)
-- 26\. Remove Duplicates from Sorted Array - [Solution](leet_code/array/26_remove_duplicates_from_sorted_array.py)
-- 80\. Remove Duplicates from Sorted Array II - [Solution](leet_code/array/80_remove_duplicates_from_sorted_array_2.py)
-- 905\. Sort Array By Parity - [Solution](leet_code/array/905_sort_array_by_parity.py)
-
 **Example: Move Zeroes**
 ```python
 def moveZeroes(nums):
@@ -295,6 +288,13 @@ def moveZeroes(nums):
 # Answer: [1,3,12,0,0]
 ```
 
+**LeetCode Problems:**
+- 283\. Move Zeroes - [Solution](leet_code/array/283_move_zeros.py)
+- 27\. Remove Element - [Solution](leet_code/array/27_remove_element.py)
+- 26\. Remove Duplicates from Sorted Array - [Solution](leet_code/array/26_remove_duplicates_from_sorted_array.py)
+- 80\. Remove Duplicates from Sorted Array II - [Solution](leet_code/array/80_remove_duplicates_from_sorted_array_2.py)
+- 905\. Sort Array By Parity - [Solution](leet_code/array/905_sort_array_by_parity.py)
+
 ### Two Pointers (Staged Traversal)
 **When to use:** Finding specific sequences (Next Permutation)
 
@@ -306,13 +306,6 @@ def nextPermutation(nums):
     # 2. Find successor to pivot
     # 3. Swap and reverse suffix
 ```
-
-**LeetCode Problems:**
-- 31\. Next Permutation - [Solution](leet_code/array/31_next_permutation.py)
-- 556\. Next Greater Element III - [Solution](leet_code/array/556_next_greate_element_3.py)
-- 189\. Rotate Array - [Solution](leet_code/array/189_rotate_array.py)
-- 443\. String Compression - [Solution](leet_code/array/443_string_compression.py)
-- 844\. Backspace String Compare - [Solution](leet_code/array/844_backspace_string_compare.py)
 
 **Example: Next Permutation**
 ```python
@@ -345,6 +338,13 @@ def nextPermutation(nums):
 # 4. Reverse [1,3,2][2:] -> [1,3,2]
 # Answer: [1,3,2]
 ```
+
+**LeetCode Problems:**
+- 31\. Next Permutation - [Solution](leet_code/array/31_next_permutation.py)
+- 556\. Next Greater Element III - [Solution](leet_code/array/556_next_greate_element_3.py)
+- 189\. Rotate Array - [Solution](leet_code/array/189_rotate_array.py)
+- 443\. String Compression - [Solution](leet_code/array/443_string_compression.py)
+- 844\. Backspace String Compare - [Solution](leet_code/array/844_backspace_string_compare.py)
 
 ### Binary Search
 **When to use:** Sorted data, finding boundaries, minimizing/maximizing with constraint
@@ -408,13 +408,6 @@ def searchRange(nums, target):
 
 **How it works:** Instead of searching in an array, search in the "answer range" (min possible value to max possible value). Use a helper function `feasible(x)` to determine if a value can satisfy the problem constraints.
 
-**LeetCode Problems:**
-- 4\. Median of Two Sorted Arrays - [Solution](leet_code/binary_search/4_median_of_two_sorted_arrays.py)
-- 528\. Random Pick with Weight - [Solution](leet_code/binary_search/528_random_pick_with_weight.py)
-- 410\. Split Array Largest Sum - [Solution](leet_code/binary_search/410_split_array_largest_sum.py)
-- 1283\. Find the Smallest Divisor Given a Threshold - [Solution](leet_code/binary_search/1283_find_smallest_divisor_given_a_threshold.py)
-- 1482\. Minimum Number of Days to Make m Bouquets - [Solution](leet_code/binary_search/1482_minimum_number_of_days_to_make_m_bouquetes.py)
-
 **Example: Random Pick with Weight**
 ```python
 import random
@@ -441,6 +434,13 @@ class Solution:
 # target = 2.5 (random)
 # bisect_left(prefix_sums, 2.5) -> index 1
 ```
+
+**LeetCode Problems:**
+- 4\. Median of Two Sorted Arrays - [Solution](leet_code/binary_search/4_median_of_two_sorted_arrays.py)
+- 528\. Random Pick with Weight - [Solution](leet_code/binary_search/528_random_pick_with_weight.py)
+- 410\. Split Array Largest Sum - [Solution](leet_code/binary_search/410_split_array_largest_sum.py)
+- 1283\. Find the Smallest Divisor Given a Threshold - [Solution](leet_code/binary_search/1283_find_smallest_divisor_given_a_threshold.py)
+- 1482\. Minimum Number of Days to Make m Bouquets - [Solution](leet_code/binary_search/1482_minimum_number_of_days_to_make_m_bouquetes.py)
 ### Prefix Sum
 **When to use:** Range sum queries, subarray sum problems
 
@@ -494,13 +494,6 @@ def subarraySum(nums, k):
 
 **How it works:** Use sets for $O(1)$ lookups and identify sequence starts (e.g., `num-1` not in set). For triplets, use two hash maps (left and right frequencies) to count occurrences in $O(n)$ time.
 
-**LeetCode Problems:**
-- 128\. Longest Consecutive Sequence - [Solution](leet_code/hash_tables/128_longest_consecutive_sequence.py)
-- 149\. Max Points on a Line - [Solution](leet_code/hash_tables/149_max_points_on_a_line.py)
-- 954\. Array of Doubled Pairs - [Solution](leet_code/hash_tables/954_array_doubled_pairs.py)
-- 454\. 4Sum II - [Solution](leet_code/hash_tables/454_four_sum.py)
-- 523\. Continuous Subarray Sum  - [Solution](leet_code/hash_tables/523_continuos_subarray_sum.py)
-
 **Example: Longest Consecutive Sequence**
 ```python
 def longestConsecutive(nums):
@@ -522,6 +515,13 @@ def longestConsecutive(nums):
 # n=100: 99 not in set, sequence [100], length=1
 # Answer: 4
 ```
+
+**LeetCode Problems:**
+- 128\. Longest Consecutive Sequence - [Solution](leet_code/hash_tables/128_longest_consecutive_sequence.py)
+- 149\. Max Points on a Line - [Solution](leet_code/hash_tables/149_max_points_on_a_line.py)
+- 954\. Array of Doubled Pairs - [Solution](leet_code/hash_tables/954_array_doubled_pairs.py)
+- 454\. 4Sum II - [Solution](leet_code/hash_tables/454_four_sum.py)
+- 523\. Continuous Subarray Sum  - [Solution](leet_code/hash_tables/523_continuos_subarray_sum.py)
 
 ### Merge Intervals
 **When to use:** Overlapping intervals, meeting rooms, scheduling problems
@@ -602,13 +602,6 @@ def sortColors(nums):
             high -= 1
 ```
 
-**LeetCode Problems:**
-- 75\. Sort Colors - [Solution](leet_code/array/75_sort_colors.py)
-- 905\. Sort Array By Parity
-- 922\. Sort Array By Parity II
-- 280\. Wiggle Sort
-- 324\. Wiggle Sort II
-
 **Example: Sort Colors**
 ```python
 def sortColors(nums):
@@ -630,6 +623,13 @@ def sortColors(nums):
 # ... continues until partitioned
 # Answer: [0,0,1,1,2,2]
 ```
+
+**LeetCode Problems:**
+- 75\. Sort Colors - [Solution](leet_code/array/75_sort_colors.py)
+- 905\. Sort Array By Parity
+- 922\. Sort Array By Parity II
+- 280\. Wiggle Sort
+- 324\. Wiggle Sort II
 
 ### BFS on Matrix
 **When to use:** Shortest path, level-order traversal on grids (flood fill, rotting oranges)
@@ -878,13 +878,6 @@ def isValid(s):
 
 **How it works:** Use two stacks: `input` and `output`. Push to `input`. When popping, if `output` is empty, move all elements from `input` to `output`. This reverses the order twice, maintaining FIFO.
 
-**LeetCode Problems:**
-- 232\. Implement Queue using Stacks
-- 225\. Implement Stack using Queues
-- 155\. Min Stack - [Solution](leet_code/queues_stacks/155_min_stack.py)
-- 622\. Design Circular Queue
-- 641\. Design Circular Deque
-
 **Example: Queue using Stacks**
 ```python
 class MyQueue:
@@ -905,6 +898,13 @@ class MyQueue:
                 self.out_stack.append(self.in_stack.pop())
         return self.out_stack[-1]
 ```
+
+**LeetCode Problems:**
+- 232\. Implement Queue using Stacks
+- 225\. Implement Stack using Queues
+- 155\. Min Stack - [Solution](leet_code/queues_stacks/155_min_stack.py)
+- 622\. Design Circular Queue
+- 641\. Design Circular Deque
 
 ## Linked List Patterns
 
@@ -966,13 +966,6 @@ def reverseList(head):
 
 **How it works:** Iterate through the list. When a node has a child, find the end of the child list and connect it back to the current node's next. This simplifies the structure while traversing.
 
-**LeetCode Problems:**
-- 430\. Flatten a Multilevel Doubly Linked List
-- 341\. Flatten Nested List Iterator
-- 114\. Flatten Binary Tree to Linked List
-- 426\. Convert Binary Search Tree to Sorted Doubly Linked List
-- 1206\. Design Skiplist
-
 **Example: Flatten Doubly Linked List**
 ```python
 def flatten(head):
@@ -995,6 +988,13 @@ def flatten(head):
         curr = curr.next
     return head
 ```
+
+**LeetCode Problems:**
+- 430\. Flatten a Multilevel Doubly Linked List
+- 341\. Flatten Nested List Iterator
+- 114\. Flatten Binary Tree to Linked List
+- 426\. Convert Binary Search Tree to Sorted Doubly Linked List
+- 1206\. Design Skiplist
 
 ## Tree Patterns
 
@@ -1140,13 +1140,6 @@ def levelOrder(root):
 
 **How it works:** Use BFS and track a column ID for each node (root is 0, left is -1, right is +1). Use a hash map to group node values by their column ID.
 
-**LeetCode Problems:**
-- 314\. Binary Tree Vertical Order Traversal - [Solution](leet_code/trees/314_binary_tree_vertical_traversal.py)
-- 987\. Vertical Order Traversal of a Binary Tree
-- 545\. Boundary of Binary Tree
-- 655\. Print Binary Tree
-- 1104\. Path In Zigzag Labelled Binary Tree
-
 **Example: Vertical Order Traversal**
 ```python
 from collections import deque, defaultdict
@@ -1170,6 +1163,13 @@ def verticalOrder(root):
 # 15 is at x=0, 7 is at x=2
 # Output: [[9], [3,15], [20], [7]]
 ```
+
+**LeetCode Problems:**
+- 314\. Binary Tree Vertical Order Traversal - [Solution](leet_code/trees/314_binary_tree_vertical_traversal.py)
+- 987\. Vertical Order Traversal of a Binary Tree
+- 545\. Boundary of Binary Tree
+- 655\. Print Binary Tree
+- 1104\. Path In Zigzag Labelled Binary Tree
 
 ### Trie (Prefix Tree)
 **When to use:** Word search, autocomplete, prefix matching
@@ -1459,13 +1459,6 @@ def findOrder(numCourses, prerequisites):
 
 **How it works:** Use Kruskal's algorithm with Union-Find. Sort all possible edges by weight and add them to the MST if they don't form a cycle. Stop when you have $n-1$ edges.
 
-**LeetCode Problems:**
-- 1584\. Min Cost to Connect All Points
-- 1135\. Connecting Cities With Minimum Cost
-- 1489\. Find Critical and Pseudo-Critical Edges in MST
-- 1697\. Checking Existence of Edge Length Limited Paths
-- 1168\. Optimize Water Distribution in a Village
-
 **Example: Minimum Spanning Tree (Kruskal's)**
 ```python
 def minCostConnectPoints(points):
@@ -1490,6 +1483,13 @@ def minCostConnectPoints(points):
             if edges_used == n - 1: break
     return cost
 ```
+
+**LeetCode Problems:**
+- 1584\. Min Cost to Connect All Points
+- 1135\. Connecting Cities With Minimum Cost
+- 1489\. Find Critical and Pseudo-Critical Edges in MST
+- 1697\. Checking Existence of Edge Length Limited Paths
+- 1168\. Optimize Water Distribution in a Village
 
 ## Backtracking Patterns
 
