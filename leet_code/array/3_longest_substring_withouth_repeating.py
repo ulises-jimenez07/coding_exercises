@@ -12,27 +12,25 @@ import unittest
 
 
 class Solution:
+    """Solution for finding the longest substring without repeating characters."""
+
     def lengthOfLongestSubstring(self, s: str) -> int:
         """Finds the length of the longest substring without repeating characters."""
-        if len(s) <= 1:
-            return len(s)
-
-        seen: dict[str, int] = {}
         max_length = 0
-        left = right = 0
+        prev_indexes: dict[str, int] = {}
+        left = 0
 
-        for i in range(len(s)):
-            if s[i] in seen:
-                left = max(left, seen[s[i]] + 1)
-
-            right += 1
-            seen[s[i]] = i
-            max_length = max(right - left, max_length)
-
+        for right, ch in enumerate(s):
+            if ch in prev_indexes:
+                left = max(prev_indexes[ch] + 1, left)
+            prev_indexes[ch] = right
+            max_length = max(max_length, right - left + 1)
         return max_length
 
 
 class TestLengthOfLongestSubstring(unittest.TestCase):
+    """Unit tests for lengthOfLongestSubstring."""
+
     def setUp(self):
         self.solution = Solution()
 
