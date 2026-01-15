@@ -14,6 +14,8 @@ from typing import List
 
 
 class Solution:
+    """Solution class for search in rotated sorted array problem."""
+
     def search(self, nums: List[int], target: int) -> int:
         left = 0
         right = len(nums) - 1
@@ -31,7 +33,7 @@ class Solution:
                     break
 
             # Choose the appropriate half to search
-            if target >= nums[0] and target <= nums[middle]:
+            if nums[0] <= target <= nums[middle]:
                 left = 0
                 right = middle
             else:
@@ -43,15 +45,17 @@ class Solution:
             middle = (left + right) // 2
             if nums[middle] == target:
                 return middle
-            elif nums[middle] < target:
+            if nums[middle] < target:
                 left = middle + 1
-            elif nums[middle] > target:
+            else:
                 right = middle - 1
 
         return -1
 
 
 class TestSearch(unittest.TestCase):
+    """Unit tests for the search in rotated sorted array implementation."""
+
     def setUp(self):
         self.sol = Solution()
 
