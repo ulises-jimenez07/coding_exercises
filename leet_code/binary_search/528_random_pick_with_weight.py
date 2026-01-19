@@ -19,20 +19,16 @@ class Solution:
 
     def pickIndex(self) -> int:
         """Pick a random index using binary search on prefix sums."""
-        target = self.total_sum * random.random()
-        low, high = 0, len(self.prefix_sums) - 1
-        choice = 0
+        target = random.uniform(0, self.total_sum)
+        left, right = 0, len(self.prefix_sums) - 1
 
-        # Binary search for the first prefix sum greater than the target
-        while low <= high:
-            mid = (low + high) // 2
-            if self.prefix_sums[mid] > target:
-                choice = mid
-                high = mid - 1
+        while left < right:
+            mid = (left + right) // 2
+            if self.prefix_sums[mid] < target:
+                left = mid + 1
             else:
-                low = mid + 1
-
-        return choice
+                right = mid
+        return left
 
 
 class TestRandomPickWithWeight(unittest.TestCase):
