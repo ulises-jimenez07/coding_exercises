@@ -10,9 +10,14 @@ Approach:
 
 import collections
 import unittest
+from typing import List
 
 
 class Solution:
+    """
+    Class containing different implementations for the Sliding Window Maximum problem.
+    """
+
     def maxSlidingWindow(self, nums: list[int], k: int) -> list[int]:
         """
         Finds the maximum value in each sliding window of size `k`.
@@ -50,8 +55,51 @@ class Solution:
 
         return ans
 
+    def maximums_of_sliding_window(self, nums: List[int], k: int) -> List[int]:
+        """
+        Alternative implementation using a unified while loop and left/right pointers.
+        This approach maintains a deque of indices where the values are in
+        decreasing order.
+        """
+        if not nums or k == 0:
+            return []
+        if k > len(nums):
+            return [max(nums)]
+
+        res = []
+        dq: collections.deque[int] = collections.deque()
+        left = right = 0
+
+        while right < len(nums):
+            # Maintain decreasing order in deque:
+            # Remove elements from back that are smaller than current element
+            while dq and nums[dq[-1]] <= nums[right]:
+                dq.pop()
+
+            dq.append(right)
+
+            # Check if the window has reached size k
+            if right - left + 1 == k:
+                # Check if the leftmost element in deque is outside the window
+                if dq and dq[0] < left:
+                    dq.popleft()
+
+                # The first element in deque is the maximum for the current window
+                res.append(nums[dq[0]])
+
+                # Slide the window
+                left += 1
+
+            right += 1
+
+        return res
+
 
 class TestMaxSlidingWindow(unittest.TestCase):
+    """
+    Unit tests for the Sliding Window Maximum implementations.
+    """
+
     def setUp(self):
         self.solution = Solution()
 
@@ -131,6 +179,25 @@ class TestMaxSlidingWindow(unittest.TestCase):
         k = 3
         expected = [3, 4, 5, 6]
         self.assertEqual(self.solution.maxSlidingWindow(nums, k), expected)
+
+    def test_against_alternative_version(self):
+        """Test that the alternative implementation produces the same results."""
+        test_cases = [
+            ([1, 3, -1, -3, 5, 3, 6, 7], 3, [3, 3, 5, 5, 6, 7]),
+            ([1, 2, 3, 4, 5], 1, [1, 2, 3, 4, 5]),
+            ([1, 3, -1, -3, 5], 5, [5]),
+            ([-1, -3, -5, -2, -4], 3, [-1, -2, -2]),
+            ([10, 5, 2, 8, 15, 3], 4, [10, 15, 15]),
+            ([1, 3, 1, 2, 0, 5], 3, [3, 3, 2, 5]),
+            ([], 3, []),
+            ([1, 2, 3], 0, []),
+            ([1, 2, 3], 5, [3]),
+            ([9, 8, 7, 6, 5, 4], 3, [9, 8, 7, 6]),
+            ([1, 2, 3, 4, 5, 6], 3, [3, 4, 5, 6]),
+        ]
+        for nums, k, expected in test_cases:
+            with self.subTest(nums=nums, k=k):
+                self.assertEqual(self.solution.maximums_of_sliding_window(nums, k), expected)
 
 
 if __name__ == "__main__":
