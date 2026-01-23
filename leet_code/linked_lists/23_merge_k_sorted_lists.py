@@ -2,13 +2,14 @@
 Problem: Merge k sorted linked lists
 
 Approach:
-- Divide and conquer: merge lists pairwise
-- Repeatedly merge pairs until one list remains
-- Time complexity: O(N log k) where N is total nodes, k is number of lists
-- Space complexity: O(1)
+- Version 1: Divide and conquer: merge lists pairwise (O(N log k) time, O(1) space)
+- Version 2: Min-Heap (Priority Queue): merge using a heap of current heads (O(N log k) time, O(k) space)
 """
 
+import heapq
+import unittest
 from typing import (
+    Any,
     List,
     Optional,
 )
@@ -16,22 +17,25 @@ from typing import (
 
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, val=0, next_node=None):
+    """Definition for singly-linked list."""
+
+    def __init__(self, val: int = 0, next_node: Optional["ListNode"] = None):
         self.val = val
         self.next = next_node
 
+    def __lt__(self, other: Any) -> bool:
+        """Less-than operator for heap comparison."""
+        if not isinstance(other, ListNode):
+            return NotImplemented
+        return self.val < other.val
+
 
 class Solution:
-    def merge_2_lists(self, l1, l2):
+    """Solution class for merging k sorted lists."""
+
+    def merge_2_lists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         """
         Merges two sorted linked lists into a single sorted linked list.
-
-        Args:
-            l1: The head of the first sorted linked list.
-            l2: The head of the second sorted linked list.
-
-        Returns:
-            The head of the merged sorted linked list.
         """
         curr = ListNode(0)
         ans = curr
@@ -47,42 +51,65 @@ class Solution:
         curr.next = l2 if l1 is None else l1
         return ans.next
 
-    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+    def merge_k_lists_divide_and_conquer(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         """
-        Merges k sorted linked lists into a single sorted linked list.
-
-        Args:
-            lists: A list of k sorted linked lists.
-
-        Returns:
-            The head of the merged sorted linked list, or None if the input list is empty.
+        Version 1: Divide and Conquer
+        Time Complexity: O(N log k) - where N is the total number of nodes and k is the number of lists.
+        Space Complexity: O(1) - if we ignore the recursive stack or if implemented iteratively.
         """
-        if len(lists) == 0:
+        if not lists:
             return None
 
-        i = 0
         last = len(lists) - 1
-        j = last
 
-        # Merge pairs until one list remains
+        # Merge pairs until only one list is left at index 0
         while last != 0:
             i = 0
             j = last
 
-            # Merge from both ends
+            # Merge lists from both ends of the current range
             while j > i:
                 lists[i] = self.merge_2_lists(lists[i], lists[j])
                 i += 1
                 j -= 1
-                last = j
+
+            # Update the last index to the end of the merged lists
+            last = j
 
         return lists[0]
 
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        """
+        Version 2: Min-Heap (Priority Queue)
+        Time Complexity: O(N log k) - each insertion/deletion in the heap takes O(log k).
+        Space Complexity: O(k) - the heap stores at most k nodes at any time.
+        """
+        heap: List[ListNode] = []
+        # Push the head of each linked list into the heap
+        for head in lists:
+            if head:
+                heapq.heappush(heap, head)
 
-import unittest
+        # Dummy node to simplify the construction of the result list
+        dummy = ListNode(-1)
+        curr = dummy
+
+        # Continuously pop the smallest element from the heap and add it to the result
+        while heap:
+            smallest_node = heapq.heappop(heap)
+            curr.next = smallest_node
+            curr = curr.next
+
+            # If the popped node has a next element, push it into the heap
+            if smallest_node.next:
+                heapq.heappush(heap, smallest_node.next)
+
+        return dummy.next
 
 
 class TestMergeKLists(unittest.TestCase):
+    """Unit tests for mergeKLists solutions."""
+
     def setUp(self):
         self.solution = Solution()
 
