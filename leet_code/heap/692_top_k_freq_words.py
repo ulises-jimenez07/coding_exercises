@@ -42,13 +42,6 @@ class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
         """
         Finds the top k frequent words.
-
-        Args:
-            words: List of strings.
-            k: Number of top elements to return.
-
-        Returns:
-            List of top k frequent words sorted by frequency and lexicographical order.
         """
         if not words or k <= 0:
             return []

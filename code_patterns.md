@@ -900,7 +900,7 @@ class MyQueue:
 ```
 
 **LeetCode Problems:**
-- 232\. Implement Queue using Stacks
+- 232\. Implement Queue using Stacks - [Solution](leet_code/queues_stacks/232_implement_queue_using_stack.py)
 - 225\. Implement Stack using Queues
 - 155\. Min Stack - [Solution](leet_code/queues_stacks/155_min_stack.py)
 - 622\. Design Circular Queue
@@ -2071,7 +2071,7 @@ def findKthLargest(nums, k):
 **LeetCode Problems:**
 - 215\. Kth Largest Element in an Array - [Solution](leet_code/heap/215_k_largest_element_heap.py)
 - 347\. Top K Frequent Elements - [Solution](leet_code/heap/347_top_k_frequent_elements.py)
-- 692\. Top K Frequent Words
+- 692\. Top K Frequent Words - [Solution](leet_code/heap/692_top_k_freq_words.py)
 - 973\. K Closest Points to Origin
 - 703\. Kth Largest Element in a Stream - [Solution](leet_code/heap/703_kt_largest_element_stream.py)
 
