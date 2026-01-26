@@ -13,6 +13,8 @@ from typing import List
 
 
 class Solution:
+    """Solution for Merge Intervals."""
+
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         """Merges overlapping intervals."""
         if not intervals:
@@ -31,6 +33,8 @@ class Solution:
 
 
 class TestSolution(unittest.TestCase):
+    """Unit tests for the Merge Intervals solution."""
+
     def setUp(self):
         self.solution = Solution()
 

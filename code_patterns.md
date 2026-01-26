@@ -575,12 +575,12 @@ def merge(intervals):
 ```
 
 **LeetCode Problems:**
-- 56\. Merge Intervals - [Solution](leet_code/array/56_merged_intervals.py)
-- 57\. Insert Interval - [Solution](leet_code/binary_search/57_insert_interval.py)
-- 252\. Meeting Rooms - [Solution](leet_code/array/252_meeting_rooms.py)
-- 253\. Meeting Rooms II - [Solution](leet_code/array/253_meeting_rooms_2.py)
-- Parking Lot Capacity - [Solution](leet_code/array/parking_lot.py)
-- 435\. Non-overlapping Intervals - [Solution](leet_code/array/435_non_overlapping_intervals.py)
+- 56\. Merge Intervals - [Solution](leet_code/intervals/56_merged_intervals.py)
+- 57\. Insert Interval - [Solution](leet_code/intervals/57_insert_interval.py)
+- 252\. Meeting Rooms - [Solution](leet_code/intervals/252_meeting_rooms.py)
+- 253\. Meeting Rooms II - [Solution](leet_code/intervals/253_meeting_rooms_2.py)
+- Parking Lot Capacity - [Solution](leet_code/intervals/parking_lot.py)
+- 435\. Non-overlapping Intervals - [Solution](leet_code/intervals/435_non_overlapping_intervals.py)
 
 ### Sorting Patterns (Dutch National Flag)
 **When to use:** Sorting three distinct types of elements (Sort Colors)
