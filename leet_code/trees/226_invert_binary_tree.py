@@ -22,10 +22,32 @@ class TreeNode:
 
 
 class Solution:
+    """Solution class for inverting a binary tree."""
+
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        """Inverts a binary tree recursively."""
+        """Main method to invert a binary tree. Calls the bottom-up recursive version."""
+        return self.invert_tree_recursive_bottom_up(root)
+
+    def invert_tree_recursive_bottom_up(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """Inverts a binary tree recursively starting from the leaves."""
         if root:
-            root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+            root.left, root.right = self.invert_tree_recursive_bottom_up(
+                root.right
+            ), self.invert_tree_recursive_bottom_up(root.left)
+        return root
+
+    def invert_tree_recursive_top_down(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """Inverts a binary tree recursively (top-down)."""
+        if not root:
+            return None
+
+        # Swap children
+        root.left, root.right = root.right, root.left
+
+        # Recursively invert left and right subtrees
+        self.invert_tree_recursive_top_down(root.left)
+        self.invert_tree_recursive_top_down(root.right)
+
         return root
 
 
@@ -68,6 +90,8 @@ def serialize_tree(root: Optional[TreeNode]) -> list[Optional[int]]:
 
 
 class TestInvertTree(unittest.TestCase):
+    """Unit tests for the invertTree solution."""
+
     def setUp(self):
         self.solution = Solution()
 
@@ -75,6 +99,12 @@ class TestInvertTree(unittest.TestCase):
         """Tests a standard tree inversion."""
         root = create_tree([4, 2, 7, 1, 3, 6, 9])
         inverted_root = self.solution.invertTree(root)
+        self.assertEqual(serialize_tree(inverted_root), [4, 7, 2, 9, 6, 3, 1])
+
+    def test_top_down_version(self):
+        """Tests the top-down recursive version."""
+        root = create_tree([4, 2, 7, 1, 3, 6, 9])
+        inverted_root = self.solution.invert_tree_recursive_top_down(root)
         self.assertEqual(serialize_tree(inverted_root), [4, 7, 2, 9, 6, 3, 1])
 
     def test_empty_tree(self):
