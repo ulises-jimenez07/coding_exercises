@@ -2,11 +2,14 @@
 Problem: Find the k-th smallest element in a Binary Search Tree
 
 Approach:
-- Use inorder traversal which visits BST nodes in sorted order
-- Stop traversal once k-th element is found for efficiency
-- Track count during traversal to identify k-th position
-- Time complexity: O(k) in best case, O(n) worst case
-- Space complexity: O(h) where h is height for recursion stack
+1. Recursive Inorder Traversal:
+   - Visit nodes in sorted order (Left -> Node -> Right).
+   - Track count and stop when k-th element is reached.
+2. Iterative Inorder Traversal (using Stack):
+   - Use a stack to simulate recursion.
+   - Go left as much as possible, then process, then go right.
+   - Time complexity: O(H + k) where H is tree height.
+   - Space complexity: O(H) for the stack.
 """
 
 import unittest
@@ -35,16 +38,40 @@ class Solution:
     Finds the k-th smallest element in a Binary Search Tree (BST).
     """
 
-    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+    def __init__(self):
+        self.k = 0
+        self.count = 0
+        self.ans: Optional[int] = None
+
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> Optional[int]:
         """
-        Finds the k-th smallest element in the BST using an inorder traversal.
+        Finds the k-th smallest element in a BST using an iterative inorder traversal.
+        """
+        stack: list[TreeNode] = []
+        node = root
 
-        Args:
-            root (Optional[TreeNode]): The root node of the binary tree.
-            k (int): The k-th position of the smallest element to find.
+        while stack or node:
+            # Traverses to the leftmost child of the current subtree
+            while node:
+                stack.append(node)
+                node = node.left
 
-        Returns:
-            int: The value of the k-th smallest element.
+            # Pops the most recently added node (minimal value for current subtree)
+            node = stack.pop()
+            k -= 1
+
+            # Checks if the current node is the k-th smallest element
+            if k == 0:
+                return node.val
+
+            # Moves to the right subtree to continue the inorder sequence
+            node = node.right
+
+        return None
+
+    def kthSmallest_recursive(self, root: Optional[TreeNode], k: int) -> Optional[int]:
+        """
+        Finds the k-th smallest element in the BST using a recursive inorder traversal.
         """
         self.k = k
         self.count = 0
@@ -58,16 +85,13 @@ class Solution:
 
         The inorder traversal of a BST visits nodes in increasing order of their values.
         This method stops the traversal once the k-th element is found to optimize performance.
-
-        Args:
-            node (Optional[TreeNode]): The current node being visited.
         """
         # If the answer is already found, we can stop the traversal.
         if self.ans is not None:
             return
 
         # Traverse the left subtree.
-        if node.left:
+        if node and node.left:
             self.inorder(node.left)
 
         # Check if the answer has already been found after the left traversal
@@ -78,11 +102,12 @@ class Solution:
         # Visit the current node.
         self.count += 1
         if self.count == self.k:
-            self.ans = node.val
+            if node:
+                self.ans = node.val
             return
 
         # Traverse the right subtree.
-        if node.right:
+        if node and node.right:
             self.inorder(node.right)
 
 
@@ -136,6 +161,20 @@ class TestKthSmallest(unittest.TestCase):
 
         solution = Solution()
         self.assertEqual(solution.kthSmallest(root, 3), 3)
+
+    def test_recursive_example_2(self):
+        """
+        Test case from LeetCode example 2 using recursive method.
+        """
+        root = TreeNode(5)
+        root.left = TreeNode(3)
+        root.right = TreeNode(6)
+        root.left.left = TreeNode(2)
+        root.left.right = TreeNode(4)
+        root.left.left.left = TreeNode(1)
+
+        solution = Solution()
+        self.assertEqual(solution.kthSmallest_recursive(root, 3), 3)
 
     def test_single_node(self):
         """
