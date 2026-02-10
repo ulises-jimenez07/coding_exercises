@@ -82,6 +82,62 @@ class Solution:
         return ans
 
 
+class TrieNode:
+    """A node in a Trie."""
+
+    def __init__(self):
+        self.childrens = {}
+        self.word = None
+
+
+def find_all_words_on_a_board(board: List[List[str]], words: List[str]) -> List[str]:
+    """
+    Finds all words from the list on the board using a TrieNode-based approach.
+    """
+    root = TrieNode()
+
+    for word in words:
+        node = root
+        for char in word:
+            if char not in node.childrens:
+                node.childrens[char] = TrieNode()
+            node = node.childrens[char]
+        node.word = word
+
+    res: List[str] = []
+
+    for r, _ in enumerate(board):
+        for c, _ in enumerate(board[0]):
+            if board[r][c] in root.childrens:
+                dfs(board, r, c, root.childrens[board[r][c]], res)
+
+    return res
+
+
+def dfs(board: List[List[str]], r: int, c: int, node: TrieNode, res: List[str]):
+    """Deep-first search to find words in the board."""
+    if node.word:
+        res.append(node.word)
+        node.word = None
+
+    temp = board[r][c]
+    board[r][c] = "#"
+
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+    for dr, dc in dirs:
+        nr, nc = r + dr, c + dc
+        if is_within_bounds(nr, nc, board) and board[nr][nc] in node.childrens:
+            dfs(board, nr, nc, node.childrens[board[nr][nc]], res)
+
+    board[r][c] = temp
+
+
+def is_within_bounds(r, c, board):
+    """Checks if coordinates are within the board bounds."""
+    return 0 <= r < len(board) and 0 <= c < len(board[0])
+
+
 class TestWordSearchII(unittest.TestCase):
     """Test cases for Word Search II."""
 
@@ -100,6 +156,19 @@ class TestWordSearchII(unittest.TestCase):
         expected = ["oath", "eat"]
         # Result order might vary, so we compare as sets or sorted lists
         result = self.solution.findWords(board, words)
+        self.assertCountEqual(result, expected)
+
+    def test_find_all_words_version_2(self):
+        """Test the second version of findWords."""
+        board = [
+            ["o", "a", "a", "n"],
+            ["e", "t", "a", "e"],
+            ["i", "h", "k", "r"],
+            ["i", "f", "l", "v"],
+        ]
+        words = ["oath", "pea", "eat", "rain"]
+        expected = ["oath", "eat"]
+        result = find_all_words_on_a_board(board, words)
         self.assertCountEqual(result, expected)
 
     def test_example_2(self):
