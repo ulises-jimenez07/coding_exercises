@@ -2,28 +2,31 @@
 Problem: Clone an undirected graph where each node contains a value and a list of neighbors.
 
 Approach:
-- Use BFS with a hash map to track original-to-clone node mappings
-- Create clone nodes and connect neighbors during traversal
-- Time complexity: O(N + E) where N is nodes and E is edges
-- Space complexity: O(N) for the hash map and queue
+- BFS: Use BFS with a hash map to track original-to-clone node mappings.
+- DFS: Use recursive DFS with a hash map to handle cycles and child node creation.
+- Time complexity: O(N + E) for both where N is nodes and E is edges.
+- Space complexity: O(N) for both.
 """
+
+import unittest
+from collections import deque
+from typing import Optional
 
 
 # Definition for a Node.
 class Node:
+    """
+    Representation of a node in an undirected graph.
+    """
+
     def __init__(self, val=0, neighbors=None):
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
 
 
-import unittest  # Import unittest for testing
-from collections import deque
-from typing import Optional
-
-
-class Solution:
+class SolutionBFS:
     """
-    A class to clone an undirected graph.
+    A class to clone an undirected graph using BFS.
     """
 
     def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
@@ -69,55 +72,94 @@ class Solution:
         return visited[node]
 
 
+class SolutionDFS:
+    """
+    A class to clone an undirected graph using recursive DFS.
+    """
+
+    def __init__(self):
+        self.cloned_map: dict[Node, Node] = {}
+
+    def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
+        """
+        Clones a given undirected graph using Depth-First Search (DFS).
+        """
+        if not node:
+            return node
+
+        self.cloned_map = {}
+        return self.dfs(node)
+
+    def dfs(self, node):
+        """Recursive helper for DFS cloning."""
+        if node in self.cloned_map:
+            return self.cloned_map[node]
+
+        # Create the clone for the current node
+        cloned_node = Node(node.val)
+        self.cloned_map[node] = cloned_node
+
+        # Recursively clone all neighbors
+        for neighbor in node.neighbors:
+            cloned_neighbor = self.dfs(neighbor)
+            cloned_node.neighbors.append(cloned_neighbor)
+
+        return cloned_node
+
+
 class TestCloneGraph(unittest.TestCase):
     """
-    Unit tests for the Solution.cloneGraph method.
+    Unit tests for both BFS and DFS cloneGraph implementations.
     """
 
-    def setUp(self):
-        self.sol = Solution()
+    def test_bfs_implementation(self):
+        """Runs all tests using BFS implementation."""
+        self._run_all_tests(SolutionBFS())
 
-    def test_empty_graph(self):
-        self.assertIsNone(self.sol.cloneGraph(None))
+    def test_dfs_implementation(self):
+        """Runs all tests using DFS implementation."""
+        self._run_all_tests(SolutionDFS())
 
-    def test_single_node_graph(self):
+    def _run_all_tests(self, sol):
+        # 1. Empty Graph
+        self.assertIsNone(sol.cloneGraph(None))
+
+        # 2. Single Node
         node1 = Node(1)
-        cloned_node = self.sol.cloneGraph(node1)
+        cloned_node = sol.cloneGraph(node1)
         self.assertEqual(cloned_node.val, 1)
         self.assertEqual(len(cloned_node.neighbors), 0)
+        self.assertIsNot(cloned_node, node1)
 
-    def test_two_node_graph(self):
-        node1 = Node(1)
-        node2 = Node(2)
-        node1.neighbors.append(node2)
-        node2.neighbors.append(node1)
+        # 3. Two-node cycle
+        node_a = Node(1)
+        node_b = Node(2)
+        node_a.neighbors.append(node_b)
+        node_b.neighbors.append(node_a)
 
-        cloned_node = self.sol.cloneGraph(node1)
+        cloned_a = sol.cloneGraph(node_a)
+        self.assertEqual(cloned_a.val, 1)
+        self.assertEqual(len(cloned_a.neighbors), 1)
+        self.assertEqual(cloned_a.neighbors[0].val, 2)
+        self.assertIsNot(cloned_a, node_a)
+        self.assertIsNot(cloned_a.neighbors[0], node_b)
 
-        self.assertEqual(cloned_node.val, 1)
-        self.assertEqual(len(cloned_node.neighbors), 1)
-        self.assertEqual(cloned_node.neighbors[0].val, 2)
+        # 4. Complex graph
+        n1 = Node(1)
+        n2 = Node(2)
+        n3 = Node(3)
+        n4 = Node(4)
+        n1.neighbors = [n2, n4]
+        n2.neighbors = [n1, n3]
+        n3.neighbors = [n2, n4]
+        n4.neighbors = [n1, n3]
 
-        cloned_neighbor = cloned_node.neighbors[0]
-        self.assertEqual(len(cloned_neighbor.neighbors), 1)
-        self.assertEqual(cloned_neighbor.neighbors[0].val, 1)
-        self.assertIsNot(cloned_neighbor.neighbors[0], node1)  # Ensure deep copy
-
-    def test_complex_graph(self):
-        # Construct a more complex graph for testing.
-        node1 = Node(1)
-        node2 = Node(2)
-        node3 = Node(3)
-        node4 = Node(4)
-        node1.neighbors = [node2, node4]
-        node2.neighbors = [node1, node3]
-        node3.neighbors = [node2, node4]
-        node4.neighbors = [node1, node3]
-
-        cloned_graph = self.sol.cloneGraph(node1)
-
-        self.assertEqual(cloned_graph.val, 1)
-        self.assertEqual(len(cloned_graph.neighbors), 2)
+        cloned_g = sol.cloneGraph(n1)
+        self.assertEqual(cloned_g.val, 1)
+        self.assertEqual(len(cloned_g.neighbors), 2)
+        # Check connectivity
+        neighbor_vals = {nb.val for nb in cloned_g.neighbors}
+        self.assertEqual(neighbor_vals, {2, 4})
 
 
 if __name__ == "__main__":
