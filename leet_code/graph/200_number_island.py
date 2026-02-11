@@ -14,69 +14,29 @@ from typing import List
 
 class Solution:
     """
-    A class to solve the 'Number of Islands' problem.
-    The problem is to count the number of islands in a 2D grid.
-    An island is surrounded by water ('0') and is formed by connecting
-    adjacent lands ('1') horizontally or vertically.
+    A class to solve the 'Number of Islands' problem using DFS.
     """
 
     def numIslands(self, grid: List[List[str]]) -> int:
-        """
-        Main method to count the number of islands.
-
-        It iterates through every cell in the grid. If a '1' (land) is found,
-        it increments the island count and initiates a Depth First Search (DFS)
-        to mark the entire island as visited (by changing '1's to '2's).
-        """
-        self.grid = grid  # pylint: disable=attribute-defined-outside-init
-        count = 0  # Initialize island count
-        rows = len(grid)
-        if rows == 0:
+        if not grid:
             return 0
-        cols = len(grid[0])
-
-        for row in range(0, rows):
-            for col in range(0, cols):
-                if self.grid[row][col] == "1":
-                    count += 1  # Found a new island
-                    self.dfs(row, col)  # Explore and mark the entire island as visited
-        return count
-
-    def is_valid(self, row, col):
-        """
-        Helper function to check if a cell (row, col) is valid to visit.
-
-        A cell is valid if:
-        1. It is within the grid boundaries.
-        2. It contains '1' (land that hasn't been visited yet).
-        """
-        # Check boundary conditions for rows
-        if row < 0 or row >= len(self.grid):
-            return False
-        # Check boundary conditions for columns
-        if col < 0 or col >= len(self.grid[0]):
-            return False
-        # Check if it's unvisited land
-        if self.grid[row][col] == "1":
-            return True
-        return False
+        # pylint: disable=attribute-defined-outside-init
+        self.grid = grid
+        self.rows, self.cols = len(grid), len(grid[0])
+        self.directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        islands = 0
+        for r in range(self.rows):
+            for c in range(self.cols):
+                if self.grid[r][c] == "1":
+                    islands += 1
+                    self.dfs(r, c)
+        return islands
 
     def dfs(self, row, col):
-        """
-        Performs Depth First Search (DFS) starting from (row, col).
-
-        It marks the current land cell as visited ('2') and recursively
-        explores all four adjacent cells (up, down, left, right).
-        """
-        if self.is_valid(row, col):
-            # Mark the current cell as visited (e.g., changing '1' to '2')
-            self.grid[row][col] = "2"
-
-            # Recursively explore all four adjacent directions
-            self.dfs(row - 1, col)  # Up
-            self.dfs(row + 1, col)  # Down
-            self.dfs(row, col - 1)  # Left
-            self.dfs(row, col + 1)  # Right
+        if 0 <= row < self.rows and 0 <= col < self.cols and self.grid[row][col] == "1":
+            self.grid[row][col] = "0"
+            for dr, dc in self.directions:
+                self.dfs(row + dr, col + dc)
 
 
 # -----------------------------------------------------------------------------
