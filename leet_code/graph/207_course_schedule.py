@@ -2,114 +2,112 @@
 Problem: Determine if it's possible to finish all courses given prerequisites (cycle detection).
 
 Approach:
-- Model as directed graph, use DFS with 3-color state tracking
-- Detect cycles (visiting -> visiting edge indicates cycle)
-- Time complexity: O(V + E) where V is courses and E is prerequisites
-- Space complexity: O(V) for state tracking and recursion stack
+- Solution 1 (DFS): Use 3-color state tracking to detect cycles in a directed graph.
+- Solution 2 (BFS): Kahn's Algorithm (Topological Sort). If we can't visit all nodes, there's a cycle.
+
+Complexity:
+- Time: O(V + E) where V is courses and E is prerequisites.
+- Space: O(V + E) for the adjacency list and O(V) for state tracking.
 """
 
 import unittest
-from collections import defaultdict
-from typing import List
+from collections import (
+    defaultdict,
+    deque,
+)
+from typing import (
+    DefaultDict,
+    Deque,
+    List,
+)
 
 
-class Solution_v1:
-    """
-    Solves the Course Schedule problem using Depth First Search (DFS) to detect cycles
-    in a directed graph. A cycle indicates a dependency loop, meaning it's impossible
-    to finish all courses.
-    """
-
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        """
-        Determines if it's possible to finish all courses given the prerequisites.
-        """
-        # Adjacency list to represent the graph where an edge from 'b' to 'a' means
-        # 'a' is a prerequisite for 'b'.
-        self.adj: List[List[int]] = [[] for _ in range(numCourses)]  # pylint: disable=attribute-defined-outside-init
-        # State of each node (course):
-        # 'u' (unvisited): The node has not been visited yet.
-        # 'v' (visiting): The node is currently being visited in the current DFS path.
-        # 'p' (processed): The node and all its descendants have been visited.
-        self.state = {i: "u" for i in range(numCourses)}  # pylint: disable=attribute-defined-outside-init
-
-        # Build the adjacency list from the prerequisites.
-        for to_node, from_node in prerequisites:
-            self.adj[from_node].append(to_node)
-
-        # Iterate through all courses and start a DFS traversal from unvisited nodes.
-        for i in range(numCourses):
-            if self.state[i] == "u":
-                # If a cycle is detected during the DFS traversal, it's impossible to finish.
-                if not self.dfs(i):
-                    return False
-        # If no cycles were found after visiting all nodes, it's possible to finish all courses.
-        return True
-
-    def dfs(self, node: int) -> bool:
-        """
-        Performs a Depth First Search from a given node to detect cycles.
-        """
-        # Mark the current node as 'visiting'.
-        self.state[node] = "v"
-
-        # Traverse all neighbors of the current node.
-        for nei in self.adj[node]:
-            # If a neighbor is in the 'visiting' state, a back-edge is found, which
-            # indicates a cycle.
-            if self.state[nei] == "v":
-                return False  # Cycle detected
-            # If an unvisited neighbor is found, recursively call DFS on it.
-            if self.state[nei] == "u":
-                if not self.dfs(nei):
-                    return False
-
-        # After visiting all neighbors and their subgraphs, mark the current node as 'processed'.
-        self.state[node] = "p"
-        return True
-
-
-class Solution:
+class SolutionV1:
     """
     Solves the Course Schedule problem using DFS with integer state tracking.
     Uses 0 (unvisited), 1 (visiting), and 2 (visited) to detect cycles.
     """
 
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        # Build adjacency list: course -> list of prerequisites
-        graph = defaultdict(list)
+        """
+        Determines if it's possible to finish all courses using DFS.
+        """
+        # Build adjacency list: course -> list of its prerequisites.
+        # This mapping allows us to traverse from a course to its dependencies.
+        graph: DefaultDict[int, List[int]] = defaultdict(list)
         for course, prereq in prerequisites:
             graph[course].append(prereq)
 
-        # State tracking: 0 = unvisited, 1 = visiting, 2 = visited
+        # State tracking: 0 = unvisited, 1 = visiting (in current path), 2 = visited (processed).
         state = [0] * numCourses
         UNVISITED, VISITING, VISITED = 0, 1, 2
 
         def has_cycle(node):
-            # If we see a node currently being visited, it's a cycle (back edge)
+            # If we encounter a node already in 'VISITING' state, a back-edge (cycle) exists.
             if state[node] == VISITING:
                 return True
-            # If already fully processed, no cycle here
+            # If already fully processed, no need to re-check this branch.
             if state[node] == VISITED:
                 return False
 
-            # Mark as visiting
+            # Mark current node as 'visiting' to track the current recursion depth.
             state[node] = VISITING
 
             for prereq in graph[node]:
                 if has_cycle(prereq):
                     return True
 
-            # Mark as visited (processed)
+            # Mark as 'visited' once all paths from this node are explored.
             state[node] = VISITED
             return False
 
-        # Iterate through all courses and start a DFS traversal from unvisited nodes.
+        # Start DFS traversal from every unvisited course to ensure we cover disconnected components.
         for course in range(numCourses):
             if state[course] == UNVISITED:
                 if has_cycle(course):
                     return False
         return True
+
+
+class SolutionV2:
+    """
+    Solves the Course Schedule problem using Kahn's Algorithm (BFS).
+    Computes in-degrees and uses a queue to process nodes with zero in-degree.
+    """
+
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        """
+        Determines if it's possible to finish all courses using BFS (Kahn's Algorithm).
+        """
+        # Build graph: prereq -> list of courses that depend on it.
+        # Simultaneously track how many dependencies (in-degree) each course has.
+        graph: DefaultDict[int, List[int]] = defaultdict(list)
+        in_degrees = [0] * numCourses
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+            in_degrees[course] += 1
+
+        # Queue contains all courses that have NO dependencies and can be taken immediately.
+        queue: Deque[int] = deque()
+        for i in range(numCourses):
+            if in_degrees[i] == 0:
+                queue.append(i)
+
+        enrolled_courses = 0
+
+        while queue:
+            node = queue.popleft()
+            enrolled_courses += 1
+
+            # For each dependent course, reduce its in-degree as the prerequisite is now 'taken'.
+            for neighbor in graph[node]:
+                in_degrees[neighbor] -= 1
+                # If a course's in-degree drops to zero, it's ready to be enrolled.
+                if in_degrees[neighbor] == 0:
+                    queue.append(neighbor)
+
+        # If we couldn't enroll in all courses, a cycle must have prevented in-degrees from reaching zero.
+        return enrolled_courses == numCourses
 
 
 # -------------------------------------------------------------------------------------
@@ -118,14 +116,14 @@ class Solution:
 
 class TestCanFinish(unittest.TestCase):
     """
-    Unit tests for the canFinish method of the Solution class.
+    Unit tests for the canFinish method of the Solution classes.
     """
 
     def test_no_prerequisites(self):
         """
         Tests a case with no prerequisites. All courses should be finishable.
         """
-        for SolClass in [Solution, Solution_v1]:
+        for SolClass in [SolutionV1, SolutionV2]:
             with self.subTest(impl=SolClass.__name__):
                 solution = SolClass()
                 self.assertTrue(solution.canFinish(2, []))
@@ -134,7 +132,7 @@ class TestCanFinish(unittest.TestCase):
         """
         Tests a valid sequence of prerequisites (no cycles).
         """
-        for SolClass in [Solution, Solution_v1]:
+        for SolClass in [SolutionV1, SolutionV2]:
             with self.subTest(impl=SolClass.__name__):
                 solution = SolClass()
                 # Prerequisites: 1 -> 0 (to take course 0, you must first take course 1).
@@ -144,7 +142,7 @@ class TestCanFinish(unittest.TestCase):
         """
         Tests a case with a cycle, making it impossible to finish.
         """
-        for SolClass in [Solution, Solution_v1]:
+        for SolClass in [SolutionV1, SolutionV2]:
             with self.subTest(impl=SolClass.__name__):
                 solution = SolClass()
                 # Prerequisites: 1 -> 0 and 0 -> 1 (a cycle).
@@ -154,7 +152,7 @@ class TestCanFinish(unittest.TestCase):
         """
         Tests a more complex graph with a cycle.
         """
-        for SolClass in [Solution, Solution_v1]:
+        for SolClass in [SolutionV1, SolutionV2]:
             with self.subTest(impl=SolClass.__name__):
                 solution = SolClass()
                 # Prerequisites: 1->0, 2->1, 3->2, 1->3
@@ -165,7 +163,7 @@ class TestCanFinish(unittest.TestCase):
         """
         Tests a more complex graph without a cycle.
         """
-        for SolClass in [Solution, Solution_v1]:
+        for SolClass in [SolutionV1, SolutionV2]:
             with self.subTest(impl=SolClass.__name__):
                 solution = SolClass()
                 # Prerequisites: 1->0, 2->0, 3->1, 3->2, 4->3
