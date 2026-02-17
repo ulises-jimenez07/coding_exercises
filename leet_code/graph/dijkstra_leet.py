@@ -10,6 +10,8 @@ Approach:
 
 import heapq
 import math
+from collections import defaultdict
+from typing import List
 
 
 class Graph:
@@ -54,7 +56,39 @@ class Graph:
         return distance
 
 
+def shortest_path(n: int, edges: List[List[int]], start: int) -> List[int]:
+    """
+    Alternative implementation of Dijkstra's algorithm.
+    """
+    graph = defaultdict(list)
+    distances = [math.inf] * n
+    distances[start] = 0
+
+    for u, v, w in edges:
+        graph[u].append((v, w))
+        graph[v].append((u, w))
+
+    min_heap = [(0, start)]
+
+    while min_heap:
+        curr_dist, curr_node = heapq.heappop(min_heap)
+
+        if curr_dist > distances[curr_node]:
+            continue
+
+        for neigbor, weight in graph[curr_node]:
+            neigbor_dist = curr_dist + weight
+
+            if neigbor_dist < distances[neigbor]:
+                distances[neigbor] = neigbor_dist
+                heapq.heappush(min_heap, (neigbor_dist, neigbor))
+
+    return [-1 if dist == math.inf else int(dist) for dist in distances]
+
+
 if __name__ == "__main__":
+    # Test Graph class
+    print("Testing Graph class (directed):")
     graph = Graph(5, True)
     graph.add_edge(0, 1, 5)
     graph.add_edge(0, 3, 10)
@@ -65,3 +99,8 @@ if __name__ == "__main__":
 
     distance = graph.dijsktra(0)
     print(distance)
+
+    # Test shortest_path function (undirected as per implementation)
+    print("\nTesting shortest_path function (undirected):")
+    edges = [[0, 1, 5], [0, 3, 10], [1, 2, 11], [1, 4, 4], [2, 4, 9], [3, 2, 2]]
+    print(shortest_path(5, edges, 0))
