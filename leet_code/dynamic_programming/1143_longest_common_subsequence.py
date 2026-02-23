@@ -42,14 +42,21 @@ class SolutionV2:
     """Longest Common Subsequence using bottom-up iterative dynamic programming."""
 
     def longestCommonSubsequence(self, s1: str, s2: str) -> int:
+        # dp[i][j] stores the LCS length for substrings s1[i:] and s2[j:]
+        # Extra row and column (all zeros) handle base cases where either string is exhausted
         dp = [[0] * (len(s2) + 1) for _ in range(len(s1) + 1)]
 
+        # Iterate through both strings backwards
         for i in range(len(s1) - 1, -1, -1):
             for j in range(len(s2) - 1, -1, -1):
+                # If characters match, LCS length is 1 + LCS length of remaining substrings
                 if s1[i] == s2[j]:
                     dp[i][j] = 1 + dp[i + 1][j + 1]
                 else:
+                    # If characters don't match, take the maximum of skipping a character from s1 or s2
                     dp[i][j] = max(dp[i + 1][j], dp[i][j + 1])
+
+        # Result is stored at the beginning of the table
         return dp[0][0]
 
 
