@@ -32,25 +32,27 @@ class Solution:
             return 0
 
         rows, cols = len(matrix), len(matrix[0])
-        # dp[i][j] stores the side length of the maximum square ending at (i, j)
+
         dp = [[0] * cols for _ in range(rows)]
-        max_side = 0
 
-        for r, row in enumerate(matrix):
-            for c, val in enumerate(row):
-                if val == "1":
-                    # Base case: first row or first column
-                    if r == 0 or c == 0:
-                        dp[r][c] = 1
-                    else:
-                        # Square length depends on top, left, and diagonal neighbors
-                        dp[r][c] = min(dp[r - 1][c], dp[r][c - 1], dp[r - 1][c - 1]) + 1
+        max_len = 0
+        for j in range(cols):
+            if matrix[0][j] == "1":
+                dp[0][j] = 1
+                max_len = 1
 
-                    # Update the record for the maximum side length seen so far
-                    if dp[r][c] > max_side:
-                        max_side = dp[r][c]
+        for i in range(rows):
+            if matrix[i][0] == "1":
+                dp[i][0] = 1
+                max_len = 1
 
-        return max_side * max_side
+        for i in range(1, rows):
+            for j in range(1, cols):
+                if matrix[i][j] == "1":
+                    dp[i][j] = 1 + min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1])
+                max_len = max(max_len, dp[i][j])
+
+        return max_len**2
 
 
 class TestMaximalSquare(unittest.TestCase):
