@@ -626,7 +626,7 @@ def sortColors(nums):
 
 **LeetCode Problems:**
 - 75\. Sort Colors - [Solution](leet_code/array/75_sort_colors.py)
-- 905\. Sort Array By Parity
+- 905\. Sort Array By Parity - [Solution](leet_code/array/905_sort_array_by_parity.py)
 - 922\. Sort Array By Parity II
 - 280\. Wiggle Sort
 - 324\. Wiggle Sort II
