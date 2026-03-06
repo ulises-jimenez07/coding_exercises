@@ -629,7 +629,7 @@ def sortColors(nums):
 - 905\. Sort Array By Parity - [Solution](leet_code/sorting/905_sort_array_by_parity.py)
 - 922\. Sort Array By Parity II - [Solution](leet_code/sorting/922_sort_array_parity_2.py)
 - 280\. Wiggle Sort - [Solution](leet_code/sorting/280_wiggle_sort.py)
-- 324\. Wiggle Sort II
+- 324\. Wiggle Sort II  - [Solution](leet_code/sorting/324_wiggle_sort_2.py)
 
 ### BFS on Matrix
 **When to use:** Shortest path, level-order traversal on grids (flood fill, rotting oranges)
