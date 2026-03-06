@@ -13,6 +13,8 @@ from typing import List
 
 
 class Solution:
+    """Namespace for the solution to LeetCode 75: Sort Colors."""
+
     def sortColors(self, nums: List[int]) -> None:
         """Sorts array containing 0s, 1s, and 2s in-place using Dutch National Flag algorithm."""
         left = 0
@@ -32,6 +34,8 @@ class Solution:
 
 
 class TestSortColors(unittest.TestCase):
+    """Unit tests for the Sort Colors solution."""
+
     def setUp(self):
         self.solution = Solution()
 

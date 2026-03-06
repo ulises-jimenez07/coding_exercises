@@ -625,10 +625,10 @@ def sortColors(nums):
 ```
 
 **LeetCode Problems:**
-- 75\. Sort Colors - [Solution](leet_code/array/75_sort_colors.py)
-- 905\. Sort Array By Parity - [Solution](leet_code/array/905_sort_array_by_parity.py)
-- 922\. Sort Array By Parity II
-- 280\. Wiggle Sort
+- 75\. Sort Colors - [Solution](leet_code/sorting/75_sort_colors.py)
+- 905\. Sort Array By Parity - [Solution](leet_code/sorting/905_sort_array_by_parity.py)
+- 922\. Sort Array By Parity II - [Solution](leet_code/sorting/922_sort_array_parity_2.py)
+- 280\. Wiggle Sort - [Solution](leet_code/sorting/280_wiggle_sort.py)
 - 324\. Wiggle Sort II
 
 ### BFS on Matrix
