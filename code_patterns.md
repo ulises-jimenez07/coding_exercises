@@ -901,9 +901,9 @@ class MyQueue:
 
 **LeetCode Problems:**
 - 232\. Implement Queue using Stacks - [Solution](leet_code/queues_stacks/232_implement_queue_using_stack.py)
-- 225\. Implement Stack using Queues
+- 225\. Implement Stack using Queues - [Solution](leet_code/queues_stacks/225_implement_stack_using_queues.py)
 - 155\. Min Stack - [Solution](leet_code/queues_stacks/155_min_stack.py)
-- 622\. Design Circular Queue
+- 622\. Design Circular Queue - [Solution](leet_code/queues_stacks/622_design_circular_queue.py)
 - 641\. Design Circular Deque
 
 ## Linked List Patterns
