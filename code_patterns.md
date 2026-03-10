@@ -904,7 +904,7 @@ class MyQueue:
 - 225\. Implement Stack using Queues - [Solution](leet_code/queues_stacks/225_implement_stack_using_queues.py)
 - 155\. Min Stack - [Solution](leet_code/queues_stacks/155_min_stack.py)
 - 622\. Design Circular Queue - [Solution](leet_code/queues_stacks/622_design_circular_queue.py)
-- 641\. Design Circular Deque
+- 641\. Design Circular Deque - [Solution](leet_code/queues_stacks/641_design_circular_deque.py)
 
 ## Linked List Patterns
 
@@ -990,7 +990,7 @@ def flatten(head):
 ```
 
 **LeetCode Problems:**
-- 430\. Flatten a Multilevel Doubly Linked List
+- 430\. Flatten a Multilevel Doubly Linked List - [Solution](leet_code/linked_lists/430_flatten_multilevel_double_linked_list.py)
 - 341\. Flatten Nested List Iterator
 - 114\. Flatten Binary Tree to Linked List
 - 426\. Convert Binary Search Tree to Sorted Doubly Linked List
