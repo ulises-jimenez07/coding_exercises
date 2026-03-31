@@ -6,20 +6,23 @@ This guide focuses on **Matrix BFS/DFS**, **Binary Trees**, and **Graphs**, usin
 
 ---
 
-## 1. Matrix BFS & DFS (Grid-Based Problems)
+## 1. Matrix Algorithms (Grid-Based Problems)
 
-In grid problems, the decision between BFS and DFS usually comes down to whether you are looking for **connectivity** or the **shortest path**.
+In grid problems, the decision between BFS and DFS usually comes down to whether you are looking for **connectivity** or the **shortest path**. Additionally, some problems require specialized matrix traversal or searching techniques.
 
-### **Decision Tree: BFS vs. DFS in Matrices**
+### **Decision Tree: Matrix Techniques**
 - **Use BFS when:** You need the **shortest path** in an unweighted grid. BFS explores layer-by-layer, ensuring that the first time you reach a target, it's via the shortest route.
     - *Example:* [1091_shortest_path_binary_matrix.py](leet_code/graph/1091_shortest_path_binary_matrix.py)
     - *Real-world Usage:* Finding the quickest route through city blocks modeled as a grid.
 - **Use Multi-Source BFS when:** There are multiple starting points and you need to find the "spread" time or distance to all other points simultaneously.
     - *Example:* [994_rotting_oranges.py](leet_code/graph/994_rotting_oranges.py)
-    - *Real-world Usage:* Identifying the closest available resources from multiple source locations.
 - **Use DFS when:** You need to explore **connectivity**, count "islands," or solve exhaustive path problems where memory (stack vs. queue) is a consideration.
     - *Example:* [200_number_island.py](leet_code/graph/200_number_island.py)
     - *Real-world Usage:* Identifying "reachable regions" or contiguous zones in a spatial dataset.
+- **Matrix Traversal (Boundary Management):** Some problems require visiting nodes in a specific order (e.g., spiral, zigzag).
+    - *Example:* [54_spiral_matrix.py](leet_code/array/54_spiral_matrix.py)
+- **Search in Sorted Matrices:** Efficiently locating elements in matrices with sorted rows/columns.
+    - *Example:* [74_search_2d_matrix.py](leet_code/binary_search/74_search_2d_matrix.py)
 
 ### **Pro-Tip: Space Complexity**
 - DFS uses stack space (recursion depth), which can be $O(\text{stack depth})$.
@@ -79,6 +82,8 @@ Trees are commonly used to model hierarchies or spatial data.
 - **Post-Order Traversal (Bottom-Up):** Essential when a node's result depends on its children.
     - *Example:* [236_lowest_common_ancester.py](leet_code/trees/236_lowest_common_ancester.py)
     - *Logic:* We check left and right subtrees. If both return values, the current node is the LCA. This "bubbles up" the answer.
+- **In-Order Traversal (Sorted BST):** Visiting nodes in non-decreasing order for Binary Search Trees.
+    - *Example:* [230_k_smallest_element_bst.py](leet_code/trees/binary_search_tree/230_k_smallest_element_bst.py)
 - **Level-Order Traversal (BFS):** Used when the horizontal relationship between nodes matters.
     - *Example:* [102_binary_tree_level_order.py](leet_code/trees/102_binary_tree_level_order.py)
 - **Serialization:** Converting trees to strings for storage or transmission.
@@ -87,6 +92,7 @@ Trees are commonly used to model hierarchies or spatial data.
 
 ### **Spatial Indexing (Quadtrees)**
 **Quadtrees** are used to index spatial data efficiently. A Quadtree is a tree where each internal node has exactly four children, used to partition a two-dimensional space into quadrants.
+- *Example:* [427_construct_quad_tree.py](leet_code/trees/427_construct_quad_tree.py)
 - *Conceptual Flow:* If a 2D "bucket" (matrix section) contains too many data points, split it into 4 quadrants (tree nodes). This provides an efficient bridge between grid-based and hierarchical logic.
 
 ### **Pattern Deep Dive: Post-Order DFS (Lowest Common Ancestor)**
@@ -133,12 +139,16 @@ Graph theory is fundamental for modeling networks, dependencies, and complex rel
 - **Dijkstra’s Algorithm:** Standard for shortest paths in **weighted** graphs (where edges are time/distance).
     - *Example:* [743_network_delay_time.py](leet_code/graph/743_network_delay_time.py) or [dijkstra_leet.py](leet_code/graph/dijkstra_leet.py).
     - *Real-world Usage:* Routing based on real-time traffic or network latency (weights = delay).
+- **BFS on Routes:** Specialized BFS for finding shortest paths in multi-layered transport networks.
+    - *Example:* [815_bus_routes.py](leet_code/graph/815_bus_routes.py)
 - **Topological Sort (Kahn's or DFS):** Used for dependency resolution.
     - *Example:* [207_course_schedule.py](leet_code/graph/207_course_schedule.py)
     - *Real-world Usage:* Determining the order of operations with constraints (e.g., task scheduling, build systems).
+- **Modeling Relationships as Paths:** Using graph traversal to solve mathematical or logical dependencies.
+    - *Example:* [399_evaluate_division.py](leet_code/graph/399_evaluate_division.py)
 - **Union-Find (Disjoint Set Union):** Dynamic connectivity.
-    - *Example:* [1584_min_cost_to_connect_all_points.py](leet_code/graph/1584_min_cost_to_connect_all_points.py)
-    - *Real-world Usage:* Identifying if two network zones remain connected after a link failure.
+    - *Example:* [1584_min_cost_to_connect_all_points.py](leet_code/graph/1584_min_cost_to_connect_all_points.py) or [305_number_of_islands_ii.py](leet_code/disjoint_set/305_number_of_islands_ii.py).
+    - *Real-world Usage:* Identifying if two network zones remain connected after a link failure or tracking real-time cluster formation.
 
 ### **Pattern Deep Dive: Dijkstra's Algorithm (Shortest Path/Time)**
 A fundamental algorithm for finding the "cheapest" path when edges have non-negative weights.
@@ -175,20 +185,6 @@ stateDiagram-v2
 4.  **Final Check:** The result is `max(distances.values())`. If any node is still at `infinity`, return `-1`.
 
 ---
-
-## 4. Suggested Exercises (Not in Codebase)
-
-To round out your understanding, I recommend implementing these high-frequency algorithm problems:
-
-| Topic | LeetCode # | Problem Name | Why study this? |
-| :--- | :--- | :--- | :--- |
-| **Matrix** | 54 | **Spiral Matrix** | Tests array manipulation and boundary condition logic. |
-| **Matrix** | 74 | **Search a 2D Matrix** | Combining binary search with matrix indexing (very common). |
-| **Graph** | 815 | **Bus Routes** (Hard) | Practical network problem. BFS on a graph of "routes" rather than "stations." |
-| **Graph** | 399 | **Evaluate Division** | Modeling equations as directed weighted graphs. |
-| **Trees** | 427 | **Construct Quad Tree** | Direct application of spatial indexing and recursive subdivision. |
-| **Trees** | 230 | **Kth Smallest in BST** | Fundamental BST property verification. |
-| **Graphs** | 305 | **Number of Islands II** | Dynamic Union-Find; adding nodes and checking connectivity in real-time. |
 
 ---
 
