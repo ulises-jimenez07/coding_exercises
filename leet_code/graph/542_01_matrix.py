@@ -23,7 +23,6 @@ Complexity:
 
 import unittest
 from collections import deque
-from math import inf
 from typing import List
 
 EMPTY = 0
@@ -45,7 +44,7 @@ class Solution:
         rows, cols = len(matrix), len(matrix[0])
         queue: deque = deque()
 
-        dist = [[inf] * cols for _ in range(rows)]
+        dist = [[-1] * cols for _ in range(rows)]
 
         # Multi-source BFS: start from every car at distance 0
         for r in range(rows):
@@ -53,24 +52,22 @@ class Solution:
                 if matrix[r][c] == CAR:
                     dist[r][c] = 0
                     queue.append((r, c))
-                elif matrix[r][c] == WALL:
-                    dist[r][c] = -1
+                # Walls stay -1, so we don't need an explicit 'elif' here
 
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
         while queue:
             r, c = queue.popleft()
-            new_dist = dist[r][c] + 1
 
             for dr, dc in directions:
                 nr, nc = r + dr, c + dc
 
-                if 0 <= nr < rows and 0 <= nc < cols and dist[nr][nc] > new_dist:
-                    dist[nr][nc] = new_dist
-                    queue.append((nr, nc))
+                if 0 <= nr < rows and 0 <= nc < cols:
+                    if matrix[nr][nc] == EMPTY and dist[nr][nc] == -1:
+                        dist[nr][nc] = dist[r][c] + 1
+                        queue.append((nr, nc))
 
-        # Unreachable empty cells (still inf) become -1 to match wall convention
-        return [[-1 if d == inf else int(d) for d in row] for row in dist]
+        return dist
 
 
 class TestMinDistanceToCar(unittest.TestCase):
