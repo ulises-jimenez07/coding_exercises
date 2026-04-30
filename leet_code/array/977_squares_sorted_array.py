@@ -1,94 +1,68 @@
 """
-Problem: Sort Array by Squares of Elements
-Given an integer array sorted in non-decreasing order, return the array with its elements
-sorted in ascending order of their squares (i.e., by absolute value). The original values
-are returned, not the squares themselves.
+Problem: Sorted Squares
+Given a sorted integer array, return the squares of each number in sorted order.
 
-Examples from problem statement:
-  [1, 5, 7, 7, 8, 10]      →  [1, 5, 7, 7, 8, 10]        (all positive, order unchanged)
-  [-5, -3, -3, 2, 4, 4, 8] →  [2, -3, -3, 4, 4, -5, 8]   (sorted by |x|, original values kept)
-
-Related: LeetCode 977 - Squares of a Sorted Array (returns squared values instead of originals)
-
-Approach: Two Pointers
-- The input is sorted, so the largest absolute values are at the two ends.
-- Use two pointers (left=0, right=n-1) and fill the result from right to left.
-- At each step, compare abs(nums[left]) vs abs(nums[right]), place the element with the
-  larger absolute value at result[pos], move that pointer inward, decrement pos.
-
-Complexity:
-- Time:  O(n)
-- Space: O(n) for the result array
+Approach:
+- The largest square must come from one of the two ends
+- Use two pointers and fill the result from right to left
+- Time complexity: O(n)
+- Space complexity: O(n)
 """
 
 import unittest
-from typing import List
 
 
 class Solution:
-    """Solution for sorting an array by the squares of its elements."""
+    """Two-pointer solution for LeetCode 977."""
 
-    def sortBySquares(self, nums: List[int]) -> List[int]:
-        """Return elements sorted by their absolute value (ascending) in O(n)."""
-        n = len(nums)
-        result = [0] * n
-        left, right = 0, n - 1
-        pos = n - 1  # Fill result from the largest position downward
+    def sortedSquares(self, nums):
+        """Return sorted squares for a non-decreasing sorted array."""
+        result = [0] * len(nums)
+        left = 0
+        right = len(nums) - 1
 
-        while left <= right:
+        for index in range(len(nums) - 1, -1, -1):
             if abs(nums[left]) > abs(nums[right]):
-                result[pos] = nums[left]
+                result[index] = nums[left] ** 2
                 left += 1
             else:
-                result[pos] = nums[right]
+                result[index] = nums[right] ** 2
                 right -= 1
-            pos -= 1
 
         return result
 
 
-class TestSortBySquares(unittest.TestCase):
-    """Unit tests for sortBySquares."""
+class TestSortedSquares(unittest.TestCase):
+    """Unit tests for Solution.sortedSquares."""
 
     def setUp(self):
         self.solution = Solution()
 
-    def test_example_1_all_positive(self):
-        """All positive — sorted by square = sorted by value, output unchanged."""
-        nums = [1, 5, 7, 7, 8, 10]
-        self.assertEqual(self.solution.sortBySquares(nums), [1, 5, 7, 7, 8, 10])
+    def test_mixed_numbers(self):
+        nums = [-4, -1, 0, 3, 10]
 
-    def test_example_2_mixed(self):
-        """Mixed negatives and positives — sort original values by |x|."""
-        nums = [-5, -3, -3, 2, 4, 4, 8]
-        self.assertEqual(self.solution.sortBySquares(nums), [2, -3, -3, 4, 4, -5, 8])
+        self.assertEqual(self.solution.sortedSquares(nums), [0, 1, 9, 16, 100])
+
+    def test_duplicate_negative_numbers(self):
+        nums = [-7, -3, 2, 3, 11]
+
+        self.assertEqual(self.solution.sortedSquares(nums), [4, 9, 9, 49, 121])
 
     def test_all_negative(self):
-        """All negative — largest |x| is at the left, smallest at the right."""
-        nums = [-7, -3, -1]
-        self.assertEqual(self.solution.sortBySquares(nums), [-1, -3, -7])
+        nums = [-5, -3, -2]
+
+        self.assertEqual(self.solution.sortedSquares(nums), [4, 9, 25])
+
+    def test_all_positive(self):
+        nums = [1, 2, 3]
+
+        self.assertEqual(self.solution.sortedSquares(nums), [1, 4, 9])
+
+    def test_empty_array(self):
+        self.assertEqual(self.solution.sortedSquares([]), [])
 
     def test_single_element(self):
-        """Single element — trivially sorted."""
-        self.assertEqual(self.solution.sortBySquares([-3]), [-3])
-        self.assertEqual(self.solution.sortBySquares([4]), [4])
-
-    def test_zeros(self):
-        """Zeros have square 0 — smallest possible."""
-        nums = [-2, 0, 0, 3]
-        self.assertEqual(self.solution.sortBySquares(nums), [0, 0, -2, 3])
-
-    def test_symmetric_array(self):
-        """Symmetric array — both ends have equal absolute values."""
-        nums = [-3, -1, 0, 1, 3]
-        result = self.solution.sortBySquares(nums)
-        # Sorted by |x|: 0, ±1, ±1, ±3, ±3
-        self.assertEqual([abs(x) for x in result], [0, 1, 1, 3, 3])
-
-    def test_two_elements(self):
-        """Minimal two-element input."""
-        self.assertEqual(self.solution.sortBySquares([-1, 2]), [-1, 2])
-        self.assertEqual(self.solution.sortBySquares([-2, 1]), [1, -2])
+        self.assertEqual(self.solution.sortedSquares([-4]), [16])
 
 
 if __name__ == "__main__":

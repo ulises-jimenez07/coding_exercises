@@ -9,25 +9,24 @@ Approach:
 - Space complexity: O(1)
 """
 
+import unittest
+
 
 # Definition for singly-linked list.
 class ListNode:
+    """Node in a singly linked list."""
+
     def __init__(self, val=0, next_node=None):
         self.val = val
         self.next = next_node
 
 
 class Solution:
+    """Solution for removing the nth node from the end of a linked list."""
+
     def removeNthFromEnd(self, head, n):
         """
         Removes the nth node from the end of a linked list.
-
-        Args:
-            head: The head of the linked list.
-            n: The position of the node to remove (counting from the end).
-
-        Returns:
-            The head of the modified linked list.
         """
         dummy = ListNode(0)
         dummy.next = head
@@ -51,10 +50,9 @@ class Solution:
         return dummy.next
 
 
-import unittest
-
-
 class TestRemoveNthFromEnd(unittest.TestCase):
+    """Unit tests for Solution.removeNthFromEnd."""
+
     def setUp(self):
         self.solution = Solution()
 
