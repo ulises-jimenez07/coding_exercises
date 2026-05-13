@@ -17,6 +17,8 @@ from typing import (
 
 
 class TreeNode:
+    """Definition for a binary tree node."""
+
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -24,34 +26,35 @@ class TreeNode:
 
 
 class Solution:
+    """Provides method to find all root-to-leaf paths that sum to a target value."""
+
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
-        self.answer: list[list[int]] = []
-        self._pre_order(root, 0, [], targetSum)
-        return self.answer
+        """Finds all paths in the tree that sum to targetSum."""
+        res = []
 
-    def _pre_order(
-        self,
-        node: Optional[TreeNode],
-        sum_till_parent: int,
-        path_till_parent: List[int],
-        target_sum: int,
-    ):
-        if node:
-            current_sum = sum_till_parent + node.val
-            path_till_parent.append(node.val)
+        def dfs(node, path, target):
+            """Explores the tree using depth-first search to find valid paths."""
+            if not node:
+                return
 
-            if node.left is None and node.right is None and current_sum == target_sum:
-                self.answer.append(path_till_parent.copy())
+            path.append(node.val)
+            # Check if leaf node and target is met
+            if not node.left and not node.right:
+                if target - node.val == 0:
+                    res.append(path[:])
 
-            if node.left:
-                self._pre_order(node.left, current_sum, path_till_parent, target_sum)
-            if node.right:
-                self._pre_order(node.right, current_sum, path_till_parent, target_sum)
+            dfs(node.left, path, target - node.val)
+            dfs(node.right, path, target - node.val)
 
-            path_till_parent.pop()
+            path.pop()
+
+        dfs(root, [], targetSum)
+        return res
 
 
 class TestSolution(unittest.TestCase):
+    """Unit tests for the pathSum solution."""
+
     def setUp(self):
         self.solution = Solution()
 
