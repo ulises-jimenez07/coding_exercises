@@ -14,6 +14,8 @@ from typing import Optional
 
 
 class TreeNode:
+    """Binary tree node used for diameter calculations."""
+
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -21,27 +23,33 @@ class TreeNode:
 
 
 class Solution:
+    """Computes the diameter of a binary tree."""
+
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        self.diameter = 0
-        self.longest_path(root)
-        return self.diameter
+        max_ = 0
 
-    def longest_path(self, node: Optional[TreeNode]) -> int:
-        if not node:
-            return 0
+        def dfs(node: Optional[TreeNode]) -> int:
+            nonlocal max_
+            if not node:
+                return 0
 
-        # Recursively find the longest path in each subtree.
-        left_path = self.longest_path(node.left)
-        right_path = self.longest_path(node.right)
+            # Get the max depth of left and right subtrees.
+            left = dfs(node.left)
+            right = dfs(node.right)
 
-        # Update the diameter with the path through the current node.
-        self.diameter = max(self.diameter, left_path + right_path)
+            # Update the maximum diameter passing through this node.
+            max_ = max(max_, left + right)
 
-        # Return the depth of the current node.
-        return max(left_path, right_path) + 1
+            # Return subtree depth for parent's computation.
+            return 1 + max(left, right)
+
+        dfs(root)
+        return max_
 
 
 class TestSolution(unittest.TestCase):
+    """Unit tests for diameter-of-binary-tree solution."""
+
     def setUp(self):
         self.solution = Solution()
 
