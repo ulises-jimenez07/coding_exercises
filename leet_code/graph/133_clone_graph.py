@@ -32,12 +32,6 @@ class SolutionBFS:
     def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
         """
         Clones a given undirected graph using Breadth-First Search (BFS).
-
-        Args:
-            node: The starting node of the graph to be cloned.
-
-        Returns:
-            The starting node of the cloned graph, or None if the input is None.
         """
         if not node:
             return node
@@ -107,6 +101,34 @@ class SolutionDFS:
         return cloned_node
 
 
+class Solution:
+    """
+    Canonical LeetCode DFS solution for Clone Graph.
+    """
+
+    def __init__(self):
+        self.cloned_map: dict[Node, Node] = {}
+
+    def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
+        if not node:
+            return node
+        self.cloned_map = {}
+        return self.dfs(node)
+
+    def dfs(self, node):
+        if node in self.cloned_map:
+            return self.cloned_map[node]
+
+        cloned_node = Node(node.val)
+        self.cloned_map[node] = cloned_node
+
+        for neighbor in node.neighbors:
+            cloned_neighbor = self.dfs(neighbor)
+            cloned_node.neighbors.append(cloned_neighbor)
+
+        return cloned_node
+
+
 class TestCloneGraph(unittest.TestCase):
     """
     Unit tests for both BFS and DFS cloneGraph implementations.
@@ -119,6 +141,10 @@ class TestCloneGraph(unittest.TestCase):
     def test_dfs_implementation(self):
         """Runs all tests using DFS implementation."""
         self._run_all_tests(SolutionDFS())
+
+    def test_original_solution_implementation(self):
+        """Runs all tests using original LeetCode DFS solution."""
+        self._run_all_tests(Solution())
 
     def _run_all_tests(self, sol):
         # 1. Empty Graph
