@@ -163,3 +163,7 @@ cython_debug/
 
 .vscode/
 .DS_Store
+
+#agents
+CLAUDE.md
+GEMINI.md
