@@ -1,11 +1,10 @@
 """
-Problem: Find all unique combinations that sum to target, allowing reuse of numbers
+Module to solve the Combination Sum problem using backtracking.
 
-Approach:
-- Version 1: Backtracking using a current_sum accumulator.
-- Version 2: Simplified backtracking using target reduction (provided by user).
-- Time complexity: O(N^(T/M)) where N is candidates length, T is target, M is minimum candidate.
-- Space complexity: O(T/M) for recursion stack.
+Given an array of distinct integers candidates and a target integer target,
+return a list of all unique combinations of candidates where the chosen
+numbers sum to target. You may return the combinations in any order.
+The same number may be chosen from candidates an unlimited number of times.
 """
 
 import unittest
@@ -14,58 +13,38 @@ from typing import List
 
 class Solution:
     """
-    Backtracking solution for the combination sum problem.
+    Backtracking solver for finding combination sums.
     """
 
-    def combinationSum(self, candidates, target):
-        return self.solution(candidates, [], [], target, 0, 0)
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        """
+        Finds all unique combinations of candidates that sum to target.
+        """
+        ans = []
+        n = len(candidates)
 
-    def solution(
-        self, candidates, ans, curr, target, index, current_sum
-    ):  # pylint: disable=too-many-arguments,too-many-positional-arguments
-        # Found valid combination
-        if current_sum == target:
-            ans.append(curr[:])
-        elif current_sum < target:
-            n = len(candidates)
-            # Try each candidate from current index
-            for i in range(index, n):
-                curr.append(candidates[i])
-                # Can reuse same element (index i)
-                self.solution(candidates, ans, curr, target, i, current_sum + candidates[i])
-                curr.pop()  # Backtrack
+        def backtrack(curr, curr_sum, index):
+            """
+            Helper function to backtrack and find combinations.
+            """
+            # Base case: if current sum matches target, record combination
+            if curr_sum == target:
+                ans.append(curr[:])
+            # If current sum is less than target, explore further candidates
+            elif curr_sum < target:
+                for i in range(index, n):
+                    curr.append(candidates[i])
+                    # Re-use candidate at index i
+                    backtrack(curr, curr_sum + candidates[i], i)
+                    curr.pop()  # Backtrack
+
+        backtrack([], 0, 0)
         return ans
-
-
-# Version 2: Simplified backtracking using target reduction
-def combinations_of_sum_k(nums: List[int], target: int) -> List[List[int]]:
-    """
-    Finds all unique combinations that sum to target using recursion.
-    """
-    res: List[List[int]] = []
-    dfs([], 0, nums, target, res)
-    return res
-
-
-def dfs(combination, start_index, nums, target, res):
-    """
-    Helper function for recursion.
-    """
-    if target == 0:
-        res.append(combination[:])
-        return
-    if target < 0:
-        return
-
-    for i in range(start_index, len(nums)):
-        combination.append(nums[i])
-        dfs(combination, i, nums, target - nums[i], res)
-        combination.pop()
 
 
 class TestSolution(unittest.TestCase):
     """
-    Unit tests for combination sum implementations.
+    Unit tests for combinationSum solution.
     """
 
     def setUp(self):
@@ -81,10 +60,7 @@ class TestSolution(unittest.TestCase):
         self.assertCountEqual(actual, expected)
 
     def test_example_two(self):
-        """
-        Test with candidates [2, 3, 5] and target 8.
-        Expected combinations: [[2, 2, 2, 2], [2, 3, 3], [3, 5]]
-        """
+        """Test with candidates [2, 3, 5] and target 8."""
         candidates = [2, 3, 5]
         target = 8
         expected = [[2, 2, 2, 2], [2, 3, 3], [3, 5]]
@@ -92,7 +68,7 @@ class TestSolution(unittest.TestCase):
         self.assertCountEqual(actual, expected)
 
     def test_empty_candidates(self):
-        """Test with an empty candidates list."""
+        """Test with empty candidates list."""
         candidates = []
         target = 7
         expected = []
@@ -107,19 +83,21 @@ class TestSolution(unittest.TestCase):
         actual = self.solution.combinationSum(candidates, target)
         self.assertCountEqual(actual, expected)
 
-    def test_v2_combinations(self):
-        """Test Version 2: combinations_of_sum_k."""
-        # Test Case 1
-        nums1 = [2, 3, 6, 7]
-        target1 = 7
-        expected1 = [[2, 2, 3], [7]]
-        self.assertCountEqual(combinations_of_sum_k(nums1, target1), expected1)
+    def test_single_element_match(self):
+        """Test with a single element candidate matching target."""
+        candidates = [2]
+        target = 2
+        expected = [[2]]
+        actual = self.solution.combinationSum(candidates, target)
+        self.assertCountEqual(actual, expected)
 
-        # Test Case 2
-        nums2 = [2, 3, 5]
-        target2 = 8
-        expected2 = [[2, 2, 2, 2], [2, 3, 3], [3, 5]]
-        self.assertCountEqual(combinations_of_sum_k(nums2, target2), expected2)
+    def test_single_element_no_match(self):
+        """Test with a single element candidate not matching target."""
+        candidates = [3]
+        target = 2
+        expected = []
+        actual = self.solution.combinationSum(candidates, target)
+        self.assertCountEqual(actual, expected)
 
 
 if __name__ == "__main__":
