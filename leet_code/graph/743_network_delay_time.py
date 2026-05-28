@@ -3,7 +3,7 @@ Problem: Find minimum time for signal to reach all nodes in a network (shortest 
 
 Approach:
 - Use Dijkstra's algorithm with min-heap for shortest paths
-- Track visited nodes and return max distance when all reachable
+- Track shortest distances and return max distance if all nodes are reached
 - Time complexity: O((V + E) log V)
 - Space complexity: O(V + E) for graph and heap
 """
@@ -18,51 +18,37 @@ class Solution:
     Solves the Network Delay Time problem using Dijkstra's algorithm.
     """
 
-    # Dijkstra's algorithm to find the shortest path from a source node to all other nodes in a weighted graph.
     def networkDelayTime(self, times: list[list[int]], n: int, k: int) -> int:
-        # Build the graph as an adjacency list: {u: [(cost, v), ...]}
-        g = collections.defaultdict(list)
+        """
+        Calculates the minimum time for all nodes to receive the signal.
+        """
+        graph = collections.defaultdict(list)
 
-        for u, v, cost in times:
-            g[u].append((cost, v))
+        for u, v, w in times:
+            graph[u].append((w, v))
 
-        # Initialize min-heap with starting node and its distance (0)
-        min_heap = [(0, k)]
+        distances = {i: float("inf") for i in range(1, n + 1)}
+        distances[k] = 0
+        heap = [(0, k)]
 
-        # Keep track of visited nodes
-        visited = set()
+        while heap:
+            curr_dist, curr_node = heapq.heappop(heap)
 
-        # Initialize distances to infinity for all nodes
-        distance = {i: float("inf") for i in range(1, n + 1)}
-        distance[k] = 0
-
-        # Iterate while the heap is not empty
-        while min_heap:
-            # Get the node with the smallest distance from the heap
-            cur_dist, u = heapq.heappop(min_heap)
-
-            # If node is already visited, skip
-            if u in visited:
+            # Skip processing if a shorter path to this node has already been processed
+            if curr_dist > distances[curr_node]:
                 continue
 
-            # Mark current node as visited
-            visited.add(u)
+            for direct_distance, neighbor in graph[curr_node]:
+                new_dist = curr_dist + direct_distance
 
-            # If all nodes are visited, return the current distance (max distance)
-            if len(visited) == n:
-                return cur_dist
+                # If a shorter path to the neighbor is found, update distance and push to heap
+                if new_dist < distances[neighbor]:
+                    distances[neighbor] = new_dist
+                    heapq.heappush(heap, (new_dist, neighbor))
 
-            # Iterate over neighbors of current node
-            for direct_distance, v in g[u]:
-                # Relax the edge: update the distance to neighbor if a shorter path is found
-                if cur_dist + direct_distance < distance[v] and v not in visited:
-                    distance[v] = cur_dist + direct_distance
-
-                    # Add the neighbor to the heap with updated distance
-                    heapq.heappush(min_heap, (cur_dist + direct_distance, v))
-
-        # If not all nodes are reachable, return -1
-        return -1
+        # Check if all nodes were reached
+        max_dist = max(distances.values())
+        return int(max_dist) if max_dist != float("inf") else -1
 
 
 class TestNetworkDelayTime(unittest.TestCase):
